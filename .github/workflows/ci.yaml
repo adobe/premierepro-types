@@ -18,6 +18,7 @@ jobs:
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
+
       - run: node --version
       - run: npm --version
       - run: npm install --engine-strict
