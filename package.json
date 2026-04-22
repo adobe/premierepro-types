@@ -1,0 +1,59 @@
+{
+  "private": true,
+  "name": "@adobe/premierepro",
+  "version": "26.2.0",
+  "description": "The TypeScript definitions and declarations for UXP APIs in Premiere",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/OneAdobe/premierepro-types/issues"
+  },
+  "homepage": "https://github.com/OneAdobe/premierepro-types#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OneAdobe/premierepro-types.git"
+  },
+  "projects": [
+    "https://adobe.io/premiere-pro/uxp"
+  ],
+  "keywords": [
+    "premiere",
+    "premierepro",
+    "uxp",
+    "typescript",
+    "ts",
+    "3p"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=24.13.0"
+  },
+  "types": "./src/premierepro.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/premierepro.d.ts"
+    }
+  },
+  "files": [
+    "src/premierepro-require.d.ts",
+    "src/premierepro.d.ts"
+  ],
+  "scripts": {
+    "check": "npm run typecheck && npm run check:exports",
+    "check:exports": "attw --pack .",
+    "format": "prettier --write '**/*.{ts,js,json}'",
+    "format:check": "prettier --check '**/*.{ts,js,json}'",
+    "lint": "eslint",
+    "test": "npm run check",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p test/tsconfig.json"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.2",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
+    "eslint": "^8.57.1",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsdoc": "^62.8.1",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3"
+  }
+}
