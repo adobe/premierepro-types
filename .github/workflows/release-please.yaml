@@ -7,6 +7,7 @@ permissions: {}
 
 jobs:
   release-please:
+    name: Publish
     permissions:
       contents: write # Used to create release commit
       pull-requests: write # Used to create release PR
