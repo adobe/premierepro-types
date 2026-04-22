@@ -5,12 +5,12 @@
   "description": "The TypeScript definitions and declarations for UXP APIs in Premiere",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/OneAdobe/premierepro-types/issues"
+    "url": "https://github.com/adobe/premierepro-types/issues"
   },
-  "homepage": "https://github.com/OneAdobe/premierepro-types#readme",
+  "homepage": "https://github.com/adobe/premierepro-types#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OneAdobe/premierepro-types.git"
+    "url": "git+https://github.com/adobe/premierepro-types.git"
   },
   "projects": [
     "https://adobe.io/premiere-pro/uxp"
@@ -24,9 +24,6 @@
     "3p"
   ],
   "sideEffects": false,
-  "engines": {
-    "node": ">=24.13.0"
-  },
   "types": "./src/premierepro.d.ts",
   "exports": {
     ".": {
