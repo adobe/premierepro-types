@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@adobe/premierepro",
-  "version": "26.2.0",
+  "version": "1.0.0",
   "description": "The TypeScript definitions and declarations for UXP APIs in Premiere",
   "license": "Apache-2.0",
   "bugs": {
