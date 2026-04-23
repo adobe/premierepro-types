@@ -24,6 +24,9 @@
     "3p"
   ],
   "sideEffects": false,
+  "engines": {
+    "node": ">=24.13.0"
+  },
   "types": "./src/premierepro.d.ts",
   "exports": {
     ".": {
