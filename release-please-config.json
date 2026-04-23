@@ -2,10 +2,10 @@
   "bootstrap-sha": "8103008a0be49f364482a607c780843516fb27eb",
   "packages": {
     ".": {
-      "release-type": "node"
+      "release-type": "node",
+      "release-as": "26.2.0"
     }
   },
   "prerelease": true,
-  "prerelease-type": "beta",
-  "release-as": "26.2.0"
+  "prerelease-type": "beta"
 }
