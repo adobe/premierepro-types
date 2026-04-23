@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "@adobe/premierepro",
   "version": "26.2.0",
   "description": "The TypeScript definitions and declarations for UXP APIs in Premiere",
