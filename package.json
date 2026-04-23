@@ -33,9 +33,11 @@
     }
   },
   "files": [
-    "src/premierepro-require.d.ts",
     "src/premierepro.d.ts"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "check": "npm run typecheck && npm run check:exports",
     "check:exports": "attw --pack .",
