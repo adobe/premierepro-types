@@ -28,7 +28,7 @@ jobs:
         run: node .github/scripts/detect-release.mjs
 
   publish:
-    name: Publish ${{ needs.detect.outputs.version }} to npm
+    name: Publish to npm
     needs: detect
     if: needs.detect.outputs.is_release == 'true'
     runs-on: ubuntu-latest
