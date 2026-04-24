@@ -75,6 +75,8 @@ The beta prerelease number (`N`) ideally corresponds to Premiere's Beta build nu
 
 All releases go through a two-step process: **prepare** (creates a PR) then **publish** (runs automatically when the PR is merged). No workflow ever pushes directly to `main` or `release/*`.
 
+> **Repository requirement:** `main` and `release/**` must be configured to use **"Pull request title and description"** as the squash commit message (Settings → General → Pull Requests → "Allow squash merging" → Default commit message). This ensures the squash commit on `main` includes the PR body — which carries the `Next-Cycle:` trailer that `detect-release` reads for stable releases, and the full list of changes for audit purposes.
+
 ### `prepare-release` — creates the release PR
 
 Triggered manually via **Actions → Prepare Release → Run workflow**.
@@ -88,7 +90,7 @@ Triggered manually via **Actions → Prepare Release → Run workflow**.
 The workflow:
 1. Computes the next version
 2. Updates `package.json`, `package-lock.json`, and `CHANGELOG.md`
-3. Opens a PR titled `chore: release X.Y.Z-beta.N` (or `chore: release X.Y.Z`)
+3. Opens a PR titled `chore: release X.Y.Z-beta.N` (or `chore: release X.Y.Z`) whose body includes the full CHANGELOG entry for this release (all `feat:` and `fix:` commits in scope). When the PR is squash-merged, this body becomes the commit message body on `main`, giving every release commit a built-in record of what it contains.
 
 > **For backport releases**, run this workflow from the appropriate `release/X.Y` branch using the branch dropdown in the Actions UI.
 

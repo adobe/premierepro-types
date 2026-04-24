@@ -58,6 +58,12 @@ jobs:
           VERSION: ${{ steps.version.outputs.version }}
         run: node .github/scripts/update-changelog.mjs
 
+      - name: Extract release notes for PR body
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          OUTPUT_FILE: /tmp/release-notes.md
+        run: node .github/scripts/extract-release-notes.mjs
+
       - name: Open release PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -73,23 +79,29 @@ jobs:
           git checkout -b "$BRANCH"
           git add package.json package-lock.json CHANGELOG.md
 
-          # For stable releases, embed Next-Cycle as a git commit trailer so the
-          # publish workflow can open the next beta cycle PR after merge without
-          # needing a separate input mechanism.
           if [ "$RELEASE_TYPE" = "stable" ]; then
             RESOLVED_NEXT_CYCLE="${NEXT_CYCLE}"
             if [ -z "$RESOLVED_NEXT_CYCLE" ]; then
               RESOLVED_NEXT_CYCLE=$(node -p \
                 "const [maj,min]='${VERSION}'.split('.'); \`\${maj}.\${+min+1}.0\`")
             fi
+            # Next-Cycle is embedded in both the branch commit (fallback for non-squash
+            # merges) and the PR body (picked up by detect-release.mjs when the squash
+            # commit message is built from the PR title + description).
             git commit -m "chore: release ${VERSION}" -m "Next-Cycle: ${RESOLVED_NEXT_CYCLE}"
-            printf 'Automated **stable** release PR for `%s`.\n\nMerging this PR will:\n- Publish `%s` to npm as `@latest`\n- Create the `release/%s` branch for future backports\n- Open a follow-up PR to begin the `%s` beta cycle\n' \
-              "$VERSION" "$VERSION" "${VERSION%.*}" "${RESOLVED_NEXT_CYCLE}" > /tmp/pr-body.md
+            printf 'Automated **stable** release PR for `%s`.\n\nMerging this PR will:\n- Publish `%s` to npm as `@latest`\n- Create the `release/%s` branch for future backports\n- Open a follow-up PR to begin the `%s` beta cycle\n\nNext-Cycle: %s\n' \
+              "$VERSION" "$VERSION" "${VERSION%.*}" "${RESOLVED_NEXT_CYCLE}" "${RESOLVED_NEXT_CYCLE}" > /tmp/pr-body.md
           else
             git commit -m "chore: release ${VERSION}"
             printf 'Automated **%s** release PR for `%s`.\n\nMerging this PR will publish `%s` to npm.\n' \
               "$RELEASE_TYPE" "$VERSION" "$VERSION" > /tmp/pr-body.md
           fi
+
+          # Append the CHANGELOG entry so reviewers (and the squash merge commit
+          # message, when the repo uses "PR title and description" mode) include
+          # the full list of changes going into this release.
+          printf '\n---\n\n' >> /tmp/pr-body.md
+          cat /tmp/release-notes.md >> /tmp/pr-body.md
 
           git push origin "$BRANCH"
 
