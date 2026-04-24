@@ -2,6 +2,12 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.3.0-beta.44 (2026-04-24)
+
+### Features
+
+* Add ProjectConverter.exportAAF (#33) ([403fad2](https://github.com/adobe/premierepro-types/commit/403fad2ee5aa2a91fea44fb536cc81cbcda8f8a8))
+
 ## 26.3.0-beta.43 (2026-04-24)
 
 ### Features
