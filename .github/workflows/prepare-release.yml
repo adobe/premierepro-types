@@ -21,6 +21,8 @@ on:
         required: false
         type: string
 
+permissions: {}
+
 jobs:
   prepare:
     name: Prepare ${{ inputs.type }} release PR
@@ -31,6 +33,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      actions: write    # required for gh workflow run (workflow_dispatch API)
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
