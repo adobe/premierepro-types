@@ -16,8 +16,10 @@
 /**
  * Updates CHANGELOG.md with a new entry for the given release.
  *
- * Beta releases get a minimal placeholder entry. Stable and backport releases
- * get a full entry generated from conventional commits since the last tag.
+ * All release types generate entries from conventional commits:
+ *   - Beta:     feat/fix commits since the previous tag (beta or stable)
+ *   - Stable:   feat/fix commits since the last stable tag (cumulative over all betas)
+ *   - Backport: all non-chore commits since the previous tag on the release branch
  *
  * Environment variables:
  *   RELEASE_TYPE - 'beta' | 'stable' | 'backport'
@@ -89,8 +91,15 @@ function formatCommits(commits) {
 
 switch (RELEASE_TYPE) {
   case "beta": {
-    // Minimal entry — full notes are only generated on stable release.
-    insertEntry(`## ${VERSION} (${date})\n\nBeta release.\n`);
+    // Entry from feat/fix commits since the previous tag (the last beta tag,
+    // or the last stable tag for the first beta of a new cycle).
+    let lastTag = "";
+    try {
+      lastTag = execSync("git describe --tags --abbrev=0", { encoding: "utf8" }).trim();
+    } catch {}
+
+    const commits = getCommits(lastTag);
+    insertEntry(`## ${VERSION} (${date})\n\n${formatCommits(commits)}`);
     break;
   }
 

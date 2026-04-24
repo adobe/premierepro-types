@@ -144,7 +144,7 @@ Commit message starts with "chore: release"?
 2. Set **type** = `beta`. Optionally set **build_number** = `20` to align with the Premiere build; otherwise leave it blank and `N` will increment by 1 from the current version (`26.3.0-beta.5` → `26.3.0-beta.6`).
 3. The workflow creates branch `release-prep/26.3.0-beta.20` and opens a PR:
    - `package.json` version: `26.3.0-beta.20`
-   - `CHANGELOG.md`: new `## 26.3.0-beta.20` section with a "Beta release." entry
+   - `CHANGELOG.md`: new `## 26.3.0-beta.20` section with `feat:` and `fix:` commits since `v26.3.0-beta.5`
 4. Review the PR — confirm the version and that only `package.json`, `package-lock.json`, and `CHANGELOG.md` changed.
 5. Merge the PR.
 6. The `publish` workflow detects `chore: release 26.3.0-beta.20`, runs tests, pushes tag `v26.3.0-beta.20`, and publishes to npm as `@beta`.
@@ -210,7 +210,8 @@ The default fallback only increments the minor version by 1 and cannot know when
 
 ## CHANGELOG policy
 
-- **Beta releases** receive a minimal placeholder entry (`Beta release.`). The full commit history is intentionally omitted to avoid churn for API consumers — the stable release entry is the authoritative record.
+- **Beta releases** receive a generated entry with `feat:` and `fix:` commits since the previous tag (the last beta, or the last stable for the first beta of a cycle). Each beta entry shows only what's new in that specific beta.
+- **Stable releases** receive a generated entry with all `feat:` and `fix:` commits since the previous stable tag — spanning the entire beta cycle. This is the authoritative cumulative record of what changed in the release.
 - **Stable releases** receive a generated entry grouping all `feat:` and `fix:` commits since the previous stable tag.
 - **Backport releases** receive a generated entry from non-chore commits since the previous tag on the release branch.
 
