@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - 'release/**'
+      - 'release-prep/**'
   pull_request:
     types: [opened, synchronize, reopened]
 
