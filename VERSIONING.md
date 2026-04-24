@@ -2,9 +2,45 @@
 
 This document describes how versions are managed and released for `@adobe/premierepro`.
 
+## Table of Contents
+
+- [Quick Reference: What Release Should I Cut?](#quick-reference-what-release-should-i-cut)
+- [Version scheme](#version-scheme)
+- [npm distribution tags](#npm-distribution-tags)
+- [Branch structure](#branch-structure)
+- [Workflows](#workflows)
+  - [`prepare-release` — creates the release PR](#prepare-release--creates-the-release-pr)
+  - [`publish` — publishes to npm after PR merge](#publish--publishes-to-npm-after-pr-merge)
+- [When to Release](#when-to-release)
+- [Scenarios](#scenarios)
+  - [Publishing a beta release](#scenario-publishing-a-beta-release)
+  - [Cutting a stable release](#scenario-cutting-a-stable-release)
+  - [Backport patch release](#scenario-backport-patch-release)
+- [Major version bumps](#major-version-bumps)
+- [CHANGELOG policy](#changelog-policy)
+
+## Quick Reference: What Release Should I Cut?
+
+Use this decision tree to determine which release type to initiate:
+
+```
+Have you merged a new feature or fix to main?
+├─ YES: Is Premiere shipping a new stable version soon?
+│   ├─ YES: Cut a STABLE release
+│   └─ NO: Cut a BETA release
+└─ NO: Is there a critical bug in an already-released stable version?
+    ├─ YES: Cut a BACKPORT patch
+    └─ NO: No release needed
+```
+
+**Troubleshooting:**
+- Not sure if Premiere shipped a new version? Check the [Premiere Pro release notes](https://adobe.com).
+- Need help deciding? Ask your tech lead or check recent issues/PRs.
+- Accidentally started the wrong release? Close the PR and start over — no harm done until you merge.
+
 ## Version scheme
 
-Package versions mirror Premiere Pro's release schedule:
+Package versions attempt to mirror Premiere Pro's release schedule where possible:
 
 | Version format | Example | Meaning |
 |---|---|---|
@@ -12,23 +48,28 @@ Package versions mirror Premiere Pro's release schedule:
 | `X.Y.0` | `26.3.0` | Stable release aligned with Premiere 26.3.0 |
 | `X.Y.Z` (Z > 0) | `26.3.1` | Backport patch to the 26.3 stable line |
 
-The beta prerelease number (`N`) ideally corresponds to Premiere's internal Beta build number, but may not always align exactly — it can be set explicitly or auto-incremented.
+The beta prerelease number (`N`) ideally corresponds to Premiere's Beta build number, but may not always align exactly — it can be set explicitly or incremented by 1 from the previous beta. We also do not release new APIs with every Beta build so prerelease numbers may skip.
 
 ## npm distribution tags
 
-| Tag | Points to |
-|---|---|
-| `@latest` | Most recent stable release |
-| `@beta` | Most recent beta release |
-| `@release-X.Y` | Most recent patch on the `X.Y` stable line (e.g. `@release-26.3`) |
+| Tag | Points to | Use Case |
+|---|---|---|
+| `@latest` | Most recent stable release | Production use. Most users should install this. |
+| `@beta` | Most recent beta release | Early testing of upcoming APIs before they're officially released. |
+| `@release-X.Y` | Most recent patch on the `X.Y` stable line (e.g. `@release-26.3`) | Staying on a specific minor version line when you can't upgrade to the latest. |
+
+**Examples:**
+- `npm install -D @adobe/premierepro@latest` → Install the most stable version
+- `npm install -D @adobe/premierepro@beta` → Install the latest beta for early testing
+- `npm install -D @adobe/premierepro@release-26.3` → Stick to the 26.3 line even if 26.4+ is available
 
 ## Branch structure
 
 | Branch | Purpose |
 |---|---|
-| `main` | Active development. Always tracks the current beta version (e.g. `26.3.0-beta.N`). |
-| `release/X.Y` | Stable line for `X.Y`. Created automatically when `X.Y.0` is released. Receives backport patches only. |
-| `release-prep/*` | Short-lived branches opened by workflows. Merged via PR, then deleted. |
+| `main` | Active development. Always tracks the current beta version (e.g. `26.3.0-beta.N`). New features and fixes go here. |
+| `release/X.Y` | Stable line for `X.Y`. Created automatically when `X.Y.0` is released. Receives backport patches only (no new features). |
+| `release-prep/*` | **Temporary branches created automatically by the prepare-release workflow.** They hold release commits (version bump, CHANGELOG updates) and are deleted after the PR is merged. You'll see these in PRs but never work from them directly. |
 
 ## Workflows
 
@@ -41,8 +82,8 @@ Triggered manually via **Actions → Prepare Release → Run workflow**.
 | Input | Required | Description |
 |---|---|---|
 | `type` | Yes | `beta`, `stable`, or `backport` |
-| `build_number` | No (beta only) | Explicit prerelease number. Auto-increments from the current version if not provided. |
-| `next_cycle` | No (stable only) | Base version for the next beta cycle (e.g. `26.4.0` or `27.0.0` for a major bump). Auto-increments minor if not provided. **Must be set explicitly for major version bumps.** |
+| `build_number` | No (beta only) | Explicit prerelease number. If not provided, increments beta build number `N` by 1 from the current version (e.g. `26.3.0-beta.5` → `26.3.0-beta.6`). |
+| `next_cycle` | No (stable only) | Base version for the next beta cycle. After releasing `26.3.0`, this should be `26.4.0` (or `27.0.0` for a major bump). If not provided, increments the minor version by 1 automatically. **Must be set explicitly for major version bumps.** Once set, `main` will be bumped to `next_cycle-beta.0` (e.g. `26.4.0-beta.0`). |
 
 The workflow:
 1. Computes the next version
@@ -65,14 +106,42 @@ For **stable** releases it additionally:
 - Creates the `release/X.Y` branch for future backports
 - Opens a follow-up PR to bump `main` to the next beta cycle (`chore: begin X.Y.0-beta.0 cycle`)
 
+**Publish workflow decision tree:**
+
+```
+Commit message starts with "chore: release"?
+├─ NO → Skip (silent, no-op)
+└─ YES → Is this on main or release/**?
+    ├─ On main:
+    │   ├─ Contains "-beta"? → Publish as @beta
+    │   └─ No "-beta"? → Publish as @latest, create release/* branch, open next-cycle PR
+    └─ On release/**:
+        └─ Publish as @release-X.Y (never updates @latest)
+```
+
 ---
 
-## Scenario: publishing a beta release
+## When to Release
+
+**Beta releases:** Cut a beta release whenever you've merged new features or fixes to `main` and want to make them available for testing. Typically aligned with Premiere's beta builds, but you decide the cadence.
+
+**Stable releases:** Cut a stable release when:
+- Premiere Pro ships a new stable version (required)
+- The APIs in `main` match what shipped in that Premiere version
+- You're ready for production use
+
+**Backport releases:** Cut a backport patch when a critical bug is discovered in an already-released stable version and fixed on the `release/X.Y` branch.
+
+---
+
+## Scenarios
+
+### Scenario: publishing a beta release
 
 **Starting state:** `main` is at `26.3.0-beta.5`. Premiere 26.3.0 Beta Build 20 shipped with a new API, and you've merged a PR with `feat: add Timeline.createSequenceFromPreset()` to `main`.
 
 1. Go to **Actions → Prepare Release → Run workflow** (on `main`)
-2. Set **type** = `beta`. Optionally set **build_number** = `20` to align with the Premiere build; otherwise leave it blank to auto-increment to `26.3.0-beta.6`.
+2. Set **type** = `beta`. Optionally set **build_number** = `20` to align with the Premiere build; otherwise leave it blank and `N` will increment by 1 from the current version (`26.3.0-beta.5` → `26.3.0-beta.6`).
 3. The workflow creates branch `release-prep/26.3.0-beta.20` and opens a PR:
    - `package.json` version: `26.3.0-beta.20`
    - `CHANGELOG.md`: new `## 26.3.0-beta.20` section with `feat:` and `fix:` commits since `v26.3.0-beta.5`
@@ -90,7 +159,7 @@ Dependents can now install `@adobe/premierepro@beta` or pin to `@adobe/premierep
 **Starting state:** Premiere 26.3.0 has shipped. `main` is at `26.3.0-beta.20`.
 
 1. Go to **Actions → Prepare Release → Run workflow** (on `main`)
-2. Set **type** = `stable`. Optionally set **next_cycle** = `26.4.0` (or leave blank to auto-increment).
+2. Set **type** = `stable`. Optionally set **next_cycle** = `26.4.0` (or leave blank to increment the minor version by 1, e.g. `26.3.0` → `26.4.0`).
 3. The workflow creates branch `release-prep/26.3.0` and opens a PR:
    - `package.json` version: `26.3.0`
    - `CHANGELOG.md`: full generated entry with all `feat:` and `fix:` commits since the last stable tag (`v26.2.0`)
@@ -135,7 +204,7 @@ When Premiere increments its major version (e.g. 26.x → 27.x), the process is 
 
 - **next_cycle** = `27.0.0`
 
-The auto-increment fallback only increments the minor version and cannot know when a major bump is intended. If left blank during a major version transition it will produce `26.11.0` instead of `27.0.0`.
+The default fallback only increments the minor version by 1 and cannot know when a major bump is intended. If left blank during a major version transition it move from `26.3.0` --> `26.4.0` instead of `27.0.0`.
 
 ---
 
@@ -145,3 +214,26 @@ The auto-increment fallback only increments the minor version and cannot know wh
 - **Stable releases** receive a generated entry with all `feat:` and `fix:` commits since the previous stable tag — spanning the entire beta cycle. This is the authoritative cumulative record of what changed in the release.
 - **Stable releases** receive a generated entry grouping all `feat:` and `fix:` commits since the previous stable tag.
 - **Backport releases** receive a generated entry from non-chore commits since the previous tag on the release branch.
+
+**Examples:**
+
+```markdown
+### Beta CHANGELOG entry:
+## 26.3.0-beta.20
+Beta release.
+
+### Stable CHANGELOG entry:
+## 26.3.0 (2026-04-24)
+### Features
+* add new API ...
+* add new API ...
+### Bug Fixes
+* fix type error
+
+### Backport CHANGELOG entry:
+## 26.3.1 (2026-04-25)
+### Bug Fixes
+* fix critical type error
+```
+
+The key difference: Beta entries are minimal because they're transient, while Stable and Backport entries are detailed so consumers know exactly what changed.
