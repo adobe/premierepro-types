@@ -1746,7 +1746,7 @@ export declare type Marker = {
    * The unique identifier of the marker.
    * @readonly
    */
-  readonly guid: Guid
+  readonly guid: Guid;
 };
 
 export declare type MarkersStatic = {
