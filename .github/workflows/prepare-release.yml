@@ -1,0 +1,100 @@
+name: Prepare Release
+
+# Creates a version-bump PR. Merging the PR triggers the publish workflow.
+#
+# For backport releases, run this workflow from the appropriate release/* branch.
+
+on:
+  workflow_dispatch:
+    inputs:
+      type:
+        description: 'Release type'
+        required: true
+        type: choice
+        options: [beta, stable, backport]
+      build_number:
+        description: '[Beta] Prerelease number (e.g. 50). Auto-increments from current version if not provided.'
+        required: false
+        type: string
+      next_cycle:
+        description: '[Stable] Base version for the next beta cycle (e.g. 26.4.0 or 27.0.0 for a major bump). Auto-increments minor if not provided.'
+        required: false
+        type: string
+
+jobs:
+  prepare:
+    name: Prepare ${{ inputs.type }} release PR
+    runs-on: ubuntu-latest
+    if: |
+      github.repository == 'adobe/premierepro-types' &&
+      (inputs.type != 'backport' || startsWith(github.ref, 'refs/heads/release/'))
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          # Full history required for stable CHANGELOG generation (commit range
+          # from the last stable tag to HEAD).
+          fetch-depth: 0
+
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: '24'
+
+      - name: Compute next version
+        id: version
+        env:
+          RELEASE_TYPE: ${{ inputs.type }}
+          BUILD_NUMBER: ${{ inputs.build_number }}
+        run: node .github/scripts/compute-version.mjs
+
+      - name: Update package.json and package-lock.json
+        run: npm version ${{ steps.version.outputs.version }} --no-git-tag-version
+
+      - name: Update CHANGELOG
+        env:
+          RELEASE_TYPE: ${{ inputs.type }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: node .github/scripts/update-changelog.mjs
+
+      - name: Open release PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.version.outputs.version }}
+          RELEASE_TYPE: ${{ inputs.type }}
+          NEXT_CYCLE: ${{ inputs.next_cycle }}
+        run: |
+          BRANCH="release-prep/${VERSION}"
+          BASE_BRANCH="${{ github.ref_name }}"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add package.json package-lock.json CHANGELOG.md
+
+          # For stable releases, embed Next-Cycle as a git commit trailer so the
+          # publish workflow can open the next beta cycle PR after merge without
+          # needing a separate input mechanism.
+          if [ "$RELEASE_TYPE" = "stable" ]; then
+            RESOLVED_NEXT_CYCLE="${NEXT_CYCLE}"
+            if [ -z "$RESOLVED_NEXT_CYCLE" ]; then
+              RESOLVED_NEXT_CYCLE=$(node -p \
+                "const [maj,min]='${VERSION}'.split('.'); \`\${maj}.\${+min+1}.0\`")
+            fi
+            git commit -m "chore: release ${VERSION}" -m "Next-Cycle: ${RESOLVED_NEXT_CYCLE}"
+            printf 'Automated **stable** release PR for `%s`.\n\nMerging this PR will:\n- Publish `%s` to npm as `@latest`\n- Create the `release/%s` branch for future backports\n- Open a follow-up PR to begin the `%s` beta cycle\n' \
+              "$VERSION" "$VERSION" "${VERSION%.*}" "${RESOLVED_NEXT_CYCLE}" > /tmp/pr-body.md
+          else
+            git commit -m "chore: release ${VERSION}"
+            printf 'Automated **%s** release PR for `%s`.\n\nMerging this PR will publish `%s` to npm.\n' \
+              "$RELEASE_TYPE" "$VERSION" "$VERSION" > /tmp/pr-body.md
+          fi
+
+          git push origin "$BRANCH"
+
+          gh pr create \
+            --title "chore: release ${VERSION}" \
+            --body-file /tmp/pr-body.md \
+            --base "$BASE_BRANCH" \
+            --head "$BRANCH"
