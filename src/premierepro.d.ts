@@ -87,164 +87,164 @@ export declare type AAFExportOptions = {
    * Constructs a new instance of the AAFExportOptions class.
    * @constructor
    */
-  new (): AAFExportOptions
-  (): AAFExportOptions
+  new (): AAFExportOptions;
+  (): AAFExportOptions;
 
   /**
    * When true, renders the sequence video to a single media file for AAF export (video mixdown) instead of relying only on linked source clips
    *
    * @param mixdownVideo
    */
-  setMixdownVideo(mixdownVideo: boolean): AAFExportOptions
+  setMixdownVideo(mixdownVideo: boolean): AAFExportOptions;
 
   /**
    * When true, exports multichannel audio as separate mono media files (one file per channel)
    *
    * @param explodeToMono
    */
-  setExplodeToMono(explodeToMono: boolean): AAFExportOptions
+  setExplodeToMono(explodeToMono: boolean): AAFExportOptions;
 
   /**
    * Set the audio sample rate
    *
    * @param sampleRate
    */
-  setSampleRate(sampleRate: number): AAFExportOptions
+  setSampleRate(sampleRate: number): AAFExportOptions;
 
   /**
    * Set the audio bits per sample
    *
    * @param bitsPerSample
    */
-  setBitsPerSample(bitsPerSample: number): AAFExportOptions
+  setBitsPerSample(bitsPerSample: number): AAFExportOptions;
 
   /**
    * Set whether to embed audio in the AAF file
    *
    * @param embedAudio
    */
-  setEmbedAudio(embedAudio: boolean): AAFExportOptions
+  setEmbedAudio(embedAudio: boolean): AAFExportOptions;
 
   /**
    * Set the audio file format (0 for AIFF, 1 for WAV)
    *
    * @param audioFileFormat
    */
-  setAudioFileFormat(audioFileFormat: number): AAFExportOptions
+  setAudioFileFormat(audioFileFormat: number): AAFExportOptions;
 
   /**
    * Set whether to trim sources
    *
    * @param trimSources
    */
-  setTrimSources(trimSources: boolean): AAFExportOptions
+  setTrimSources(trimSources: boolean): AAFExportOptions;
 
   /**
    * Set the number of handle frames
    *
    * @param handleFrames
    */
-  setHandleFrames(handleFrames: number): AAFExportOptions
+  setHandleFrames(handleFrames: number): AAFExportOptions;
 
   /**
    * Path to the encoder preset file (.epr) used when mixdown video is enabled
    *
    * @param videoMixdownPresetPath
    */
-  setVideoMixdownPresetPath(videoMixdownPresetPath: string): AAFExportOptions
+  setVideoMixdownPresetPath(videoMixdownPresetPath: string): AAFExportOptions;
 
   /**
    * Set whether to render audio effects
    *
    * @param renderAudioEffects
    */
-  setRenderAudioEffects(renderAudioEffects: boolean): AAFExportOptions
+  setRenderAudioEffects(renderAudioEffects: boolean): AAFExportOptions;
 
   /**
    * Set whether to interleave without effects
    *
    * @param interleaveWithoutEffects
    */
-  setInterleaveWithoutEffects(interleaveWithoutEffects: boolean): AAFExportOptions
+  setInterleaveWithoutEffects(interleaveWithoutEffects: boolean): AAFExportOptions;
 
   /**
    * When true, exploded mono audio is written under a subdirectory named after the folder that contained each clip's source media on disk
    *
    * @param preserveParentFolder
    */
-  setPreserveParentFolder(preserveParentFolder: boolean): AAFExportOptions
+  setPreserveParentFolder(preserveParentFolder: boolean): AAFExportOptions;
 
   /**
    * True if the exporter will render a single mixed-down video file
    * @readonly
    */
-  readonly mixdownVideo: boolean
+  readonly mixdownVideo: boolean;
 
   /**
    * True if multichannel audio is exported as separate mono files per channel
    * @readonly
    */
-  readonly explodeToMono: boolean
+  readonly explodeToMono: boolean;
 
   /**
    * Get the audio sample rate
    * @readonly
    */
-  readonly sampleRate: number
+  readonly sampleRate: number;
 
   /**
    * Get the audio bits per sample
    * @readonly
    */
-  readonly bitsPerSample: number
+  readonly bitsPerSample: number;
 
   /**
    * Get whether to embed audio in the AAF file
    * @readonly
    */
-  readonly embedAudio: boolean
+  readonly embedAudio: boolean;
 
   /**
    * Get the audio file format (0 for AIFF, 1 for WAV)
    * @readonly
    */
-  readonly audioFileFormat: number
+  readonly audioFileFormat: number;
 
   /**
    * Get whether to trim sources
    * @readonly
    */
-  readonly trimSources: boolean
+  readonly trimSources: boolean;
 
   /**
    * Get the number of handle frames
    * @readonly
    */
-  readonly handleFrames: number
+  readonly handleFrames: number;
 
   /**
    * Get the video mixdown preset path
    * @readonly
    */
-  readonly videoMixdownPresetPath: string
+  readonly videoMixdownPresetPath: string;
 
   /**
    * Get whether to render audio effects
    * @readonly
    */
-  readonly renderAudioEffects: boolean
+  readonly renderAudioEffects: boolean;
 
   /**
    * Get whether to interleave without effects
    * @readonly
    */
-  readonly interleaveWithoutEffects: boolean
+  readonly interleaveWithoutEffects: boolean;
 
   /**
    * Get whether to preserve parent folder
    * @readonly
    */
-  readonly preserveParentFolder: boolean
+  readonly preserveParentFolder: boolean;
 };
 
 export declare type Action = {};
@@ -2544,7 +2544,11 @@ export declare type ProjectConverterStatic = {
    * @param filePath
    * @param aafExportOptions
    */
-  exportAAF(sequence: Sequence, filePath: string, aafExportOptions?: AAFExportOptions): Promise<boolean>;
+  exportAAF(
+    sequence: Sequence,
+    filePath: string,
+    aafExportOptions?: AAFExportOptions
+  ): Promise<boolean>;
 
   /**
    * Export a sequence as Final Cut Pro XML to the specified output file path.
@@ -2576,13 +2580,13 @@ export declare type ProjectConverterStatic = {
    * AAF Export Audio Format AIFF
    * @readonly
    */
-  readonly AAF_EXPORT_AUDIO_FORMAT_AIFF: number
+  readonly AAF_EXPORT_AUDIO_FORMAT_AIFF: number;
 
   /**
    * AAF Export Audio Format WAV
    * @readonly
    */
-  readonly AAF_EXPORT_AUDIO_FORMAT_WAV: number
+  readonly AAF_EXPORT_AUDIO_FORMAT_WAV: number;
 };
 
 export declare type ProjectConverter = {};
