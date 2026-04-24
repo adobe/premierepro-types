@@ -1,5 +1,11 @@
 # Changelog
 
+
+## 26.3.0-beta.19 (2026-04-24)
+
+### Features
+
+* Remove ProjectConverter.import* APIs (#15) ([94cdb13](https://github.com/adobe/premierepro-types/commit/94cdb13f83bd646841b95267aba0cdfcdae29451))
 ## 26.2.0 (2026-04-23)
 
 ### Miscellaneous Chores
