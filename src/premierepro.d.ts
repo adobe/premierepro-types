@@ -2368,22 +2368,6 @@ export declare type ProjectConverterStatic = {
     outputFilePath: string,
     suppressUI?: boolean
   ): Promise<boolean>;
-
-  /**
-   * Import a Final Cut Pro XML file into the active project.
-   *
-   * @param importPath
-   * @param suppressUI
-   */
-  importFromFinalCutProXML(importPath: string, suppressUI?: boolean): Promise<boolean>;
-
-  /**
-   * Import an OpenTimelineIO file into the active project.
-   *
-   * @param importPath
-   * @param suppressUI
-   */
-  importFromOpenTimelineIO(importPath: string, suppressUI?: boolean): Promise<boolean>;
 };
 
 export declare type ProjectConverter = {};
