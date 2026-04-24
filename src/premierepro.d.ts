@@ -2815,7 +2815,7 @@ export declare type Sequence = {
    *
    * @param trackItemSelection
    */
-  setSelection(trackItemSelection: TrackItemSelection): Promise<boolean>;
+  setSelection(trackItemSelection: TrackItemSelection): boolean;
 
   /**
    * Get video track count from this sequence
