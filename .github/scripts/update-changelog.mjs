@@ -41,10 +41,13 @@ const date = new Date().toISOString().split("T")[0];
 /** Inserts a new CHANGELOG entry after the `# Changelog` header. */
 function insertEntry(entry) {
   const content = readFileSync("CHANGELOG.md", "utf8");
+  // indexOf finds the \n immediately before the first "## " heading.
+  // Trim trailing whitespace from the before-slice so we fully control spacing,
+  // and skip the leading \n of the after-slice (+1) to avoid a double blank line.
   const insertPoint = content.indexOf("\n## ");
   const newContent =
     insertPoint !== -1
-      ? content.slice(0, insertPoint) + "\n\n" + entry.trimEnd() + content.slice(insertPoint)
+      ? content.slice(0, insertPoint).trimEnd() + "\n\n" + entry.trimEnd() + "\n\n" + content.slice(insertPoint + 1)
       : content.trimEnd() + "\n\n" + entry.trimEnd() + "\n\n";
   writeFileSync("CHANGELOG.md", newContent);
   console.log(`Updated CHANGELOG.md for ${VERSION}`);

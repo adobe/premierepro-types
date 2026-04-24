@@ -5,9 +5,14 @@ on:
     branches:
       - main
       - 'release/**'
-      - 'release-prep/**'
   pull_request:
     types: [opened, synchronize, reopened]
+  # Used by prepare-release.yml to trigger CI on release-prep/* branches.
+  # release-prep/** is intentionally omitted from the push trigger above: the
+  # prepare-release workflow uses GITHUB_TOKEN (which cannot fire push triggers
+  # anyway) and dispatches CI explicitly. Manual commits to a release-prep branch
+  # are covered by the pull_request: synchronize event since a PR is always open.
+  workflow_dispatch:
 
 permissions:
   contents: read
