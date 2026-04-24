@@ -55,6 +55,13 @@ switch (RELEASE_TYPE) {
     const base = current.replace(/-beta\.\d+$/, "");
     const currentN = parseInt(current.match(/beta\.(\d+)$/)[1], 10);
     const nextN = BUILD_NUMBER ? parseInt(BUILD_NUMBER, 10) : currentN + 1;
+    if (nextN <= currentN) {
+      fail(
+        `build_number ${nextN} is not greater than the current beta number ${currentN} ` +
+          `(current version: ${current}). Provide a build_number > ${currentN}, or leave it ` +
+          `blank to auto-increment to ${currentN + 1}.`
+      );
+    }
     setOutput("version", `${base}-beta.${nextN}`);
     break;
   }
