@@ -59,6 +59,12 @@ jobs:
           git tag "v${VERSION}"
           git push origin "v${VERSION}"
 
+      - name: Verify version is not a downgrade
+        env:
+          VERSION: ${{ needs.detect.outputs.version }}
+          DIST_TAG: ${{ needs.detect.outputs.dist_tag }}
+        run: node .github/scripts/check-version-order.mjs
+
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.ADOBE_BOT_NPM_TOKEN }}
