@@ -45,7 +45,7 @@ function insertEntry(entry) {
   const newContent =
     insertPoint !== -1
       ? content.slice(0, insertPoint) + "\n\n" + entry.trimEnd() + content.slice(insertPoint)
-      : content.trimEnd() + "\n\n" + entry.trimEnd() + "\n";
+      : content.trimEnd() + "\n\n" + entry.trimEnd() + "\n\n";
   writeFileSync("CHANGELOG.md", newContent);
   console.log(`Updated CHANGELOG.md for ${VERSION}`);
 }
