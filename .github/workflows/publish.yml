@@ -10,6 +10,8 @@ on:
       - main
       - 'release/**'
 
+permissions: {}
+
 jobs:
   detect:
     name: Detect release commit
@@ -33,9 +35,8 @@ jobs:
     if: needs.detect.outputs.is_release == 'true'
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      id-token: write
-      pull-requests: write
+      contents: write      # git tag, release branch, GitHub release
+      pull-requests: write # open next-cycle PR (stable releases only)
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
