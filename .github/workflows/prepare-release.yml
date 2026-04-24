@@ -110,3 +110,13 @@ jobs:
             --body-file /tmp/pr-body.md \
             --base "$BASE_BRANCH" \
             --head "$BRANCH"
+
+      # GitHub does not fire push-based workflow triggers when the push is made
+      # by GITHUB_TOKEN (anti-recursion guard). Dispatching via the API bypasses
+      # this restriction, so the CI check appears on the PR and branch protection
+      # rules are satisfied.
+      - name: Trigger CI on release-prep branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: gh workflow run ci.yaml --ref "release-prep/${VERSION}"
