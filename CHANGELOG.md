@@ -1,5 +1,7 @@
 # Changelog
 
+Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
+
 ## 26.2.0 (2026-04-23)
 
 ### Miscellaneous Chores
