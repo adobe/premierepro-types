@@ -8,6 +8,7 @@ Versioning of Beta and Stable releases is documented here. For more details on t
 ### Features
 
 * Remove ProjectConverter.import* APIs (#15) ([94cdb13](https://github.com/adobe/premierepro-types/commit/94cdb13f83bd646841b95267aba0cdfcdae29451))
+
 ## 26.2.0 (2026-04-23)
 
 ### Miscellaneous Chores
