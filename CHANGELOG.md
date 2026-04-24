@@ -2,6 +2,12 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.3.0-beta.39 (2026-04-24)
+
+### Features
+
+* Add createSetNameAction for Tracks (#27) ([abe2966](https://github.com/adobe/premierepro-types/commit/abe29667aeefee0e0995ca57e315bd09c62219e8))
+
 ## 26.3.0-beta.29 (2026-04-24)
 
 ### Features
