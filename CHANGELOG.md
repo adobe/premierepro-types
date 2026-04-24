@@ -2,6 +2,13 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.3.0-beta.43 (2026-04-24)
+
+### Features
+
+* Make Sequence.setSelection synchronous (#31) ([945d457](https://github.com/adobe/premierepro-types/commit/945d4579c4cc4c977c44d5daab1dd728472e662c))
+* Add Project.createSequenceWithPresetPath (#30) ([b49f026](https://github.com/adobe/premierepro-types/commit/b49f026d09562716f67d13e1935af8ecce2bada7))
+
 ## 26.3.0-beta.39 (2026-04-24)
 
 ### Features
