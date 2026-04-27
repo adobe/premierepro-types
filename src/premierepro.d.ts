@@ -3241,7 +3241,7 @@ export declare type SequenceEditor = {
     inTime: TickTime,
     inVideoTrackIndex: number,
     inAudioTrackIndex: number
-  ): (VideoClipTrackItem | AudioClipTrackItem)[];
+  ): Array<VideoClipTrackItem | AudioClipTrackItem>;
 
   /**
    * Insert input MGT into sequence with time and index defined
@@ -3258,7 +3258,7 @@ export declare type SequenceEditor = {
     inTime: TickTime,
     inVideoTrackIndex: number,
     inAudioTrackIndex: number
-  ): (VideoClipTrackItem | AudioClipTrackItem)[];
+  ): Array<VideoClipTrackItem | AudioClipTrackItem>;
 };
 
 export declare type SequenceSettingsStatic = {
@@ -3897,7 +3897,7 @@ export declare type TrackItemSelection = {
   /**
    * return list of trackItems inside of trackItemSelection
    */
-  getTrackItems(): Promise<(VideoClipTrackItem | AudioClipTrackItem)[]>;
+  getTrackItems(): Promise<Array<VideoClipTrackItem | AudioClipTrackItem>>;
 };
 
 export declare type TransitionFactoryStatic = {

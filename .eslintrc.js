@@ -32,7 +32,7 @@ module.exports = {
   plugins: ["@typescript-eslint", "jsdoc", "import"],
   rules: {
     "@typescript-eslint/adjacent-overload-signatures": "error",
-    "@typescript-eslint/array-type": "error",
+    "@typescript-eslint/array-type": ["error", { default: "array-simple" }],
 
     camelcase: "off",
     "@typescript-eslint/naming-convention": [
