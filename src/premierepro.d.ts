@@ -4389,7 +4389,7 @@ export declare type TranscriptStatic = {
    *
    * @param clipProjectItem
    */
-  hasTranscript(clipProjectItem: ClipProjectItem): boolean
+  hasTranscript(clipProjectItem: ClipProjectItem): boolean;
 
   /**
    * Export transcripts inside of clipProjectItem as JSON string if transcript exist
