@@ -2,6 +2,12 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.3.0-beta.47 (2026-04-28)
+
+### Features
+
+* feat: Add Transcript.querySupportedLanguages (#35) ([d5596b2](https://github.com/adobe/premierepro-types/commit/d5596b24bed5584b99c6c4c200113eee4c2cc14e))
+
 ## 26.3.0-beta.44 (2026-04-24)
 
 ### Features
