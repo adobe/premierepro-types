@@ -2,6 +2,12 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.3.0-beta.54 (2026-04-28)
+
+### Features
+
+* feat: Add Transcript.hasTranscript (#38) ([7acc9cb](https://github.com/adobe/premierepro-types/commit/7acc9cb15d64d0740454f551317cd97cb2b056e8))
+
 ## 26.3.0-beta.47 (2026-04-28)
 
 ### Features
