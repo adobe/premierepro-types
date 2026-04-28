@@ -76,19 +76,35 @@ function getCommits(fromTag) {
 function formatCommits(commits) {
   const features = [];
   const fixes = [];
+  const chores = [];
+  const refactors = [];
+  const tests = [];
+  const docs = [];
 
   for (const { msg, shortHash, fullHash } of commits) {
     const link = `([${shortHash}](${REPO_URL}/commit/${fullHash}))`;
-    if (/^feat(\([^)]+\))?!?:/.test(msg)) {
-      features.push(`* ${msg.replace(/^feat(\([^)]+\))?!?:\s*/, "")} ${link}`);
-    } else if (/^fix(\([^)]+\))?!?:/.test(msg)) {
-      fixes.push(`* ${msg.replace(/^fix(\([^)]+\))?!?:\s*/, "")} ${link}`);
+    if (msg.startsWith("feat")) {
+      features.push(`* ${msg} ${link}`);
+    } else if (msg.startsWith("fix")) {
+      fixes.push(`* ${msg} ${link}`);
+    } else if (msg.startsWith("chore")) {
+      chores.push(`* ${msg} ${link}`);
+    } else if (msg.startsWith("refactor")) {
+      refactors.push(`* ${msg} ${link}`);
+    } else if (msg.startsWith("test")) {
+      tests.push(`* ${msg} ${link}`);
+    } else if (msg.startsWith("docs")) {
+      docs.push(`* ${msg} ${link}`);
     }
   }
 
   let out = "";
   if (features.length) out += `### Features\n\n${features.join("\n")}\n\n`;
   if (fixes.length) out += `### Bug Fixes\n\n${fixes.join("\n")}\n\n`;
+  if (chores.length) out += `### Miscellaneous Chores\n\n${chores.join("\n")}\n\n`;
+  if (refactors.length) out += `### Refactorings\n\n${refactors.join("\n")}\n\n`;
+  if (tests.length) out += `### Tests\n\n${tests.join("\n")}\n\n`;
+  if (docs.length) out += `### Documentation\n\n${docs.join("\n")}\n\n`;
   return out || "No notable changes.\n\n";
 }
 
