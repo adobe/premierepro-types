@@ -4385,6 +4385,13 @@ export declare type TranscriptStatic = {
   querySupportedLanguages(): Array<{ displayString: string; languageCode: string; locale: string }>;
 
   /**
+   * Returns true if the ClipProjectItem has an existing transcript
+   *
+   * @param clipProjectItem
+   */
+  hasTranscript(clipProjectItem: ClipProjectItem): boolean
+
+  /**
    * Export transcripts inside of clipProjectItem as JSON string if transcript exist
    *
    * @param clipProjectItem
