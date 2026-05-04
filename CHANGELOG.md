@@ -2,6 +2,12 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.3.0-beta.58 (2026-05-04)
+
+### Features
+
+* feat: Add ObjectMaskUtils utility object (#40) ([b7947b0](https://github.com/adobe/premierepro-types/commit/b7947b07cb756a886ae3853b6b34cd4ad730c99e))
+
 ## 26.3.0-beta.54 (2026-04-28)
 
 ### Features
