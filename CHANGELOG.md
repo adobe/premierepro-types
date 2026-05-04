@@ -2,6 +2,12 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.3.0-beta.59 (2026-05-04)
+
+### Bug Fixes
+
+* fix: Add ObjectMaskUtils to premierepro top level object (#42) ([28fb59a](https://github.com/adobe/premierepro-types/commit/28fb59a399172c99b3cf9797da5d1ffce622493d))
+
 ## 26.3.0-beta.58 (2026-05-04)
 
 ### Features
