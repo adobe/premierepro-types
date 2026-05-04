@@ -2091,6 +2091,18 @@ export declare type MetadataStatic = {
 
 export declare type Metadata = {};
 
+export declare type ObjectMaskUtilsStatic = {
+  /**
+   * Check if the project or sequence contains object mask. Returns true if at
+   * least one object mask exists.
+   *
+   * @param projectOrSequence
+   */
+  hasObjectMask(projectOrSequence: Project | Sequence): boolean;
+};
+
+export declare type ObjectMaskUtils = {};
+
 export declare type OpenProjectOptions = {
   /**
    * Constructs a new instance of the OpenProjectOptions class.
