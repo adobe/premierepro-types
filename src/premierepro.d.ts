@@ -41,6 +41,7 @@ export declare type premierepro = {
   Markers: MarkersStatic;
   Media: Media;
   Metadata: MetadataStatic;
+  ObjectMaskUtils: ObjectMaskUtilsStatic;
   OpenProjectOptions: OpenProjectOptions;
   OperationCompleteEvent: OperationCompleteEventStatic;
   PRProduction: PRProductionStatic;
