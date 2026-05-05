@@ -1369,6 +1369,30 @@ export declare type EncoderManager = {
   ): Promise<boolean>;
 
   /**
+   * Start encoding the AME batch queue.
+   */
+  startBatchEncode(): Promise<boolean>;
+
+  /**
+   * Set whether to enable sidecar XMP when exporting a sequence.
+   *
+   * @param enabled
+   */
+  setSidecarXMPEnabled(enabled: boolean): Promise<boolean>;
+
+  /**
+   * Set whether to enable embedded XMP when exporting a sequence.
+   *
+   * @param enabled
+   */
+  setEmbeddedXMPEnabled(enabled: boolean): Promise<boolean>;
+
+  /**
+   * Launch AME asynchronously if not already running.
+   */
+  launchEncoder(): Promise<boolean>;
+
+  /**
    * Check if AME is installed.
    * @readonly
    */
@@ -2094,8 +2118,7 @@ export declare type Metadata = {};
 
 export declare type ObjectMaskUtilsStatic = {
   /**
-   * Check if the project or sequence contains object mask. Returns true if at
-   * least one object mask exists.
+   * Check if the project or sequence contains object mask. Returns true if at least one object mask exists.
    *
    * @param projectOrSequence
    */
