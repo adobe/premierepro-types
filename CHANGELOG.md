@@ -2,6 +2,12 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.3.0-beta.65 (2026-05-05)
+
+### Features
+
+* feat: Add new APIs for EncoderManager (#44) ([9421c13](https://github.com/adobe/premierepro-types/commit/9421c1302fb9677e7fc275def0bea62ec21b72f3))
+
 ## 26.3.0-beta.59 (2026-05-04)
 
 ### Bug Fixes
