@@ -131,7 +131,7 @@ export declare type AAFExportOptions = {
    *
    * @param audioFileFormat
    */
-  setAudioFileFormat(audioFileFormat: number): AAFExportOptions;
+  setAudioFileFormat(audioFileFormat: Constants.AAFExportAudioFormat): AAFExportOptions;
 
   /**
    * Set whether to trim sources
@@ -3727,6 +3727,13 @@ export declare type SourceMonitorStatic = {
   getPosition(): Promise<TickTime>;
 
   /**
+   * Set position of source monitor to the given TickTime
+   *
+   * @param position
+   */
+  setPosition(position: TickTime): Promise<boolean>;
+
+  /**
    * Play clip at source monitor with input speed
    *
    * @param speed
@@ -4438,6 +4445,11 @@ export declare type TranscriptStatic = {
 export declare type Transcript = {};
 
 export namespace Constants {
+  export enum AAFExportAudioFormat {
+    AIFF,
+    WAV,
+  }
+
   export enum AudioChannelType {
     MONO,
     STEREO,
