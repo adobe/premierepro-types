@@ -2,6 +2,12 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.3.0-beta.67 (2026-05-07)
+
+### Features
+
+* feat: Add SourceMonitor.setPosition (#46) ([f7985ca](https://github.com/adobe/premierepro-types/commit/f7985ca39ae9d02a234287dd104add1065e18446))
+
 ## 26.3.0-beta.65 (2026-05-05)
 
 ### Features
