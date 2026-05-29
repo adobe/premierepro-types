@@ -837,6 +837,23 @@ export declare type ClipProjectItem = {
   changeMediaFilePath(newPath: string, overrideCompatibilityCheck?: boolean): Promise<boolean>;
 
   /**
+   * Returns a deferred Action that creates a subclip when committed inside a transaction. hasHardBoundaries: if true, prevents trimming beyond the subclip boundaries. Accepts additional options (defaults to true): { takeVideo?: boolean, takeAudio?: boolean }.
+   *
+   * @param name
+   * @param startTime
+   * @param endTime
+   * @param hasHardBoundaries
+   * @param options
+   */
+  createSubClipAction(
+    name: string,
+    startTime: TickTime,
+    endTime: TickTime,
+    hasHardBoundaries: boolean,
+    options?: object
+  ): Action;
+
+  /**
    * Returns true if the clip Project item is a merged clip
    */
   isMergedClip(): Promise<boolean>;
