@@ -2,6 +2,10 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.2.1 (2026-05-30)
+
+* fix: package dependency update and NodeJS requirements (#55) ([68c6487](https://github.com/adobe/premierepro-types/commit/68c6487e03464c253d81398ac702334d676df1a8))
+
 ## 26.2.0 (2026-04-23)
 
 ### Miscellaneous Chores
