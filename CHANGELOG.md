@@ -2,6 +2,20 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.3.0-beta.85 (2026-05-30)
+
+### Features
+
+* feat: Add ClipProjectItem.createSubClipAction (#50) ([0e21b13](https://github.com/adobe/premierepro-types/commit/0e21b134eef67f7b2b4cf7c2ce8409bca2eb2a72))
+
+### Bug Fixes
+
+* fix: update NodeJS engines entry in package-lock.json (#51) ([c1ada56](https://github.com/adobe/premierepro-types/commit/c1ada568ca7ea30ce9df1d94c734b7a96d9467a9))
+
+### Miscellaneous Chores
+
+* chore: update brace-expansion dependency (#52) ([4cba326](https://github.com/adobe/premierepro-types/commit/4cba32697495170bfe2df4a82ed6c5e1abd6361c))
+
 ## 26.3.0-beta.67 (2026-05-07)
 
 ### Features
