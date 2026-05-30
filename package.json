@@ -24,7 +24,7 @@
   ],
   "sideEffects": false,
   "engines": {
-    "node": ">=24.13.0"
+    "node": ">=20.0.0"
   },
   "types": "./src/premierepro.d.ts",
   "exports": {
