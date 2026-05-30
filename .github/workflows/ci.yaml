@@ -1,33 +1,39 @@
+name: ci
+
 on:
   push:
     branches:
       - main
+      - 'release/**'
   pull_request:
-    types: [assigned, opened, synchronize]
-name: ci
-permissions:
-  contents: read # Used to read the code base
+    types: [opened, synchronize, reopened]
+  # Used by prepare-release.yml to trigger CI on release-prep/* branches.
+  # release-prep/** is intentionally omitted from the push trigger above: the
+  # prepare-release workflow uses GITHUB_TOKEN (which cannot fire push triggers
+  # anyway) and dispatches CI explicitly. Manual commits to a release-prep branch
+  # are covered by the pull_request: synchronize event since a PR is always open.
+  workflow_dispatch:
+
+permissions: {}
 
 jobs:
   build:
     name: Build/Lint/Test
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          # Make sure the actual branch is checked out when running on pull requests
+          # On pull requests, check out the PR branch rather than the merge commit.
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
 
       - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: '24'
-          registry-url: 'https://registry.npmjs.org'
 
-      - run: node --version
-      - run: npm --version
       - run: npm ci
       - run: npm run format:check
       - run: npm run lint
       - run: npm test
-      - run: npm publish --dry-run
