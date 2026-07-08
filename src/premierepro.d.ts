@@ -632,7 +632,7 @@ export declare type AudioTrack = {
    *
    * @param name
    */
-  createSetNameAction(name: string): object;
+  createSetNameAction(name: string): Action;
 
   /**
    * sets the mute state of the track to muted/unmuted
@@ -688,7 +688,7 @@ export declare type CaptionTrack = {
    *
    * @param name
    */
-  createSetNameAction(name: string): object;
+  createSetNameAction(name: string): Action;
 
   /**
    * sets the mute state of the track to muted/unmuted
@@ -4280,7 +4280,7 @@ export declare type VideoTrack = {
    *
    * @param name
    */
-  createSetNameAction(name: string): object;
+  createSetNameAction(name: string): Action;
 
   /**
    * sets the mute state of the track to muted/unmuted
