@@ -314,7 +314,7 @@ export declare type AddTransitionOptions = {
 
 export declare type AppPreferenceStatic = {
   /**
-   * Set backend preference using given list of property keys. The parameters are <key, value (number, boolean or string), persistence flag>
+   * Set backend preference using one of the available property keys
    *
    * @param key App preference key to set
    * @param value Value to set for the preference key
@@ -946,17 +946,17 @@ export declare type ClipProjectItem = {
   /**
    * Returns an action which sets Override pixel aspect ratio
    *
-   * @param inNumerator
-   * @param inDenominator
+   * @param numerator
+   * @param denominator
    */
-  createSetOverridePixelAspectRatioAction(inNumerator: number, inDenominator: number): Action;
+  createSetOverridePixelAspectRatioAction(numerator: number, denominator: number): Action;
 
   /**
    * Returns an action which sets the override frame rate
    *
-   * @param inOverriddenFrameRateValue
+   * @param overriddenFrameRateValue
    */
-  createSetOverrideFrameRateAction(inOverriddenFrameRateValue: number): Action;
+  createSetOverrideFrameRateAction(overriddenFrameRateValue: number): Action;
 
   /**
    * Returns an action which Sets the in point of the Project item
@@ -1956,7 +1956,7 @@ export declare type Marker = {
   /**
    * Return an action to set the type of the marker.
    *
-   * @param markerType This values can be Scale (0), AnchorToInPoint (1) or AnchorToOutPoint (2)
+   * @param markerType Can be set to "Comment", "Chapter", "Segmentation", or "WebLink"
    */
   createSetTypeAction(markerType: string): Action;
 
@@ -2009,14 +2009,14 @@ export declare type Markers = {
   /**
    * Add a new marker
    *
-   * @param Name
+   * @param name
    * @param markerType
    * @param startTime
    * @param duration
    * @param comments
    */
   createAddMarkerAction(
-    Name: string,
+    name: string,
     markerType?: string,
     startTime?: TickTime,
     duration?: TickTime,
@@ -2401,7 +2401,7 @@ export declare type Project = {
   createSequenceWithPresetPath(name: string, presetPath: string): Promise<Sequence>;
 
   /**
-   * Create a new sequence with a given name and medias
+   * Create a new sequence with a given name and media
    *
    * @param name
    * @param clipProjectItems
@@ -2455,16 +2455,16 @@ export declare type Project = {
    *
    * @param aepPath
    * @param compNames
-   * @param TargetBin
+   * @param targetBin
    */
-  importAEComps(aepPath: string, compNames: string[], TargetBin?: ProjectItem): Promise<boolean>;
+  importAEComps(aepPath: string, compNames: string[], targetBin?: ProjectItem): Promise<boolean>;
 
   /**
    *
    * @param aepPath
-   * @param TargetBin
+   * @param targetBin
    */
-  importAllAEComps(aepPath: string, TargetBin?: ProjectItem): Promise<boolean>;
+  importAllAEComps(aepPath: string, targetBin?: ProjectItem): Promise<boolean>;
 
   /**
    * Import files in root/target bin of the project
@@ -2518,7 +2518,7 @@ export declare type Project = {
   getRootItem(): Promise<FolderItem>;
 
   /**
-   * Pause growing of files instead swap the files
+   * Pauses or resumes monitoring of actively-captured (growing) media files in the project. When paused, Premiere stops refreshing clips whose source files are still being written to disk, allowing stable playback at the current captured duration. Pass true to pause, false to resume.
    *
    * @param pause
    */
@@ -2920,7 +2920,7 @@ export declare type Properties = {
   getValue(name: string): string;
 
   /**
-   * Create an action to set a named value through scripting. The parameters are <name, value (number, boolean or string), persistence flag>. This method can fail if e.g. the underlying properties object does not support action based setting of properties.
+   * Create an action to set a named value through scripting. This method can fail if e.g. the underlying properties object does not support action based setting of properties.
    *
    * @param name property name
    * @param value Value to set for the property key
@@ -3115,7 +3115,7 @@ export declare type Sequence = {
   getSettings(): Promise<SequenceSettings>;
 
   /**
-   * Returns action that set sequence settings
+   * Returns an action that updates the settings for the sequence.
    *
    * @param sequenceSettings
    */
@@ -3166,7 +3166,7 @@ export declare type Sequence = {
   createSetInPointAction(tickTime: TickTime): Action;
 
   /**
-   * Create an action to set an InPoint for the sequence
+   * Create an action to set the zero point for the sequence.
    *
    * @param tickTime
    */
