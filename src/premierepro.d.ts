@@ -927,11 +927,13 @@ export declare type ClipProjectItem = {
   getMediaFilePath(): Promise<string>;
 
   /**
-   * Get the media file path of the Project item.
+   * Get the component chain of the Project item for the given media type.
    *
-   * @param mediaType Media type can be audio, video or data/caption
+   * @param mediaType Media type can be audio or video
    */
-  getComponentChain(mediaType: Constants.MediaType): Promise<string>;
+  getComponentChain(
+    mediaType: Constants.MediaType
+  ): Promise<AudioComponentChain | VideoComponentChain | null>;
 
   /**
    * Returns an action which Sets the in point of the Project item
