@@ -2,6 +2,13 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.5.0-beta.7 (2026-07-08)
+
+### Bug Fixes
+
+* fix: Fully type options for createSubClipAction (#64) ([feabbef](https://github.com/adobe/premierepro-types/commit/feabbefb56f3dab2fa27e85794aadd8538e7bcea))
+* fix!: Update getComponentChain return type (#63) ([1e2e1f3](https://github.com/adobe/premierepro-types/commit/1e2e1f3afb9bb191dc0cf650e74d7e3b4ff0e5ee))
+
 ## 26.5.0-beta.3 (2026-07-08)
 
 ### Bug Fixes
