@@ -837,7 +837,7 @@ export declare type ClipProjectItem = {
   changeMediaFilePath(newPath: string, overrideCompatibilityCheck?: boolean): Promise<boolean>;
 
   /**
-   * Returns a deferred Action that creates a subclip when committed inside a transaction. hasHardBoundaries: if true, prevents trimming beyond the subclip boundaries. Accepts additional options (defaults to true): { takeVideo?: boolean, takeAudio?: boolean }.
+   * Returns a deferred Action that creates a subclip when committed inside a transaction. hasHardBoundaries: if true, prevents trimming beyond the subclip boundaries. Takes additional options (defaulting to true).
    *
    * @param name
    * @param startTime
@@ -850,7 +850,7 @@ export declare type ClipProjectItem = {
     startTime: TickTime,
     endTime: TickTime,
     hasHardBoundaries: boolean,
-    options?: object
+    options?: { takeVideo?: boolean; takeAudio?: boolean }
   ): Action;
 
   /**
