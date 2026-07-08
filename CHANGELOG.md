@@ -2,6 +2,16 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.5.0-beta.3 (2026-07-08)
+
+### Bug Fixes
+
+* fix: Use better return type for createSetNameAction (#61) ([2218d15](https://github.com/adobe/premierepro-types/commit/2218d153214f63a1605ee0ce1fadbce3f5f334e6))
+
+### Miscellaneous Chores
+
+* chore: begin 26.5.0-beta.0 cycle (#60) ([94f5c00](https://github.com/adobe/premierepro-types/commit/94f5c00d8c239f63fe7fd5d6e6bcc320c43dac9f))
+
 ## 26.3.0 (2026-06-12)
 
 ### Features
