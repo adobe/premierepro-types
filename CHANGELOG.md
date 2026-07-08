@@ -2,6 +2,12 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.5.0-beta.8 (2026-07-08)
+
+### Features
+
+* feat: Add MediaManager type (#66) ([ea3a3f2](https://github.com/adobe/premierepro-types/commit/ea3a3f2ac22318d080dcdcc979f040cae7495d13))
+
 ## 26.5.0-beta.7 (2026-07-08)
 
 ### Bug Fixes
