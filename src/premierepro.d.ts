@@ -40,6 +40,7 @@ export declare type premierepro = {
   Marker: MarkerStatic;
   Markers: MarkersStatic;
   Media: Media;
+  MediaManager: MediaManagerStatic;
   Metadata: MetadataStatic;
   ObjectMaskUtils: ObjectMaskUtilsStatic;
   OpenProjectOptions: OpenProjectOptions;
@@ -2043,6 +2044,15 @@ export declare type Media = {
    */
   readonly duration: TickTime;
 };
+
+export declare type MediaManagerStatic = {
+  /**
+   * Flush the media cache.
+   */
+  purgeMediaCache(): Promise<boolean>;
+};
+
+export declare type MediaManager = {};
 
 export declare type MetadataStatic = {
   /**
