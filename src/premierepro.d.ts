@@ -79,6 +79,7 @@ export declare type premierepro = {
   VideoFilterFactory: VideoFilterFactoryStatic;
   VideoTrack: VideoTrackStatic;
   VideoTransition: VideoTransitionStatic;
+  WorkAreaUtils: WorkAreaUtilsStatic;
   EventManager: EventManagerStatic;
   Transcript: TranscriptStatic;
   Constants: typeof Constants;
@@ -3149,12 +3150,12 @@ export declare type Sequence = {
   getEndTime(): Promise<TickTime>;
 
   /**
-   * Get time representing the inPoint of sequence.
+   * Get time representing the in point of the sequence.
    */
   getInPoint(): Promise<TickTime>;
 
   /**
-   * Get time representing the inPoint of sequence.
+   * Get time representing the out point of the sequence.
    */
   getOutPoint(): Promise<TickTime>;
 
@@ -4355,6 +4356,49 @@ export declare type VideoTransitionStatic = {
 };
 
 export declare type VideoTransition = {};
+
+export declare type WorkAreaUtilsStatic = {
+  /**
+   * Get the work area in point of the sequence.
+   *
+   * @param sequence
+   */
+  getWorkAreaInPoint(sequence: Sequence): TickTime;
+
+  /**
+   * Get the work area out point of the sequence.
+   *
+   * @param sequence
+   */
+  getWorkAreaOutPoint(sequence: Sequence): TickTime;
+
+  /**
+   * Set the work area in point of the sequence.
+   *
+   * @param sequence
+   * @param tickTime
+   */
+  setWorkAreaInPoint(sequence: Sequence, tickTime: TickTime): boolean;
+
+  /**
+   * Set the work area out point of the sequence.
+   *
+   * @param sequence
+   * @param tickTime
+   */
+  setWorkAreaOutPoint(sequence: Sequence, tickTime: TickTime): boolean;
+
+  /**
+   * Set the work area in and out points of the sequence.
+   *
+   * @param sequence
+   * @param inTickTime
+   * @param outTickTime
+   */
+  setWorkAreaInOutPoints(sequence: Sequence, inTickTime: TickTime, outTickTime: TickTime): boolean;
+};
+
+export declare type WorkAreaUtils = {};
 
 export declare type EventManagerStatic = {
   /**
