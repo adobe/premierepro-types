@@ -2,6 +2,16 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.5.0-beta.29 (2026-07-08)
+
+### Features
+
+* feat: Add WorkAreaUtils type (#69) ([3c07cb9](https://github.com/adobe/premierepro-types/commit/3c07cb9a427e44abf1495034cd37bae87fa04cb4))
+
+### Bug Fixes
+
+* fix: Various description, parameter name cleanup (#68) ([82d66c6](https://github.com/adobe/premierepro-types/commit/82d66c6bc3138358a4b6583639ffdcffa1232375))
+
 ## 26.5.0-beta.8 (2026-07-08)
 
 ### Features
