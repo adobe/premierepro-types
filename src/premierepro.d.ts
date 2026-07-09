@@ -371,7 +371,7 @@ export declare type Application = {
   /**
    * @readonly
    */
-  readonly version: string;
+  readonly version: Promise<string>;
 };
 
 export declare type AudioClipTrackItemStatic = {
@@ -2037,13 +2037,13 @@ export declare type Media = {
    * Get the media start time
    * @readonly
    */
-  readonly start: TickTime;
+  readonly start: Promise<TickTime>;
 
   /**
    * Get the media duration
    * @readonly
    */
-  readonly duration: TickTime;
+  readonly duration: Promise<TickTime>;
 };
 
 export declare type MediaManagerStatic = {
