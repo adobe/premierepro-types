@@ -2034,14 +2034,26 @@ export declare type Media = {
   createSetStartAction(time: TickTime): Action;
 
   /**
+   * Get the media start time.
+   */
+  getStart(): TickTime;
+
+  /**
+   * Get the media duration.
+   */
+  getDuration(): TickTime;
+
+  /**
    * Get the media start time
    * @readonly
+   * @deprecated Use getStart() instead.
    */
   readonly start: Promise<TickTime>;
 
   /**
    * Get the media duration
    * @readonly
+   * @deprecated Use getDuration() instead.
    */
   readonly duration: Promise<TickTime>;
 };
