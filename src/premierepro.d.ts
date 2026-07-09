@@ -4513,6 +4513,13 @@ export declare type TranscriptStatic = {
   querySupportedLanguages(): Array<{ displayString: string; languageCode: string; locale: string }>;
 
   /**
+   * Returns true if the language pack for the given language code is available ex:isLanguagePackAvailable('en-US')
+   *
+   * @param language
+   */
+  isLanguagePackAvailable(language: string): boolean;
+
+  /**
    * Returns true if the ClipProjectItem has an existing transcript
    *
    * @param clipProjectItem
