@@ -2,6 +2,17 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.5.0-beta.59 (2026-07-09)
+
+### Features
+
+* feat: Add Transcript.isLanguagePackAvailable (#73) ([ffa4408](https://github.com/adobe/premierepro-types/commit/ffa4408dc32adead8f6d40180ca6400ee46b3efb))
+* feat: Add sync functions for Media (#72) ([b2cc39e](https://github.com/adobe/premierepro-types/commit/b2cc39e971c8f20542ab9199c32af892957b217f))
+
+### Bug Fixes
+
+* fix!: Use correct return type for async properties (#71) ([74b332b](https://github.com/adobe/premierepro-types/commit/74b332b410088f9ce086973f5fcdb6a0c06607a8))
+
 ## 26.5.0-beta.29 (2026-07-08)
 
 ### Features
