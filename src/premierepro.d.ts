@@ -4537,6 +4537,9 @@ export declare type TranscriptStatic = {
 export declare type Transcript = {};
 
 export namespace Constants {
+  /**
+   * @since 26.3
+   */
   export enum AAFExportAudioFormat {
     AIFF,
     WAV,
@@ -4589,10 +4592,22 @@ export namespace Constants {
     TIME_TRANSITION_START,
   }
 
+  /**
+   * @since 25.6
+   */
   export enum MarkerColor {
     GREEN,
     RED,
+    /**
+     * @since 25.6
+     * @since 26.5 Deprecated in favor of the properly spelled 'MAGENTA' equivalent.
+     * @deprecated Use MAGENTA instead.
+     */
     MAGNETA,
+    /**
+     * @since 26.5
+     */
+    MAGENTA,
     ORANGE,
     YELLOW,
     BLUE,
