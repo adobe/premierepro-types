@@ -2,6 +2,12 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.5.0-beta.61 (2026-07-13)
+
+### Features
+
+* feat: Add Constants.MarkerColor.MAGENTA (#75) ([17c6160](https://github.com/adobe/premierepro-types/commit/17c616048623d8fee9c4946a08917fc08f5c532b))
+
 ## 26.5.0-beta.59 (2026-07-09)
 
 ### Features
