@@ -94,25 +94,11 @@ export declare type AAFExportOptions = {
   (): AAFExportOptions;
 
   /**
-   * When true, renders the sequence video to a single media file for AAF export (video mixdown) instead of relying only on linked source clips
+   * Set the audio file format (0 for AIFF, 1 for WAV)
    *
-   * @param mixdownVideo
+   * @param audioFileFormat
    */
-  setMixdownVideo(mixdownVideo: boolean): AAFExportOptions;
-
-  /**
-   * When true, exports multichannel audio as separate mono media files (one file per channel)
-   *
-   * @param explodeToMono
-   */
-  setExplodeToMono(explodeToMono: boolean): AAFExportOptions;
-
-  /**
-   * Set the audio sample rate
-   *
-   * @param sampleRate
-   */
-  setSampleRate(sampleRate: number): AAFExportOptions;
+  setAudioFileFormat(audioFileFormat: Constants.AAFExportAudioFormat): AAFExportOptions;
 
   /**
    * Set the audio bits per sample
@@ -129,18 +115,11 @@ export declare type AAFExportOptions = {
   setEmbedAudio(embedAudio: boolean): AAFExportOptions;
 
   /**
-   * Set the audio file format (0 for AIFF, 1 for WAV)
+   * When true, exports multichannel audio as separate mono media files (one file per channel)
    *
-   * @param audioFileFormat
+   * @param explodeToMono
    */
-  setAudioFileFormat(audioFileFormat: Constants.AAFExportAudioFormat): AAFExportOptions;
-
-  /**
-   * Set whether to trim sources
-   *
-   * @param trimSources
-   */
-  setTrimSources(trimSources: boolean): AAFExportOptions;
+  setExplodeToMono(explodeToMono: boolean): AAFExportOptions;
 
   /**
    * Set the number of handle frames
@@ -150,25 +129,18 @@ export declare type AAFExportOptions = {
   setHandleFrames(handleFrames: number): AAFExportOptions;
 
   /**
-   * Path to the encoder preset file (.epr) used when mixdown video is enabled
-   *
-   * @param videoMixdownPresetPath
-   */
-  setVideoMixdownPresetPath(videoMixdownPresetPath: string): AAFExportOptions;
-
-  /**
-   * Set whether to render audio effects
-   *
-   * @param renderAudioEffects
-   */
-  setRenderAudioEffects(renderAudioEffects: boolean): AAFExportOptions;
-
-  /**
    * Set whether to interleave without effects
    *
    * @param interleaveWithoutEffects
    */
   setInterleaveWithoutEffects(interleaveWithoutEffects: boolean): AAFExportOptions;
+
+  /**
+   * When true, renders the sequence video to a single media file for AAF export (video mixdown) instead of relying only on linked source clips
+   *
+   * @param mixdownVideo
+   */
+  setMixdownVideo(mixdownVideo: boolean): AAFExportOptions;
 
   /**
    * When true, exploded mono audio is written under a subdirectory named after the folder that contained each clip's source media on disk
@@ -178,22 +150,38 @@ export declare type AAFExportOptions = {
   setPreserveParentFolder(preserveParentFolder: boolean): AAFExportOptions;
 
   /**
-   * True if the exporter will render a single mixed-down video file
-   * @readonly
+   * Set whether to render audio effects
+   *
+   * @param renderAudioEffects
    */
-  readonly mixdownVideo: boolean;
+  setRenderAudioEffects(renderAudioEffects: boolean): AAFExportOptions;
 
   /**
-   * True if multichannel audio is exported as separate mono files per channel
-   * @readonly
+   * Set the audio sample rate
+   *
+   * @param sampleRate
    */
-  readonly explodeToMono: boolean;
+  setSampleRate(sampleRate: number): AAFExportOptions;
 
   /**
-   * Get the audio sample rate
+   * Set whether to trim sources
+   *
+   * @param trimSources
+   */
+  setTrimSources(trimSources: boolean): AAFExportOptions;
+
+  /**
+   * Path to the encoder preset file (.epr) used when mixdown video is enabled
+   *
+   * @param videoMixdownPresetPath
+   */
+  setVideoMixdownPresetPath(videoMixdownPresetPath: string): AAFExportOptions;
+
+  /**
+   * Get the audio file format (0 for AIFF, 1 for WAV)
    * @readonly
    */
-  readonly sampleRate: number;
+  readonly audioFileFormat: number;
 
   /**
    * Get the audio bits per sample
@@ -208,16 +196,10 @@ export declare type AAFExportOptions = {
   readonly embedAudio: boolean;
 
   /**
-   * Get the audio file format (0 for AIFF, 1 for WAV)
+   * True if multichannel audio is exported as separate mono files per channel
    * @readonly
    */
-  readonly audioFileFormat: number;
-
-  /**
-   * Get whether to trim sources
-   * @readonly
-   */
-  readonly trimSources: boolean;
+  readonly explodeToMono: boolean;
 
   /**
    * Get the number of handle frames
@@ -226,10 +208,22 @@ export declare type AAFExportOptions = {
   readonly handleFrames: number;
 
   /**
-   * Get the video mixdown preset path
+   * Get whether to interleave without effects
    * @readonly
    */
-  readonly videoMixdownPresetPath: string;
+  readonly interleaveWithoutEffects: boolean;
+
+  /**
+   * True if the exporter will render a single mixed-down video file
+   * @readonly
+   */
+  readonly mixdownVideo: boolean;
+
+  /**
+   * Get whether to preserve parent folder
+   * @readonly
+   */
+  readonly preserveParentFolder: boolean;
 
   /**
    * Get whether to render audio effects
@@ -238,16 +232,22 @@ export declare type AAFExportOptions = {
   readonly renderAudioEffects: boolean;
 
   /**
-   * Get whether to interleave without effects
+   * Get the audio sample rate
    * @readonly
    */
-  readonly interleaveWithoutEffects: boolean;
+  readonly sampleRate: number;
 
   /**
-   * Get whether to preserve parent folder
+   * Get whether to trim sources
    * @readonly
    */
-  readonly preserveParentFolder: boolean;
+  readonly trimSources: boolean;
+
+  /**
+   * Get the video mixdown preset path
+   * @readonly
+   */
+  readonly videoMixdownPresetPath: string;
 };
 
 export declare type Action = {};
@@ -268,6 +268,13 @@ export declare type AddTransitionOptions = {
   setApplyToStart(applyToStart: boolean): AddTransitionOptions;
 
   /**
+   * Sets the duration of transition
+   *
+   * @param tickTime Sets the duration of transition in TickTime
+   */
+  setDuration(tickTime: TickTime): AddTransitionOptions;
+
+  /**
    * Set whether transition should be applied to one/both sides
    *
    * @param forceSingleSided
@@ -282,17 +289,16 @@ export declare type AddTransitionOptions = {
   setTransitionAlignment(transitionAlignment: number): AddTransitionOptions;
 
   /**
-   * Sets the duration of transition
-   *
-   * @param tickTime Sets the duration of transition in TickTime
-   */
-  setDuration(tickTime: TickTime): AddTransitionOptions;
-
-  /**
    * Get whether to apply transition to the start or end of trackitem
    * @readonly
    */
   readonly applyToStart: boolean;
+
+  /**
+   * Gets the duration of transition
+   * @readonly
+   */
+  readonly duration: TickTime;
 
   /**
    * Get whether transition should be applied to one/both sides
@@ -305,15 +311,16 @@ export declare type AddTransitionOptions = {
    * @readonly
    */
   readonly transitionAlignment: number;
-
-  /**
-   * Gets the duration of transition
-   * @readonly
-   */
-  readonly duration: TickTime;
 };
 
 export declare type AppPreferenceStatic = {
+  /**
+   * Get preference value in native string form
+   *
+   * @param preferenceKey App preference key to get
+   */
+  getValue(preferenceKey: Constants.PreferenceKey): string;
+
   /**
    * Set backend preference using one of the available property keys
    *
@@ -326,13 +333,6 @@ export declare type AppPreferenceStatic = {
     value: boolean | string | number,
     persistenceFlag: Constants.PropertyType
   ): boolean;
-
-  /**
-   * Get preference value in native string form
-   *
-   * @param preferenceKey App preference key to get
-   */
-  getValue(preferenceKey: Constants.PreferenceKey): string;
 
   /**
    * Preference string key used to modify auto-peak generation settings
@@ -353,16 +353,16 @@ export declare type AppPreferenceStatic = {
   readonly KEY_SHOW_QUICKSTART_DIALOG: string;
 
   /**
-   * Property is persistent in backend and shared across cloud project.
-   * @readonly
-   */
-  readonly PROPERTY_PERSISTENT: number;
-
-  /**
    * Property is not persisted and will be cleared when the project closes.
    * @readonly
    */
   readonly PROPERTY_NON_PERSISTENT: number;
+
+  /**
+   * Property is persistent in backend and shared across cloud project.
+   * @readonly
+   */
+  readonly PROPERTY_PERSISTENT: number;
 };
 
 export declare type AppPreference = {};
@@ -376,22 +376,22 @@ export declare type Application = {
 
 export declare type AudioClipTrackItemStatic = {
   /**
-   * Empty Track Item Type
-   * @readonly
-   */
-  readonly TRACKITEMTYPE_EMPTY: number;
-
-  /**
    * Clip Track Item Type
    * @readonly
    */
   readonly TRACKITEMTYPE_CLIP: number;
 
   /**
-   * Transition Track Item Type
+   * Empty Track Item Type
    * @readonly
    */
-  readonly TRACKITEMTYPE_TRANSITION: number;
+  readonly TRACKITEMTYPE_EMPTY: number;
+
+  /**
+   * Feedback Track Item Type
+   * @readonly
+   */
+  readonly TRACKITEMTYPE_FEEDBACK: number;
 
   /**
    * Previe Track Item Type
@@ -400,112 +400,19 @@ export declare type AudioClipTrackItemStatic = {
   readonly TRACKITEMTYPE_PREVIEW: number;
 
   /**
-   * Feedback Track Item Type
+   * Transition Track Item Type
    * @readonly
    */
-  readonly TRACKITEMTYPE_FEEDBACK: number;
+  readonly TRACKITEMTYPE_TRANSITION: number;
 };
 
 export declare type AudioClipTrackItem = {
-  /**
-   * Returns the value of internal matchname for this trackItem
-   */
-  getMatchName(): Promise<string>;
-
-  /**
-   * Returns the display name for trackItem
-   */
-  getName(): Promise<string>;
-
-  /**
-   * Returns if trackItem is selected or not
-   */
-  getIsSelected(): Promise<boolean>;
-
-  /**
-   * Returns the value of speed of the trackItem
-   */
-  getSpeed(): Promise<number>;
-
-  /**
-   * Returns true if the trackitem is an adjustment layer
-   */
-  isAdjustmentLayer(): Promise<boolean>;
-
-  /**
-   * Returns true if the trackitem is reversed
-   */
-  isSpeedReversed(): Promise<number>;
-
   /**
    * Returns an action that moves the inPoint of the track item to a new time, by shifting it by a number of seconds.
    *
    * @param tickTime
    */
   createMoveAction(tickTime: TickTime): Action;
-
-  /**
-   * Returns a TickTime object representing the track item in point relative to the start time of the project item referenced by this track item.
-   */
-  getInPoint(): Promise<TickTime>;
-
-  /**
-   * Returns a TickTime object representing the track item out point relative to the start time of the project item referenced by this track item.
-   */
-  getOutPoint(): Promise<TickTime>;
-
-  /**
-   * Create SetInPointAction for setting the track item in point relative to the start time of the project item referenced by this track item
-   *
-   * @param tickTime Sets the In-Point in TickTime
-   */
-  createSetInPointAction(tickTime: TickTime): Action;
-
-  /**
-   * Create SetOutPointAction for setting the track item out point relative to the start time of the project item referenced by this track item
-   *
-   * @param tickTime Sets the Out-Point in TickTime
-   */
-  createSetOutPointAction(tickTime: TickTime): Action;
-
-  /**
-   * Returns a TickTime object representing the starting sequence time of this track item relative to the sequence start time.
-   */
-  getStartTime(): Promise<TickTime>;
-
-  /**
-   * Returns a TickTime object representing the ending sequence time of this track item relative to the sequence start time.
-   */
-  getEndTime(): Promise<TickTime>;
-
-  /**
-   * Create set start time action for sequence
-   *
-   * @param tickTime
-   */
-  createSetStartAction(tickTime: TickTime): Action;
-
-  /**
-   * Create set end time action for sequence
-   *
-   * @param tickTime
-   */
-  createSetEndAction(tickTime: TickTime): Action;
-
-  /**
-   * Returns timecode representing the duration of this track item relative to the sequence start.
-   */
-  getDuration(): Promise<TickTime>;
-
-  /**
-   * Index representing the type of this track item.
-   */
-  getType(): Promise<number>;
-
-  /**
-   * Returns true if trackitem is muted/disabled
-   */
-  isDisabled(): Promise<boolean>;
 
   /**
    * Returns an action that enables/disables the trackItem
@@ -515,6 +422,20 @@ export declare type AudioClipTrackItem = {
   createSetDisabledAction(disabled: boolean): Action;
 
   /**
+   * Create set end time action for sequence
+   *
+   * @param tickTime
+   */
+  createSetEndAction(tickTime: TickTime): Action;
+
+  /**
+   * Create SetInPointAction for setting the track item in point relative to the start time of the project item referenced by this track item
+   *
+   * @param tickTime Sets the In-Point in TickTime
+   */
+  createSetInPointAction(tickTime: TickTime): Action;
+
+  /**
    * Returns an action that renames the trackItem
    *
    * @param inName
@@ -522,9 +443,73 @@ export declare type AudioClipTrackItem = {
   createSetNameAction(inName: string): Action;
 
   /**
+   * Create SetOutPointAction for setting the track item out point relative to the start time of the project item referenced by this track item
+   *
+   * @param tickTime Sets the Out-Point in TickTime
+   */
+  createSetOutPointAction(tickTime: TickTime): Action;
+
+  /**
+   * Create set start time action for sequence
+   *
+   * @param tickTime
+   */
+  createSetStartAction(tickTime: TickTime): Action;
+
+  /**
+   * Returns timecode representing the duration of this track item relative to the sequence start.
+   */
+  getDuration(): Promise<TickTime>;
+
+  /**
+   * Returns a TickTime object representing the ending sequence time of this track item relative to the sequence start time.
+   */
+  getEndTime(): Promise<TickTime>;
+
+  /**
+   * Returns a TickTime object representing the track item in point relative to the start time of the project item referenced by this track item.
+   */
+  getInPoint(): Promise<TickTime>;
+
+  /**
+   * Returns if trackItem is selected or not
+   */
+  getIsSelected(): Promise<boolean>;
+
+  /**
+   * Returns the value of internal matchname for this trackItem
+   */
+  getMatchName(): Promise<string>;
+
+  /**
    * Returns UUID representing the underlying media type of this track item
    */
   getMediaType(): Promise<Guid>;
+
+  /**
+   * Returns the display name for trackItem
+   */
+  getName(): Promise<string>;
+
+  /**
+   * Returns a TickTime object representing the track item out point relative to the start time of the project item referenced by this track item.
+   */
+  getOutPoint(): Promise<TickTime>;
+
+  /**
+   * Returns the project item for this track item.
+   */
+  getProjectItem(): Promise<ProjectItem>;
+
+  /**
+   * Returns the value of speed of the trackItem
+   */
+  getSpeed(): Promise<number>;
+
+  /**
+   * Returns a TickTime object representing the starting sequence time of this track item relative to the sequence start time.
+   */
+  getStartTime(): Promise<TickTime>;
 
   /**
    * Index representing the track index of the track this track item belongs to
@@ -532,9 +517,24 @@ export declare type AudioClipTrackItem = {
   getTrackIndex(): Promise<number>;
 
   /**
-   * Returns the project item for this track item.
+   * Index representing the type of this track item.
    */
-  getProjectItem(): Promise<ProjectItem>;
+  getType(): Promise<number>;
+
+  /**
+   * Returns true if the trackitem is an adjustment layer
+   */
+  isAdjustmentLayer(): Promise<boolean>;
+
+  /**
+   * Returns true if trackitem is muted/disabled
+   */
+  isDisabled(): Promise<boolean>;
+
+  /**
+   * Returns true if the trackitem is reversed
+   */
+  isSpeedReversed(): Promise<number>;
 
   /**
    * Returns AudioComponentChain
@@ -546,6 +546,13 @@ export declare type AudioComponentChainStatic = {};
 
 export declare type AudioComponentChain = {
   /**
+   * Creates and returns an append component action
+   *
+   * @param component Audio filter component
+   */
+  createAppendComponentAction(component: Component | AudioFilterComponent): Action;
+
+  /**
    * Creates and returns an insert component action
    *
    * @param component Audio filter component
@@ -555,13 +562,6 @@ export declare type AudioComponentChain = {
     component: Component | AudioFilterComponent,
     componentInsertionIndex: number
   ): Action;
-
-  /**
-   * Creates and returns an append component action
-   *
-   * @param component Audio filter component
-   */
-  createAppendComponentAction(component: Component | AudioFilterComponent): Action;
 
   /**
    * Creates and returns an remove component action
@@ -637,11 +637,9 @@ export declare type AudioTrack = {
   createSetNameAction(name: string): Action;
 
   /**
-   * sets the mute state of the track to muted/unmuted
-   *
-   * @param mute
+   * Index representing the track index of this track within the track group.
    */
-  setMute(mute: boolean): Promise<boolean>;
+  getIndex(): Promise<number>;
 
   /**
    * UUID representing the underlying media type of this track
@@ -649,14 +647,16 @@ export declare type AudioTrack = {
   getMediaType(): Promise<Guid>;
 
   /**
-   * Index representing the track index of this track within the track group.
-   */
-  getIndex(): Promise<number>;
-
-  /**
    * Get mute state of the track
    */
   isMuted(): Promise<boolean>;
+
+  /**
+   * sets the mute state of the track to muted/unmuted
+   *
+   * @param mute
+   */
+  setMute(mute: boolean): Promise<boolean>;
 
   /**
    * Returns array of AudioClipTrackItem from the track item type
@@ -670,16 +670,16 @@ export declare type AudioTrack = {
   ): AudioClipTrackItem[];
 
   /**
-   * Get the name of the track
-   * @readonly
-   */
-  readonly name: string;
-
-  /**
    * The ID of the track within the TrackGroup
    * @readonly
    */
   readonly id: number;
+
+  /**
+   * Get the name of the track
+   * @readonly
+   */
+  readonly name: string;
 };
 
 export declare type CaptionTrackStatic = {};
@@ -693,11 +693,9 @@ export declare type CaptionTrack = {
   createSetNameAction(name: string): Action;
 
   /**
-   * sets the mute state of the track to muted/unmuted
-   *
-   * @param mute
+   * Index representing the track index of this track within the track group.
    */
-  setMute(mute: boolean): Promise<boolean>;
+  getIndex(): Promise<number>;
 
   /**
    * UUID representing the underlying media type of this track
@@ -705,14 +703,16 @@ export declare type CaptionTrack = {
   getMediaType(): Promise<Guid>;
 
   /**
-   * Index representing the track index of this track within the track group.
-   */
-  getIndex(): Promise<number>;
-
-  /**
    * Get mute state of the track
    */
   isMuted(): Promise<boolean>;
+
+  /**
+   * sets the mute state of the track to muted/unmuted
+   *
+   * @param mute
+   */
+  setMute(mute: boolean): Promise<boolean>;
 
   /**
    * Returns the track items of the specified media type from the given track
@@ -723,16 +723,16 @@ export declare type CaptionTrack = {
   getTrackItems(trackItemType: number, includeEmptyTrackItems: boolean): [];
 
   /**
-   * Get the name of the track
-   * @readonly
-   */
-  readonly name: string;
-
-  /**
    * The ID of the track within the TrackGroup
    * @readonly
    */
   readonly id: number;
+
+  /**
+   * Get the name of the track
+   * @readonly
+   */
+  readonly name: string;
 };
 
 export declare type ClipProjectItemStatic = {
@@ -745,48 +745,6 @@ export declare type ClipProjectItemStatic = {
 };
 
 export declare type ClipProjectItem = {
-  /**
-   * Get Guid of Input LUT overridden on media
-   */
-  getInputLUTID(): Promise<string>;
-
-  /**
-   * Create action for setting Guid of Input LUT on media. This applies for Video Clips only.
-   *
-   * @param stringLUTID
-   */
-  createSetInputLUTIDAction(stringLUTID: string): Action;
-
-  /**
-   * Returns true if the project item is a sequence
-   */
-  isSequence(): Promise<boolean>;
-
-  /**
-   * Returns true if Premiere Pro can change the path associated with this project item; otherwise, returns false
-   */
-  canChangeMediaPath(): Promise<boolean>;
-
-  /**
-   * Returns true if the media is offline
-   */
-  isOffline(): Promise<boolean>;
-
-  /**
-   * Indicates whether it is possible to attach a proxy to this project item.
-   */
-  canProxy(): Promise<boolean>;
-
-  /**
-   * Returns the proxy path if the project item has a proxy attached
-   */
-  getProxyPath(): Promise<string>;
-
-  /**
-   * Indicates whether a proxy has already been attached to the project item.
-   */
-  hasProxy(): Promise<boolean>;
-
   /**
    * Attach proxy or high resolution footage to projectItem and returns true if successful. Not undoable.
    *
@@ -801,27 +759,22 @@ export declare type ClipProjectItem = {
   ): Promise<boolean>;
 
   /**
-   * Returns array of project's items with media paths containing match string
+   * Returns true if Premiere Pro can change the path associated with this project item; otherwise, returns false
+   */
+  canChangeMediaPath(): Promise<boolean>;
+
+  /**
+   * Indicates whether it is possible to attach a proxy to this project item.
+   */
+  canProxy(): Promise<boolean>;
+
+  /**
+   * Change media file path of projectItem and returns true if successful. Not undoable.
    *
-   * @param matchString
-   * @param ignoreSubclips
+   * @param newPath
+   * @param overrideCompatibilityCheck
    */
-  findItemsMatchingMediaPath(matchString: string, ignoreSubclips?: boolean): Promise<ProjectItem[]>;
-
-  /**
-   * Updates representation of the media associated with the project item
-   */
-  refreshMedia(): Promise<boolean>;
-
-  /**
-   * Returns an action which sets the media offline
-   */
-  createSetOfflineAction(): Action;
-
-  /**
-   * Get the footage interpretation object for project item
-   */
-  getFootageInterpretation(): Promise<FootageInterpretation>;
+  changeMediaFilePath(newPath: string, overrideCompatibilityCheck?: boolean): Promise<boolean>;
 
   /**
    * Set the footage interpretation object for project item
@@ -831,12 +784,21 @@ export declare type ClipProjectItem = {
   createSetFootageInterpretationAction(footageInterpretation: FootageInterpretation): Action;
 
   /**
-   * Change media file path of projectItem and returns true if successful. Not undoable.
+   * Create action for setting Guid of Input LUT on media. This applies for Video Clips only.
    *
-   * @param newPath
-   * @param overrideCompatibilityCheck
+   * @param stringLUTID
    */
-  changeMediaFilePath(newPath: string, overrideCompatibilityCheck?: boolean): Promise<boolean>;
+  createSetInputLUTIDAction(stringLUTID: string): Action;
+
+  /**
+   * Returns an action which sets the media offline
+   */
+  createSetOfflineAction(): Action;
+
+  /**
+   * Returns an action which sets the scale to frame to true
+   */
+  createSetScaleToFrameSizeAction(): Action;
 
   /**
    * Returns a deferred Action that creates a subclip when committed inside a transaction. hasHardBoundaries: if true, prevents trimming beyond the subclip boundaries. Takes additional options (defaulting to true).
@@ -856,6 +818,39 @@ export declare type ClipProjectItem = {
   ): Action;
 
   /**
+   * Returns array of project's items with media paths containing match string
+   *
+   * @param matchString
+   * @param ignoreSubclips
+   */
+  findItemsMatchingMediaPath(matchString: string, ignoreSubclips?: boolean): Promise<ProjectItem[]>;
+
+  /**
+   * Get GUID of LUT embedded in media
+   */
+  getEmbeddedLUTID(): Promise<string>;
+
+  /**
+   * Get the footage interpretation object for project item
+   */
+  getFootageInterpretation(): Promise<FootageInterpretation>;
+
+  /**
+   * Get Guid of Input LUT overridden on media
+   */
+  getInputLUTID(): Promise<string>;
+
+  /**
+   * Returns the proxy path if the project item has a proxy attached
+   */
+  getProxyPath(): Promise<string>;
+
+  /**
+   * Indicates whether a proxy has already been attached to the project item.
+   */
+  hasProxy(): Promise<boolean>;
+
+  /**
    * Returns true if the clip Project item is a merged clip
    */
   isMergedClip(): Promise<boolean>;
@@ -866,14 +861,26 @@ export declare type ClipProjectItem = {
   isMulticamClip(): Promise<boolean>;
 
   /**
-   * Get GUID of LUT embedded in media
+   * Returns true if the media is offline
    */
-  getEmbeddedLUTID(): Promise<string>;
+  isOffline(): Promise<boolean>;
 
   /**
-   * Returns an action which sets the scale to frame to true
+   * Returns true if the project item is a sequence
    */
-  createSetScaleToFrameSizeAction(): Action;
+  isSequence(): Promise<boolean>;
+
+  /**
+   * Updates representation of the media associated with the project item
+   */
+  refreshMedia(): Promise<boolean>;
+
+  /**
+   * Create an action for set color label to projectItem by index
+   *
+   * @param inColorLabelIndex
+   */
+  createSetColorLabelAction(inColorLabelIndex: number): Action;
 
   /**
    * Returns action that renames projectItem
@@ -886,13 +893,6 @@ export declare type ClipProjectItem = {
    * Get color label index of projectItem
    */
   getColorLabelIndex(): Promise<number>;
-
-  /**
-   * Create an action for set color label to projectItem by index
-   *
-   * @param inColorLabelIndex
-   */
-  createSetColorLabelAction(inColorLabelIndex: number): Action;
 
   /**
    * Get the parent Project of this projectItem.
@@ -990,16 +990,16 @@ export declare type ClipProjectItem = {
   getOriginatingProjectPath(): Promise<string>;
 
   /**
-   * Get the type of the Project Item.
-   * @readonly
-   */
-  readonly type: number;
-
-  /**
    * The name of this project item.
    * @readonly
    */
   readonly name: string;
+
+  /**
+   * Get the type of the Project Item.
+   * @readonly
+   */
+  readonly type: number;
 };
 
 export declare type CloseProjectOptions = {
@@ -1011,25 +1011,18 @@ export declare type CloseProjectOptions = {
   (): CloseProjectOptions;
 
   /**
-   * Set whether to prompt if a project is dirty on project open/close
-   *
-   * @param promptIfDirty
-   */
-  setPromptIfDirty(promptIfDirty: boolean): CloseProjectOptions;
-
-  /**
-   * Set whether to show the cancel button on project open/close
-   *
-   * @param showCancelButton
-   */
-  setShowCancelButton(showCancelButton: boolean): CloseProjectOptions;
-
-  /**
    * Set whether the app should be prepared to quit when open/closing a project
    *
    * @param isAppBeingPreparedToQuit
    */
   setIsAppBeingPreparedToQuit(isAppBeingPreparedToQuit: boolean): CloseProjectOptions;
+
+  /**
+   * Set whether to prompt if a project is dirty on project open/close
+   *
+   * @param promptIfDirty
+   */
+  setPromptIfDirty(promptIfDirty: boolean): CloseProjectOptions;
 
   /**
    * Set whether to save your workspaces when opening/closing a project
@@ -1039,16 +1032,11 @@ export declare type CloseProjectOptions = {
   setSaveWorkspace(isAppBeingPreparedToQuit: boolean): CloseProjectOptions;
 
   /**
-   * Get whether a prompt is shown if a project is dirty on project open/close
-   * @readonly
+   * Set whether to show the cancel button on project open/close
+   *
+   * @param showCancelButton
    */
-  readonly promptIfDirty: boolean;
-
-  /**
-   * Get whether the cancel button is shown on project open/close
-   * @readonly
-   */
-  readonly showCancelButton: boolean;
+  setShowCancelButton(showCancelButton: boolean): CloseProjectOptions;
 
   /**
    * Get whether the app is prepared to quit when open/closing a project
@@ -1057,10 +1045,22 @@ export declare type CloseProjectOptions = {
   readonly isAppBeingPreparedToQuit: boolean;
 
   /**
+   * Get whether a prompt is shown if a project is dirty on project open/close
+   * @readonly
+   */
+  readonly promptIfDirty: boolean;
+
+  /**
    * Get whether your workspaces are saved when opening/closing a project
    * @readonly
    */
   readonly saveWorkspace: boolean;
+
+  /**
+   * Get whether the cancel button is shown on project open/close
+   * @readonly
+   */
+  readonly showCancelButton: boolean;
 };
 
 export declare type Color = {
@@ -1084,14 +1084,9 @@ export declare type Color = {
   equals(colorObject: Color): boolean;
 
   /**
-   * Read/Write property to get/set red value of color object
+   * Read/Write property to get/set alpha value of color object
    */
-  red: number;
-
-  /**
-   * Read/Write property to get/set green value of color object
-   */
-  green: number;
+  alpha: number;
 
   /**
    * Read/Write property to get/set blue value of color object
@@ -1099,18 +1094,21 @@ export declare type Color = {
   blue: number;
 
   /**
-   * Read/Write property to get/set alpha value of color object
+   * Read/Write property to get/set green value of color object
    */
-  alpha: number;
+  green: number;
+
+  /**
+   * Read/Write property to get/set red value of color object
+   */
+  red: number;
 };
 
 export declare type Component = {
   /**
-   * Get a parameter from the component based on the given input index. Parameter indexes are zero-based, and the actual is defined exclusively by the component itself.
-   *
-   * @param paramIndex
+   * Returned Promise will be fullfilled with the value of display name for this component
    */
-  getParam(paramIndex?: number): ComponentParam;
+  getDisplayName(): Promise<string>;
 
   /**
    * Returned Promise will be fullfilled with the value of internal matchname for this component
@@ -1118,9 +1116,11 @@ export declare type Component = {
   getMatchName(): Promise<string>;
 
   /**
-   * Returned Promise will be fullfilled with the value of display name for this component
+   * Get a parameter from the component based on the given input index. Parameter indexes are zero-based, and the actual is defined exclusively by the component itself.
+   *
+   * @param paramIndex
    */
-  getDisplayName(): Promise<string>;
+  getParam(paramIndex?: number): ComponentParam;
 
   /**
    * Gets the number of param in the component
@@ -1130,6 +1130,18 @@ export declare type Component = {
 
 export declare type ComponentParam = {
   /**
+   * Returns bool whether keyframes are supported for this component parameter
+   */
+  areKeyframesSupported(): Promise<boolean>;
+
+  /**
+   * Creates and returns an action object which can be used to add a keyframe component
+   *
+   * @param inKeyFrame
+   */
+  createAddKeyframeAction(inKeyFrame: Keyframe): Action;
+
+  /**
    * Creates and returns a keyframe initialised with the ComponentParam's type and passed in value. This throws if the passed in value is not compatible with the component param type
    *
    * @param inValue Input could be number, string, boolean, PointF, or Color depend on effect param type
@@ -1137,11 +1149,49 @@ export declare type ComponentParam = {
   createKeyframe(inValue: number | string | boolean | PointF | Color): Keyframe;
 
   /**
-   * Gets the value of component Param at the given time
+   * Returns an action which removes keyframe at specific time
    *
-   * @param time The time at which to get the value of the component param
+   * @param inTime
+   * @param UpdateUI
    */
-  getValueAtTime(time: TickTime): Promise<number | string | boolean | PointF | Color>;
+  createRemoveKeyframeAction(inTime: TickTime, UpdateUI?: boolean): Action;
+
+  /**
+   * Returns an action which removes keyframe at specific time range
+   *
+   * @param inTime
+   * @param outTime
+   * @param UpdateUI
+   */
+  createRemoveKeyframeRangeAction(inTime: TickTime, outTime: TickTime, UpdateUI?: boolean): Action;
+
+  /**
+   * Returns an action which sets the interpolation mode of keyframe at the given time
+   *
+   * @param inTime
+   * @param InterpolationMode
+   * @param UpdateUI
+   */
+  createSetInterpolationAtKeyframeAction(
+    inTime: TickTime,
+    InterpolationMode: number,
+    UpdateUI?: boolean
+  ): Action;
+
+  /**
+   * Creates and returns an action object to set the component to be time varying
+   *
+   * @param inTimeVarying
+   */
+  createSetTimeVaryingAction(inTimeVarying: boolean): Action;
+
+  /**
+   * Creates and returns an action object which can be used to set the value of a non-time varying component
+   *
+   * @param inKeyFrame
+   * @param inSafeForPlayback
+   */
+  createSetValueAction(inKeyFrame: Keyframe, inSafeForPlayback?: boolean): Action;
 
   /**
    * Find sthe nearest key for the given time
@@ -1166,50 +1216,6 @@ export declare type ComponentParam = {
   findPreviousKeyframe(inTime: TickTime): Keyframe;
 
   /**
-   * Returns an action which removes keyframe at specific time
-   *
-   * @param inTime
-   * @param UpdateUI
-   */
-  createRemoveKeyframeAction(inTime: TickTime, UpdateUI?: boolean): Action;
-
-  /**
-   * Returns an action which removes keyframe at specific time range
-   *
-   * @param inTime
-   * @param outTime
-   * @param UpdateUI
-   */
-  createRemoveKeyframeRangeAction(inTime: TickTime, outTime: TickTime, UpdateUI?: boolean): Action;
-
-  /**
-   * Creates and returns an action object which can be used to set the value of a non-time varying component
-   *
-   * @param inKeyFrame
-   * @param inSafeForPlayback
-   */
-  createSetValueAction(inKeyFrame: Keyframe, inSafeForPlayback?: boolean): Action;
-
-  /**
-   * Creates and returns an action object which can be used to add a keyframe component
-   *
-   * @param inKeyFrame
-   */
-  createAddKeyframeAction(inKeyFrame: Keyframe): Action;
-
-  /**
-   * Creates and returns an action object to set the component to be time varying
-   *
-   * @param inTimeVarying
-   */
-  createSetTimeVaryingAction(inTimeVarying: boolean): Action;
-
-  /**
-   * Returned promise will be fullfilled with the start value (keyframe) of the component param
-   */
-  getStartValue(): Promise<Keyframe>;
-
-  /**
    * Get a list of tickTime for the keyframes of this component param
    */
   getKeyframeListAsTickTimes(): TickTime[];
@@ -1222,27 +1228,21 @@ export declare type ComponentParam = {
   getKeyframePtr(time?: TickTime): Keyframe;
 
   /**
+   * Returned promise will be fullfilled with the start value (keyframe) of the component param
+   */
+  getStartValue(): Promise<Keyframe>;
+
+  /**
+   * Gets the value of component Param at the given time
+   *
+   * @param time The time at which to get the value of the component param
+   */
+  getValueAtTime(time: TickTime): Promise<number | string | boolean | PointF | Color>;
+
+  /**
    * Returns true if the parameter value varies over time (for the duration of the item)
    */
   isTimeVarying(): boolean;
-
-  /**
-   * Returns an action which sets the interpolation mode of keyframe at the given time
-   *
-   * @param inTime
-   * @param InterpolationMode
-   * @param UpdateUI
-   */
-  createSetInterpolationAtKeyframeAction(
-    inTime: TickTime,
-    InterpolationMode: number,
-    UpdateUI?: boolean
-  ): Action;
-
-  /**
-   * Returns bool whether keyframes are supported for this component parameter
-   */
-  areKeyframesSupported(): Promise<boolean>;
 
   /**
    * Returns the display name of the component param
@@ -1268,11 +1268,6 @@ export declare type CompoundAction = {
 
 export declare type EncoderManagerStatic = {
   /**
-   * Get the Encoder Manager object.
-   */
-  getManager(): EncoderManager;
-
-  /**
    * Get the Export File Extension of Input Preset file
    *
    * @param sequence
@@ -1281,22 +1276,15 @@ export declare type EncoderManagerStatic = {
   getExportFileExtension(sequence: Sequence, presetFilePath: string): Promise<string>;
 
   /**
-   * Export type used to queue an export job into the Adobe Media Encoder export queue
-   * @readonly
+   * Get the Encoder Manager object.
    */
-  readonly EXPORT_QUEUE_TO_AME: string;
+  getManager(): EncoderManager;
 
   /**
-   * Export type used to queue an export job into the app export queue
+   * Broadcast when AME job is canceled
    * @readonly
    */
-  readonly EXPORT_QUEUE_TO_APP: string;
-
-  /**
-   * Export type used to immediately exporting an object
-   * @readonly
-   */
-  readonly EXPORT_IMMEDIATELY: string;
+  readonly EVENT_RENDER_CANCEL: string;
 
   /**
    * Broadcast when AME is finished rendering
@@ -1311,10 +1299,10 @@ export declare type EncoderManagerStatic = {
   readonly EVENT_RENDER_ERROR: string;
 
   /**
-   * Broadcast when AME job is canceled
+   * Broadcast when AME job is rendering the job
    * @readonly
    */
-  readonly EVENT_RENDER_CANCEL: string;
+  readonly EVENT_RENDER_PROGRESS: string;
 
   /**
    * Broadcast when AME job is queued
@@ -1323,49 +1311,25 @@ export declare type EncoderManagerStatic = {
   readonly EVENT_RENDER_QUEUE: string;
 
   /**
-   * Broadcast when AME job is rendering the job
+   * Export type used to immediately exporting an object
    * @readonly
    */
-  readonly EVENT_RENDER_PROGRESS: string;
+  readonly EXPORT_IMMEDIATELY: string;
+
+  /**
+   * Export type used to queue an export job into the Adobe Media Encoder export queue
+   * @readonly
+   */
+  readonly EXPORT_QUEUE_TO_AME: string;
+
+  /**
+   * Export type used to queue an export job into the app export queue
+   * @readonly
+   */
+  readonly EXPORT_QUEUE_TO_APP: string;
 };
 
 export declare type EncoderManager = {
-  /**
-   * Export a sequence. If no output file and preset is specified, the sequence will be exported with the applied export settings or standard export rules will be applied.
-   *
-   * @param sequence
-   * @param exportType Constants.ExportType.IMMEDIATELY, Constants.ExportType.QUEUE_TO_AME etc..
-   * @param outputFile
-   * @param presetFile
-   * @param exportFull
-   */
-  exportSequence(
-    sequence: Sequence,
-    exportType: Constants.ExportType,
-    outputFile?: string,
-    presetFile?: string,
-    exportFull?: boolean
-  ): Promise<boolean>;
-
-  /**
-   * Encode input clipProjectItem in AME
-   *
-   * @param clipProjectItem
-   * @param outputFile
-   * @param presetFile
-   * @param workArea
-   * @param removeUponCompletion
-   * @param startQueueImmediately
-   */
-  encodeProjectItem(
-    clipProjectItem: ClipProjectItem,
-    outputFile?: string,
-    presetFile?: string,
-    workArea?: number,
-    removeUponCompletion?: boolean,
-    startQueueImmediately?: boolean
-  ): Promise<boolean>;
-
   /**
    * Encode input media file in AME
    *
@@ -1390,16 +1354,45 @@ export declare type EncoderManager = {
   ): Promise<boolean>;
 
   /**
-   * Start encoding the AME batch queue.
+   * Encode input clipProjectItem in AME
+   *
+   * @param clipProjectItem
+   * @param outputFile
+   * @param presetFile
+   * @param workArea
+   * @param removeUponCompletion
+   * @param startQueueImmediately
    */
-  startBatchEncode(): Promise<boolean>;
+  encodeProjectItem(
+    clipProjectItem: ClipProjectItem,
+    outputFile?: string,
+    presetFile?: string,
+    workArea?: number,
+    removeUponCompletion?: boolean,
+    startQueueImmediately?: boolean
+  ): Promise<boolean>;
 
   /**
-   * Set whether to enable sidecar XMP when exporting a sequence.
+   * Export a sequence. If no output file and preset is specified, the sequence will be exported with the applied export settings or standard export rules will be applied.
    *
-   * @param enabled
+   * @param sequence
+   * @param exportType Constants.ExportType.IMMEDIATELY, Constants.ExportType.QUEUE_TO_AME etc..
+   * @param outputFile
+   * @param presetFile
+   * @param exportFull
    */
-  setSidecarXMPEnabled(enabled: boolean): Promise<boolean>;
+  exportSequence(
+    sequence: Sequence,
+    exportType: Constants.ExportType,
+    outputFile?: string,
+    presetFile?: string,
+    exportFull?: boolean
+  ): Promise<boolean>;
+
+  /**
+   * Launch AME asynchronously if not already running.
+   */
+  launchEncoder(): Promise<boolean>;
 
   /**
    * Set whether to enable embedded XMP when exporting a sequence.
@@ -1409,9 +1402,16 @@ export declare type EncoderManager = {
   setEmbeddedXMPEnabled(enabled: boolean): Promise<boolean>;
 
   /**
-   * Launch AME asynchronously if not already running.
+   * Set whether to enable sidecar XMP when exporting a sequence.
+   *
+   * @param enabled
    */
-  launchEncoder(): Promise<boolean>;
+  setSidecarXMPEnabled(enabled: boolean): Promise<boolean>;
+
+  /**
+   * Start encoding the AME batch queue.
+   */
+  startBatchEncode(): Promise<boolean>;
 
   /**
    * Check if AME is installed.
@@ -1462,24 +1462,12 @@ export declare type FolderItem = {
   createBinAction(name: string, makeUnique: boolean): Action;
 
   /**
-   * Creates a smart bin with given name and returns the Folder object
+   * Creates an action that moves the given item to the provided folder item newParent.
    *
-   * @param name
-   * @param searchQuery
+   * @param item
+   * @param newParent
    */
-  createSmartBinAction(name: string, searchQuery: string): Action;
-
-  /**
-   * Rename the Bin and return true if it's successful
-   *
-   * @param name
-   */
-  createRenameBinAction(name: string): Action;
-
-  /**
-   * Collection of child items of this folder.
-   */
-  getItems(): Promise<ProjectItem[]>;
+  createMoveItemAction(item: ProjectItem, newParent: FolderItem): Action;
 
   /**
    * Creates an action that removes the given item from this folder.
@@ -1489,12 +1477,31 @@ export declare type FolderItem = {
   createRemoveItemAction(item: ProjectItem): Action;
 
   /**
-   * Creates an action that moves the given item to the provided folder item newParent.
+   * Rename the Bin and return true if it's successful
    *
-   * @param item
-   * @param newParent
+   * @param name
    */
-  createMoveItemAction(item: ProjectItem, newParent: FolderItem): Action;
+  createRenameBinAction(name: string): Action;
+
+  /**
+   * Creates a smart bin with given name and returns the Folder object
+   *
+   * @param name
+   * @param searchQuery
+   */
+  createSmartBinAction(name: string, searchQuery: string): Action;
+
+  /**
+   * Collection of child items of this folder.
+   */
+  getItems(): Promise<ProjectItem[]>;
+
+  /**
+   * Create an action for set color label to projectItem by index
+   *
+   * @param inColorLabelIndex
+   */
+  createSetColorLabelAction(inColorLabelIndex: number): Action;
 
   /**
    * Returns action that renames projectItem
@@ -1509,54 +1516,28 @@ export declare type FolderItem = {
   getColorLabelIndex(): Promise<number>;
 
   /**
-   * Create an action for set color label to projectItem by index
-   *
-   * @param inColorLabelIndex
-   */
-  createSetColorLabelAction(inColorLabelIndex: number): Action;
-
-  /**
    * Get the parent Project of this projectItem.
    */
   getProject(): Promise<Project>;
-
-  /**
-   * Get the type of the Project Item.
-   * @readonly
-   */
-  readonly type: number;
 
   /**
    * The name of this project item.
    * @readonly
    */
   readonly name: string;
+
+  /**
+   * Get the type of the Project Item.
+   * @readonly
+   */
+  readonly type: number;
 };
 
 export declare type FootageInterpretation = {
   /**
-   * Get frame rate of footage
+   * Get alpha usage type property of footage
    */
-  getFrameRate(): number;
-
-  /**
-   * Set frame rate of footage
-   *
-   * @param frameRate
-   */
-  setFrameRate(frameRate: number): boolean;
-
-  /**
-   * Get pixel aspect ratio of footage
-   */
-  getPixelAspectRatio(): number;
-
-  /**
-   * Set pixel aspect ratio of footage
-   *
-   * @param pixelAspectRatio
-   */
-  setPixelAspectRatio(pixelAspectRatio: number): boolean;
+  getAlphaUsage(): number;
 
   /**
    * Get field type of footage
@@ -1564,11 +1545,29 @@ export declare type FootageInterpretation = {
   getFieldType(): number;
 
   /**
-   * Set field type of footage
-   *
-   * @param fieldType
+   * Get frame rate of footage
    */
-  setFieldType(fieldType: number): boolean;
+  getFrameRate(): number;
+
+  /**
+   * Get ignore alpha property of footage
+   */
+  getIgnoreAlpha(): boolean;
+
+  /**
+   * Get input LUTID of footage
+   */
+  getInputLUTID(): string;
+
+  /**
+   * Get invert alpha property of footage
+   */
+  getInvertAlpha(): boolean;
+
+  /**
+   * Get pixel aspect ratio of footage
+   */
+  getPixelAspectRatio(): number;
 
   /**
    * Get removePullDown property of footage
@@ -1576,16 +1575,24 @@ export declare type FootageInterpretation = {
   getRemovePullDown(): boolean;
 
   /**
-   * Set removePullDown property of footage
-   *
-   * @param removePulldown
+   * Get vr conform projection type of footage
    */
-  setRemovePullDown(removePulldown: boolean): boolean;
+  getVrConform(): number;
 
   /**
-   * Get alpha usage type property of footage
+   * Get vr horizontal view of footage
    */
-  getAlphaUsage(): number;
+  getVrHorzView(): number;
+
+  /**
+   * Get vr layout type of footage
+   */
+  getVrLayout(): number;
+
+  /**
+   * Get vr vertical view of footage
+   */
+  getVrVertView(): number;
 
   /**
    * Set alpha usage type property of footage
@@ -1595,9 +1602,18 @@ export declare type FootageInterpretation = {
   setAlphaUsage(alphaUsage: number): boolean;
 
   /**
-   * Get ignore alpha property of footage
+   * Set field type of footage
+   *
+   * @param fieldType
    */
-  getIgnoreAlpha(): boolean;
+  setFieldType(fieldType: number): boolean;
+
+  /**
+   * Set frame rate of footage
+   *
+   * @param frameRate
+   */
+  setFrameRate(frameRate: number): boolean;
 
   /**
    * Set ignore alpha property of footage
@@ -1607,9 +1623,11 @@ export declare type FootageInterpretation = {
   setIgnoreAlpha(ignoreAlpha: boolean): boolean;
 
   /**
-   * Get invert alpha property of footage
+   * Set input LUTID of footage
+   *
+   * @param inputLUTID
    */
-  getInvertAlpha(): boolean;
+  setInputLUTID(inputLUTID: string): boolean;
 
   /**
    * Set invert alpha property of footage
@@ -1619,9 +1637,18 @@ export declare type FootageInterpretation = {
   setInvertAlpha(invertAlpha: boolean): boolean;
 
   /**
-   * Get vr conform projection type of footage
+   * Set pixel aspect ratio of footage
+   *
+   * @param pixelAspectRatio
    */
-  getVrConform(): number;
+  setPixelAspectRatio(pixelAspectRatio: number): boolean;
+
+  /**
+   * Set removePullDown property of footage
+   *
+   * @param removePulldown
+   */
+  setRemovePullDown(removePulldown: boolean): boolean;
 
   /**
    * Set vr conform projection type of footage
@@ -1631,9 +1658,11 @@ export declare type FootageInterpretation = {
   setVrConform(vrConform: number): boolean;
 
   /**
-   * Get vr layout type of footage
+   * Set vr horizontal view of footage
+   *
+   * @param vrHorzView
    */
-  getVrLayout(): number;
+  setVrHorzView(vrHorzView: number): boolean;
 
   /**
    * Set vr layout type of footage
@@ -1643,58 +1672,11 @@ export declare type FootageInterpretation = {
   setVrLayout(vrLayOut: number): boolean;
 
   /**
-   * Get vr horizontal view of footage
-   */
-  getVrHorzView(): number;
-
-  /**
-   * Set vr horizontal view of footage
-   *
-   * @param vrHorzView
-   */
-  setVrHorzView(vrHorzView: number): boolean;
-
-  /**
-   * Get vr vertical view of footage
-   */
-  getVrVertView(): number;
-
-  /**
    * Set vr horizontal view of footage
    *
    * @param vrVertView
    */
   setVrVertView(vrVertView: number): boolean;
-
-  /**
-   * Get input LUTID of footage
-   */
-  getInputLUTID(): string;
-
-  /**
-   * Set input LUTID of footage
-   *
-   * @param inputLUTID
-   */
-  setInputLUTID(inputLUTID: string): boolean;
-
-  /**
-   * alpha channel none
-   * @readonly
-   */
-  readonly ALPHACHANNEL_NONE: number;
-
-  /**
-   * alpha channel straight
-   * @readonly
-   */
-  readonly ALPHACHANNEL_STRAIGHT: number;
-
-  /**
-   * alpha channel premultiplied
-   * @readonly
-   */
-  readonly ALPHACHANNEL_PREMULTIPLIED: number;
 
   /**
    * alpha channel ignore
@@ -1703,10 +1685,34 @@ export declare type FootageInterpretation = {
   readonly ALPHACHANNEL_IGNORE: number;
 
   /**
+   * alpha channel none
+   * @readonly
+   */
+  readonly ALPHACHANNEL_NONE: number;
+
+  /**
+   * alpha channel premultiplied
+   * @readonly
+   */
+  readonly ALPHACHANNEL_PREMULTIPLIED: number;
+
+  /**
+   * alpha channel straight
+   * @readonly
+   */
+  readonly ALPHACHANNEL_STRAIGHT: number;
+
+  /**
    * default filed type invalid
    * @readonly
    */
   readonly FIELD_TYPE_DEFAULT: number;
+
+  /**
+   * field type lowerfirst
+   * @readonly
+   */
+  readonly FIELD_TYPE_LOWERFIRST: number;
 
   /**
    * field type progressive
@@ -1719,12 +1725,6 @@ export declare type FootageInterpretation = {
    * @readonly
    */
   readonly FIELD_TYPE_UPPERFIRST: number;
-
-  /**
-   * field type lowerfirst
-   * @readonly
-   */
-  readonly FIELD_TYPE_LOWERFIRST: number;
 };
 
 export declare type FrameRateStatic = {
@@ -1802,10 +1802,10 @@ export declare type IngestSettings = {
 
 export declare type KeyframeStatic = {
   /**
-   * Linear interpolation mode
+   * Bezier interpolation mode
    * @readonly
    */
-  readonly INTERPOLATION_MODE_LINEAR: number;
+  readonly INTERPOLATION_MODE_BEZIER: number;
 
   /**
    * Hold interpolation mode
@@ -1814,10 +1814,10 @@ export declare type KeyframeStatic = {
   readonly INTERPOLATION_MODE_HOLD: number;
 
   /**
-   * Bezier interpolation mode
+   * Linear interpolation mode
    * @readonly
    */
-  readonly INTERPOLATION_MODE_BEZIER: number;
+  readonly INTERPOLATION_MODE_LINEAR: number;
 
   /**
    * Time interpolation mode
@@ -1826,16 +1826,16 @@ export declare type KeyframeStatic = {
   readonly INTERPOLATION_MODE_TIME: number;
 
   /**
-   * Time transition start interpolation mode
-   * @readonly
-   */
-  readonly INTERPOLATION_MODE_TIME_TRANSITION_START: number;
-
-  /**
    * Time transition end interpolation mode
    * @readonly
    */
   readonly INTERPOLATION_MODE_TIME_TRANSITION_END: number;
+
+  /**
+   * Time transition start interpolation mode
+   * @readonly
+   */
+  readonly INTERPOLATION_MODE_TIME_TRANSITION_START: number;
 };
 
 export declare type Keyframe = {
@@ -1852,27 +1852,27 @@ export declare type Keyframe = {
   setTemporalInterpolationMode(temporalInterpolationMode: number): Promise<boolean>;
 
   /**
-   */
-  value: { value: string | number | boolean | Color | PointF };
-
-  /**
    * Get/Set position of a keyframe
    */
   position: TickTime;
+
+  /**
+   */
+  value: { value: string | number | boolean | Color | PointF };
 };
 
 export declare type MarkerStatic = {
-  /**
-   * Marker Type: Comment
-   * @readonly
-   */
-  readonly MARKER_TYPE_COMMENT: string;
-
   /**
    * Marker Type: Chapter
    * @readonly
    */
   readonly MARKER_TYPE_CHAPTER: string;
+
+  /**
+   * Marker Type: Comment
+   * @readonly
+   */
+  readonly MARKER_TYPE_COMMENT: string;
 
   /**
    * Marker Type: FLVCuePoint
@@ -1888,6 +1888,41 @@ export declare type MarkerStatic = {
 };
 
 export declare type Marker = {
+  /**
+   * Return an action to set the color of the marker by the color index
+   *
+   * @param colorIndex
+   */
+  createSetColorByIndexAction(colorIndex: number): Action;
+
+  /**
+   * Return an action to set the comments of the marker.
+   *
+   * @param comments
+   */
+  createSetCommentsAction(comments: string): Action;
+
+  /**
+   * Return an action to set the duration of the marker.
+   *
+   * @param tickTime
+   */
+  createSetDurationAction(tickTime: TickTime): Action;
+
+  /**
+   * Return an action to set the name of the marker.
+   *
+   * @param name
+   */
+  createSetNameAction(name: string): Action;
+
+  /**
+   * Return an action to set the type of the marker.
+   *
+   * @param markerType Can be set to "Comment", "Chapter", "Segmentation", or "WebLink"
+   */
+  createSetTypeAction(markerType: string): Action;
+
   /**
    * Get color code of the marker.
    */
@@ -1914,9 +1949,9 @@ export declare type Marker = {
   getName(): string;
 
   /**
-   * Get url of the marker.
+   * Get start time of the marker.
    */
-  getUrl(): string;
+  getStart(): TickTime;
 
   /**
    * Get target of the marker. Used together with url for web targets.
@@ -1929,44 +1964,9 @@ export declare type Marker = {
   getType(): string;
 
   /**
-   * Get start time of the marker.
+   * Get url of the marker.
    */
-  getStart(): TickTime;
-
-  /**
-   * Return an action to set the color of the marker by the color index
-   *
-   * @param colorIndex
-   */
-  createSetColorByIndexAction(colorIndex: number): Action;
-
-  /**
-   * Return an action to set the name of the marker.
-   *
-   * @param name
-   */
-  createSetNameAction(name: string): Action;
-
-  /**
-   * Return an action to set the duration of the marker.
-   *
-   * @param tickTime
-   */
-  createSetDurationAction(tickTime: TickTime): Action;
-
-  /**
-   * Return an action to set the type of the marker.
-   *
-   * @param markerType Can be set to "Comment", "Chapter", "Segmentation", or "WebLink"
-   */
-  createSetTypeAction(markerType: string): Action;
-
-  /**
-   * Return an action to set the comments of the marker.
-   *
-   * @param comments
-   */
-  createSetCommentsAction(comments: string): Action;
+  getUrl(): string;
 
   /**
    * The unique identifier of the marker.
@@ -1986,28 +1986,6 @@ export declare type MarkersStatic = {
 
 export declare type Markers = {
   /**
-   * Get all markers
-   *
-   * @param filters Marker Type Filter (Optional)
-   */
-  getMarkers(filters?: string[]): Marker[];
-
-  /**
-   * Remove the given marker
-   *
-   * @param marker
-   */
-  createRemoveMarkerAction(marker: Marker): Action;
-
-  /**
-   * Move the given marker at new time value
-   *
-   * @param marker
-   * @param tickTime
-   */
-  createMoveMarkerAction(marker: Marker, tickTime: TickTime): Action;
-
-  /**
    * Add a new marker
    *
    * @param name
@@ -2023,6 +2001,28 @@ export declare type Markers = {
     duration?: TickTime,
     comments?: string
   ): Action;
+
+  /**
+   * Move the given marker at new time value
+   *
+   * @param marker
+   * @param tickTime
+   */
+  createMoveMarkerAction(marker: Marker, tickTime: TickTime): Action;
+
+  /**
+   * Remove the given marker
+   *
+   * @param marker
+   */
+  createRemoveMarkerAction(marker: Marker): Action;
+
+  /**
+   * Get all markers
+   *
+   * @param filters Marker Type Filter (Optional)
+   */
+  getMarkers(filters?: string[]): Marker[];
 };
 
 export declare type Media = {
@@ -2034,21 +2034,14 @@ export declare type Media = {
   createSetStartAction(time: TickTime): Action;
 
   /**
-   * Get the media start time.
-   */
-  getStart(): TickTime;
-
-  /**
    * Get the media duration.
    */
   getDuration(): TickTime;
 
   /**
-   * Get the media start time
-   * @readonly
-   * @deprecated Use getStart() instead.
+   * Get the media start time.
    */
-  readonly start: Promise<TickTime>;
+  getStart(): TickTime;
 
   /**
    * Get the media duration
@@ -2056,6 +2049,13 @@ export declare type Media = {
    * @deprecated Use getDuration() instead.
    */
   readonly duration: Promise<TickTime>;
+
+  /**
+   * Get the media start time
+   * @readonly
+   * @deprecated Use getStart() instead.
+   */
+  readonly start: Promise<TickTime>;
 };
 
 export declare type MediaManagerStatic = {
@@ -2069,18 +2069,13 @@ export declare type MediaManager = {};
 
 export declare type MetadataStatic = {
   /**
-   * Get project metadata
+   * Add name and label property to project metadata schema
    *
-   * @param projectItem
+   * @param name
+   * @param label
+   * @param type
    */
-  getProjectMetadata(projectItem: ProjectItem): Promise<string>;
-
-  /**
-   * Get project XMP metadata
-   *
-   * @param projectItem
-   */
-  getXMPMetadata(projectItem: ProjectItem): Promise<string>;
+  addPropertyToProjectMetadataSchema(name: string, label: string, type: number): Promise<boolean>;
 
   /**
    * Get set project metadata action
@@ -2104,15 +2099,6 @@ export declare type MetadataStatic = {
   createSetXMPMetadataAction(projectItem: ProjectItem, metadata: string): Action;
 
   /**
-   * Add name and label property to project metadata schema
-   *
-   * @param name
-   * @param label
-   * @param type
-   */
-  addPropertyToProjectMetadataSchema(name: string, label: string, type: number): Promise<boolean>;
-
-  /**
    * Get project column metadata from project item
    *
    * @param projectItem
@@ -2120,9 +2106,23 @@ export declare type MetadataStatic = {
   getProjectColumnsMetadata(projectItem: ProjectItem): Promise<string>;
 
   /**
+   * Get project metadata
+   *
+   * @param projectItem
+   */
+  getProjectMetadata(projectItem: ProjectItem): Promise<string>;
+
+  /**
    * Get project panel metadata
    */
   getProjectPanelMetadata(): Promise<string>;
+
+  /**
+   * Get project XMP metadata
+   *
+   * @param projectItem
+   */
+  getXMPMetadata(projectItem: ProjectItem): Promise<string>;
 
   /**
    * Set project panel metadata
@@ -2130,6 +2130,12 @@ export declare type MetadataStatic = {
    * @param metadata
    */
   setProjectPanelMetadata(metadata: string): Promise<boolean>;
+
+  /**
+   * Metadata Type: BOOLEAN
+   * @readonly
+   */
+  readonly METADATA_TYPE_BOOLEAN: number;
 
   /**
    * Metadata Type: INTEGER
@@ -2148,12 +2154,6 @@ export declare type MetadataStatic = {
    * @readonly
    */
   readonly METADATA_TYPE_TEXT: number;
-
-  /**
-   * Metadata Type: BOOLEAN
-   * @readonly
-   */
-  readonly METADATA_TYPE_BOOLEAN: number;
 };
 
 export declare type Metadata = {};
@@ -2178,6 +2178,13 @@ export declare type OpenProjectOptions = {
   (): OpenProjectOptions;
 
   /**
+   * Set whether to add to MRU list after project changes
+   *
+   * @param addToMRUList
+   */
+  setAddToMRUList(addToMRUList: boolean): OpenProjectOptions;
+
+  /**
    * Set whether to show the convert project dialog on project open/close
    *
    * @param showConvertProjectDialog
@@ -2199,11 +2206,10 @@ export declare type OpenProjectOptions = {
   setShowWarningDialog(showConvertProjectDialog: boolean): OpenProjectOptions;
 
   /**
-   * Set whether to add to MRU list after project changes
-   *
-   * @param addToMRUList
+   * Get whether to add project changes to MRU list
+   * @readonly
    */
-  setAddToMRUList(addToMRUList: boolean): OpenProjectOptions;
+  readonly addToMRUList: boolean;
 
   /**
    * Get whether the convert project dialog is shown on project open/close
@@ -2222,20 +2228,44 @@ export declare type OpenProjectOptions = {
    * @readonly
    */
   readonly showWarningDialog: boolean;
-
-  /**
-   * Get whether to add project changes to MRU list
-   * @readonly
-   */
-  readonly addToMRUList: boolean;
 };
 
 export declare type OperationCompleteEventStatic = {
   /**
-   * Represents the state when an operation completes successfully.
+   * Event occurs when a clip reached its maximum extend limit.
    * @readonly
    */
-  readonly OPERATION_STATE_SUCCESS: number;
+  readonly EVENT_CLIP_EXTEND_REACHED: string;
+
+  /**
+   * Event occurs when an effect is drag over a trackitem
+   * @readonly
+   */
+  readonly EVENT_EFFECT_DRAG_OVER: string;
+
+  /**
+   * Event occurs when an effect is dropped on a trackitem
+   * @readonly
+   */
+  readonly EVENT_EFFECT_DROP_COMPLETE: string;
+
+  /**
+   * Event occurs when a media export operation is complete.
+   * @readonly
+   */
+  readonly EVENT_EXPORT_MEDIA_COMPLETE: string;
+
+  /**
+   * Event occurs when a generative extend operation is complete.
+   * @readonly
+   */
+  readonly EVENT_GENERATIVE_EXTEND_COMPLETE: string;
+
+  /**
+   * Event occurs when a media import operation is complete.
+   * @readonly
+   */
+  readonly EVENT_IMPORT_MEDIA_COMPLETE: string;
 
   /**
    * Represents the state when an operation is cancelled.
@@ -2250,40 +2280,10 @@ export declare type OperationCompleteEventStatic = {
   readonly OPERATION_STATE_FAILED: number;
 
   /**
-   * Event occurs when a media import operation is complete.
+   * Represents the state when an operation completes successfully.
    * @readonly
    */
-  readonly EVENT_IMPORT_MEDIA_COMPLETE: string;
-
-  /**
-   * Event occurs when a media export operation is complete.
-   * @readonly
-   */
-  readonly EVENT_EXPORT_MEDIA_COMPLETE: string;
-
-  /**
-   * Event occurs when an effect is dropped on a trackitem
-   * @readonly
-   */
-  readonly EVENT_EFFECT_DROP_COMPLETE: string;
-
-  /**
-   * Event occurs when an effect is drag over a trackitem
-   * @readonly
-   */
-  readonly EVENT_EFFECT_DRAG_OVER: string;
-
-  /**
-   * Event occurs when a clip reached its maximum extend limit.
-   * @readonly
-   */
-  readonly EVENT_CLIP_EXTEND_REACHED: string;
-
-  /**
-   * Event occurs when a generative extend operation is complete.
-   * @readonly
-   */
-  readonly EVENT_GENERATIVE_EXTEND_COMPLETE: string;
+  readonly OPERATION_STATE_SUCCESS: number;
 };
 
 export declare type OperationCompleteEvent = {
@@ -2339,13 +2339,13 @@ export declare type PointF = {
 
 export declare type PointKeyframe = {
   /**
-   */
-  value: { value: PointF };
-
-  /**
    * Get/Set position of a keyframe
    */
   position: TickTime;
+
+  /**
+   */
+  value: { value: PointF };
 };
 
 export declare type ProjectStatic = {
@@ -2355,6 +2355,18 @@ export declare type ProjectStatic = {
    * @param path
    */
   createProject(path: string): Promise<Project>;
+
+  /**
+   * Currently active project.
+   */
+  getActiveProject(): Promise<Project>;
+
+  /**
+   * Get project referenced by given UID
+   *
+   * @param projectGuid
+   */
+  getProject(projectGuid: Guid): Project;
 
   /**
    * Returns true if the file at the given path is openable as a Premiere project
@@ -2370,32 +2382,22 @@ export declare type ProjectStatic = {
    * @param openProjectOptions
    */
   open(path: string, openProjectOptions?: OpenProjectOptions): Promise<Project>;
-
-  /**
-   * Currently active project.
-   */
-  getActiveProject(): Promise<Project>;
-
-  /**
-   * Get project referenced by given UID
-   *
-   * @param projectGuid
-   */
-  getProject(projectGuid: Guid): Project;
 };
 
 export declare type Project = {
   /**
-   * Get the active sequence of the project
+   * Close a project
+   *
+   * @param closeProjectOptions
    */
-  getActiveSequence(): Promise<Sequence>;
+  close(closeProjectOptions?: CloseProjectOptions): Promise<boolean>;
 
   /**
-   * Set the active sequence of the project
+   * Close a sequence and return true if successful.
    *
    * @param sequence
    */
-  setActiveSequence(sequence: Sequence): Promise<boolean>;
+  closeSequence(sequence: Sequence): Promise<boolean>;
 
   /**
    * Create a new sequence with the default preset path - Parameter presetPath is deprecated, instead use createSequenceWithPresetPath()
@@ -2404,14 +2406,6 @@ export declare type Project = {
    * @param presetPath
    */
   createSequence(name: string, presetPath?: string): Promise<Sequence>;
-
-  /**
-   * Create a new sequence with a preset path
-   *
-   * @param name
-   * @param presetPath
-   */
-  createSequenceWithPresetPath(name: string, presetPath: string): Promise<Sequence>;
 
   /**
    * Create a new sequence with a given name and media
@@ -2427,9 +2421,12 @@ export declare type Project = {
   ): Promise<Sequence>;
 
   /**
-   * Get project color settings object
+   * Create a new sequence with a preset path
+   *
+   * @param name
+   * @param presetPath
    */
-  getColorSettings(): Promise<ProjectColorSettings>;
+  createSequenceWithPresetPath(name: string, presetPath: string): Promise<Sequence>;
 
   /**
    * Delete a given sequence from the project
@@ -2439,30 +2436,36 @@ export declare type Project = {
   deleteSequence(sequence: Sequence): Promise<boolean>;
 
   /**
+   * Get the active sequence of the project
+   */
+  getActiveSequence(): Promise<Sequence>;
+
+  /**
+   * Get project color settings object
+   */
+  getColorSettings(): Promise<ProjectColorSettings>;
+
+  /**
    * Get current insertion bin
    */
   getInsertionBin(): Promise<ProjectItem>;
 
   /**
-   * Open a sequence and return true if successful.
-   *
-   * @param sequence
+   * The root item of the project which contains all items of the project on the lowest level.
    */
-  openSequence(sequence: Sequence): Promise<boolean>;
+  getRootItem(): Promise<FolderItem>;
 
   /**
-   * Close a sequence and return true if successful.
+   * Get sequence by id from the project
    *
-   * @param sequence
+   * @param guid
    */
-  closeSequence(sequence: Sequence): Promise<boolean>;
+  getSequence(guid: Guid): Sequence;
 
   /**
-   *
-   * @param projectPath
-   * @param sequenceIds
+   * Get an array of all sequences in this project.
    */
-  importSequences(projectPath: string, sequenceIds?: Guid[]): Promise<boolean>;
+  getSequences(): Promise<Sequence[]>;
 
   /**
    *
@@ -2495,11 +2498,25 @@ export declare type Project = {
   ): Promise<boolean>;
 
   /**
-   * Close a project
    *
-   * @param closeProjectOptions
+   * @param projectPath
+   * @param sequenceIds
    */
-  close(closeProjectOptions?: CloseProjectOptions): Promise<boolean>;
+  importSequences(projectPath: string, sequenceIds?: Guid[]): Promise<boolean>;
+
+  /**
+   * Open a sequence and return true if successful.
+   *
+   * @param sequence
+   */
+  openSequence(sequence: Sequence): Promise<boolean>;
+
+  /**
+   * Pauses or resumes monitoring of actively-captured (growing) media files in the project. When paused, Premiere stops refreshing clips whose source files are still being written to disk, allowing stable playback at the current captured duration. Pass true to pause, false to resume.
+   *
+   * @param pause
+   */
+  pauseGrowing(pause: boolean): Promise<boolean>;
 
   /**
    * Save the project
@@ -2514,34 +2531,17 @@ export declare type Project = {
   saveAs(path: string): Promise<boolean>;
 
   /**
-   * Get sequence by id from the project
+   * Set the active sequence of the project
    *
-   * @param guid
+   * @param sequence
    */
-  getSequence(guid: Guid): Sequence;
-
-  /**
-   * Get an array of all sequences in this project.
-   */
-  getSequences(): Promise<Sequence[]>;
-
-  /**
-   * The root item of the project which contains all items of the project on the lowest level.
-   */
-  getRootItem(): Promise<FolderItem>;
-
-  /**
-   * Pauses or resumes monitoring of actively-captured (growing) media files in the project. When paused, Premiere stops refreshing clips whose source files are still being written to disk, allowing stable playback at the current captured duration. Pass true to pause, false to resume.
-   *
-   * @param pause
-   */
-  pauseGrowing(pause: boolean): Promise<boolean>;
+  setActiveSequence(sequence: Sequence): Promise<boolean>;
 
   /**
    * Execute undoable transaction by passing compound action
    *
    * @param callback
-   * @param undoString?
+   * @param undoString
    */
   executeTransaction(
     callback: (compoundAction: CompoundAction) => void,
@@ -2584,6 +2584,12 @@ export declare type ProjectClosedEventStatic = {
 
 export declare type ProjectClosedEvent = {
   /**
+   * The unique identifier of the project.
+   * @readonly
+   */
+  readonly id: string;
+
+  /**
    * The project name.
    * @readonly
    */
@@ -2594,24 +2600,18 @@ export declare type ProjectClosedEvent = {
    * @readonly
    */
   readonly path: string;
-
-  /**
-   * The unique identifier of the project.
-   * @readonly
-   */
-  readonly id: string;
 };
 
 export declare type ProjectColorSettings = {
   /**
-   * Get all the graphics white luminance as array of values
-   */
-  getSupportedGraphicsWhiteLuminances(): Promise<number[]>;
-
-  /**
    * Get the graphics white luminance value
    */
   getGraphicsWhiteLuminance(): Promise<number>;
+
+  /**
+   * Get all the graphics white luminance as array of values
+   */
+  getSupportedGraphicsWhiteLuminances(): Promise<number[]>;
 };
 
 export declare type ProjectConverterStatic = {
@@ -2671,12 +2671,6 @@ export declare type ProjectConverter = {};
 
 export declare type ProjectEventStatic = {
   /**
-   * Event occurs when project was opened.
-   * @readonly
-   */
-  readonly EVENT_OPENED: string;
-
-  /**
    * Event occurs when the active project has changed
    * @readonly
    */
@@ -2687,9 +2681,21 @@ export declare type ProjectEventStatic = {
    * @readonly
    */
   readonly EVENT_DIRTY: string;
+
+  /**
+   * Event occurs when project was opened.
+   * @readonly
+   */
+  readonly EVENT_OPENED: string;
 };
 
 export declare type ProjectEvent = {
+  /**
+   * The unique identifier of the project.
+   * @readonly
+   */
+  readonly id: string;
+
   /**
    * The project name.
    * @readonly
@@ -2701,12 +2707,6 @@ export declare type ProjectEvent = {
    * @readonly
    */
   readonly path: string;
-
-  /**
-   * The unique identifier of the project.
-   * @readonly
-   */
-  readonly id: string;
 
   /**
    * The project object.
@@ -2724,22 +2724,22 @@ export declare type ProjectItemStatic = {
   cast(item: FolderItem | ClipProjectItem): ProjectItem;
 
   /**
-   * Project item type for clips.
-   * @readonly
-   */
-  readonly TYPE_CLIP: number;
-
-  /**
    * Project item type for bins/folders.
    * @readonly
    */
   readonly TYPE_BIN: number;
 
   /**
-   * Project item type for the root container.
+   * Project item type for clips.
    * @readonly
    */
-  readonly TYPE_ROOT: number;
+  readonly TYPE_CLIP: number;
+
+  /**
+   * Project item type for compound clips.
+   * @readonly
+   */
+  readonly TYPE_COMPOUND: number;
 
   /**
    * Project item type for generic files.
@@ -2748,19 +2748,26 @@ export declare type ProjectItemStatic = {
   readonly TYPE_FILE: number;
 
   /**
+   * Project item type for the root container.
+   * @readonly
+   */
+  readonly TYPE_ROOT: number;
+
+  /**
    * Project item type for styles.
    * @readonly
    */
   readonly TYPE_STYLE: number;
-
-  /**
-   * Project item type for compound clips.
-   * @readonly
-   */
-  readonly TYPE_COMPOUND: number;
 };
 
 export declare type ProjectItem = {
+  /**
+   * Create an action for set color label to projectItem by index
+   *
+   * @param inColorLabelIndex
+   */
+  createSetColorLabelAction(inColorLabelIndex: number): Action;
+
   /**
    * Returns action that renames projectItem
    *
@@ -2772,13 +2779,6 @@ export declare type ProjectItem = {
    * Get color label index of projectItem
    */
   getColorLabelIndex(): Promise<number>;
-
-  /**
-   * Create an action for set color label to projectItem by index
-   *
-   * @param inColorLabelIndex
-   */
-  createSetColorLabelAction(inColorLabelIndex: number): Action;
 
   /**
    * Get the parent Project of this projectItem.
@@ -2796,16 +2796,16 @@ export declare type ProjectItem = {
   getParentBin(): FolderItem;
 
   /**
-   * Get the type of the Project Item.
-   * @readonly
-   */
-  readonly type: number;
-
-  /**
    * The name of this project item.
    * @readonly
    */
   readonly name: string;
+
+  /**
+   * Get the type of the Project Item.
+   * @readonly
+   */
+  readonly type: number;
 };
 
 export declare type ProjectItemSelection = {
@@ -2816,6 +2816,14 @@ export declare type ProjectItemSelection = {
 };
 
 export declare type ProjectSettingsStatic = {
+  /**
+   * Returns an action which sets IngestSettings
+   *
+   * @param project
+   * @param ingestSettings
+   */
+  createSetIngestSettingsAction(project: Project, ingestSettings: IngestSettings): Action;
+
   /**
    * Returns an action which sets ScratchDiskSetting
    *
@@ -2828,13 +2836,6 @@ export declare type ProjectSettingsStatic = {
   ): Action;
 
   /**
-   * Returns project ScratchDiskSettings
-   *
-   * @param project
-   */
-  getScratchDiskSettings(project: Project): Promise<ScratchDiskSettings>;
-
-  /**
    * Returns project ingest settings
    *
    * @param project
@@ -2842,23 +2843,22 @@ export declare type ProjectSettingsStatic = {
   getIngestSettings(project: Project): Promise<IngestSettings>;
 
   /**
-   * Returns an action which sets IngestSettings
+   * Returns project ScratchDiskSettings
    *
    * @param project
-   * @param ingestSettings
    */
-  createSetIngestSettingsAction(project: Project, ingestSettings: IngestSettings): Action;
+  getScratchDiskSettings(project: Project): Promise<ScratchDiskSettings>;
 };
 
 export declare type ProjectSettings = {};
 
 export declare type ProjectUtilsStatic = {
   /**
-   * Get array of selected project items in project view
+   * Get project based on input view guid
    *
-   * @param project
+   * @param guid
    */
-  getSelection(project: Project): Promise<ProjectItemSelection>;
+  getProjectFromViewId(guid: Guid): Promise<Project>;
 
   /**
    * Get array of project view ids
@@ -2866,11 +2866,11 @@ export declare type ProjectUtilsStatic = {
   getProjectViewIds(): Promise<Guid[]>;
 
   /**
-   * Get project based on input view guid
+   * Get array of selected project items in project view
    *
-   * @param guid
+   * @param project
    */
-  getProjectFromViewId(guid: Guid): Promise<Project>;
+  getSelection(project: Project): Promise<ProjectItemSelection>;
 
   /**
    * Get array of selected projectItem based on input view guid
@@ -2891,46 +2891,25 @@ export declare type PropertiesStatic = {
   getProperties(propertyOwnerObject: Project | Sequence): Promise<Properties>;
 
   /**
-   * Property is persistent in backend and shared across cloud project.
-   * @readonly
-   */
-  readonly PROPERTY_PERSISTENT: number;
-
-  /**
    * Property is not persisted and will be cleared when the project closes.
    * @readonly
    */
   readonly PROPERTY_NON_PERSISTENT: number;
+
+  /**
+   * Property is persistent in backend and shared across cloud project.
+   * @readonly
+   */
+  readonly PROPERTY_PERSISTENT: number;
 };
 
 export declare type Properties = {
   /**
-   * Get named value as integer number
+   * Create an action to clear the value with the given name. This method can fail if e.g. the underlying properties object does not support action based setting of properties.
    *
    * @param name
    */
-  getValueAsInt(name: string): number;
-
-  /**
-   * Get named value as float number
-   *
-   * @param name
-   */
-  getValueAsFloat(name: string): number;
-
-  /**
-   * Get named value as boolean
-   *
-   * @param name
-   */
-  getValueAsBool(name: string): boolean;
-
-  /**
-   * Get named value in native string form
-   *
-   * @param name
-   */
-  getValue(name: string): string;
+  createClearValueAction(name: string): Action;
 
   /**
    * Create an action to set a named value through scripting. This method can fail if e.g. the underlying properties object does not support action based setting of properties.
@@ -2946,18 +2925,39 @@ export declare type Properties = {
   ): Action;
 
   /**
+   * Get named value in native string form
+   *
+   * @param name
+   */
+  getValue(name: string): string;
+
+  /**
+   * Get named value as boolean
+   *
+   * @param name
+   */
+  getValueAsBool(name: string): boolean;
+
+  /**
+   * Get named value as float number
+   *
+   * @param name
+   */
+  getValueAsFloat(name: string): number;
+
+  /**
+   * Get named value as integer number
+   *
+   * @param name
+   */
+  getValueAsInt(name: string): number;
+
+  /**
    * Check if a named value exists under this name.
    *
    * @param name
    */
   hasValue(name: string): boolean;
-
-  /**
-   * Create an action to clear the value with the given name. This method can fail if e.g. the underlying properties object does not support action based setting of properties.
-   *
-   * @param name
-   */
-  createClearValueAction(name: string): Action;
 };
 
 export declare type RectF = {
@@ -2969,29 +2969,17 @@ export declare type RectF = {
   (): RectF;
 
   /**
-   * Get/Set the width of a rect
-   */
-  width: number;
-
-  /**
    * Get/Set the height of a rect
    */
   height: number;
+
+  /**
+   * Get/Set the width of a rect
+   */
+  width: number;
 };
 
 export declare type ScratchDiskSettingsStatic = {
-  /**
-   * Folder Type: CAPTURED
-   * @readonly
-   */
-  readonly FOLDERTYPE_CAPTURE: string;
-
-  /**
-   * Folder Type: VIDEOPREVIEW
-   * @readonly
-   */
-  readonly FOLDERTYPE_VIDEO_PREVIEW: string;
-
   /**
    * Folder Type: AUDIOPREVIEW
    * @readonly
@@ -3005,31 +2993,50 @@ export declare type ScratchDiskSettingsStatic = {
   readonly FOLDERTYPE_AUTO_SAVE: string;
 
   /**
-   * Folder Type: CCLLIBRARIES
-   * @readonly
-   */
-  readonly FOLDERTYPE_CCL_LIBRARIES: string;
-
-  /**
    * Folder Type: CAPSULEMEDIA
    * @readonly
    */
   readonly FOLDERTYPE_CAPSULE_MEDIA: string;
 
   /**
-   * Folder: SAMEASPROJECT
+   * Folder Type: CAPTURED
    * @readonly
    */
-  readonly FOLDER_SAME_AS_PROJECT: string;
+  readonly FOLDERTYPE_CAPTURE: string;
+
+  /**
+   * Folder Type: CCLLIBRARIES
+   * @readonly
+   */
+  readonly FOLDERTYPE_CCL_LIBRARIES: string;
+
+  /**
+   * Folder Type: VIDEOPREVIEW
+   * @readonly
+   */
+  readonly FOLDERTYPE_VIDEO_PREVIEW: string;
 
   /**
    * Folder: MYDOCUMNETS
    * @readonly
    */
   readonly FOLDER_MY_DOCUMNETS: string;
+
+  /**
+   * Folder: SAMEASPROJECT
+   * @readonly
+   */
+  readonly FOLDER_SAME_AS_PROJECT: string;
 };
 
 export declare type ScratchDiskSettings = {
+  /**
+   * Gets the scratchDisk location for specific disktype - may return symbolic paths for reserved types like 'MyDocuments'
+   *
+   * @param ScratchDiskType
+   */
+  getScratchDiskPath(ScratchDiskType: Constants.ScratchDiskFolderType): string;
+
   /**
    * Sets project ScratchDisk Path
    *
@@ -3040,92 +3047,34 @@ export declare type ScratchDiskSettings = {
     ScratchDiskType: Constants.ScratchDiskFolderType,
     ScratchDiskValue: Constants.ScratchDiskFolder
   ): boolean;
-
-  /**
-   * Gets the scratchDisk location for specific disktype - may return symbolic paths for reserved types like 'MyDocuments'
-   *
-   * @param ScratchDiskType
-   */
-  getScratchDiskPath(ScratchDiskType: Constants.ScratchDiskFolderType): string;
 };
 
 export declare type SequenceStatic = {};
 
 export declare type Sequence = {
   /**
-   * Get video time display format of this sequence
-   */
-  getSequenceVideoTimeDisplayFormat(): Promise<TimeDisplay>;
-
-  /**
-   * Get audio time display format of this sequence
-   */
-  getSequenceAudioTimeDisplayFormat(): Promise<TimeDisplay>;
-
-  /**
-   * Get the player's current position
-   */
-  getPlayerPosition(): Promise<TickTime>;
-
-  /**
-   * Set the player's current position
-   *
-   * @param positionTime
-   */
-  setPlayerPosition(positionTime?: TickTime): Promise<boolean>;
-
-  /**
    * Clears TrackItem Selection
    */
   clearSelection(): Promise<boolean>;
 
   /**
-   * Updates sequence selection using the given track item selection.
+   * Creates an action to clone the given sequence
+   */
+  createCloneAction(): Action;
+
+  /**
+   * Create SetInPointAction for sequence
    *
-   * @param trackItemSelection
+   * @param tickTime
    */
-  setSelection(trackItemSelection: TrackItemSelection): boolean;
+  createSetInPointAction(tickTime: TickTime): Action;
 
   /**
-   * Get video track count from this sequence
-   */
-  getVideoTrackCount(): Promise<number>;
-
-  /**
-   * Get audio track count from this sequence
-   */
-  getAudioTrackCount(): Promise<number>;
-
-  /**
-   * Get caption track count from this sequence
-   */
-  getCaptionTrackCount(): Promise<number>;
-
-  /**
-   * Get video track from track index
+   * Create SetOutPointAction for sequence
    *
-   * @param trackIndex
+   * @param tickTime
    */
-  getVideoTrack(trackIndex: number): Promise<VideoTrack>;
-
-  /**
-   * Get audio track from track index
-   *
-   * @param trackIndex
-   */
-  getAudioTrack(trackIndex: number): Promise<AudioTrack>;
-
-  /**
-   * Get caption track from track index
-   *
-   * @param trackIndex
-   */
-  getCaptionTrack(trackIndex: number): Promise<CaptionTrack>;
-
-  /**
-   * Get sequence settings object
-   */
-  getSettings(): Promise<SequenceSettings>;
+  createSetOutPointAction(tickTime: TickTime): Action;
 
   /**
    * Returns an action that updates the settings for the sequence.
@@ -3135,9 +3084,11 @@ export declare type Sequence = {
   createSetSettingsAction(sequenceSettings: SequenceSettings): Action;
 
   /**
-   * Creates an action to clone the given sequence
+   * Create an action to set the zero point for the sequence.
+   *
+   * @param tickTime
    */
-  createCloneAction(): Action;
+  createSetZeroPointAction(tickTime: TickTime): Action;
 
   /**
    * Returns a new sequence, which is a sub-sequence of the existing sequence
@@ -3147,19 +3098,38 @@ export declare type Sequence = {
   createSubsequence(ignoreTrackTargeting?: boolean): Promise<Sequence>;
 
   /**
-   * Returns whether or not the sequence is done analyzing for video effects
+   * Get audio track from track index
+   *
+   * @param trackIndex
    */
-  isDoneAnalyzingForVideoEffects(): Promise<boolean>;
+  getAudioTrack(trackIndex: number): Promise<AudioTrack>;
 
   /**
-   * Time representing the zero point of the sequence.
+   * Get audio track count from this sequence
    */
-  getZeroPoint(): Promise<TickTime>;
+  getAudioTrackCount(): Promise<number>;
+
+  /**
+   * Get caption track from track index
+   *
+   * @param trackIndex
+   */
+  getCaptionTrack(trackIndex: number): Promise<CaptionTrack>;
+
+  /**
+   * Get caption track count from this sequence
+   */
+  getCaptionTrackCount(): Promise<number>;
 
   /**
    * Time representing the end of the sequence
    */
   getEndTime(): Promise<TickTime>;
+
+  /**
+   * Gets the size of the frame
+   */
+  getFrameSize(): Promise<RectF>;
 
   /**
    * Get time representing the in point of the sequence.
@@ -3172,25 +3142,9 @@ export declare type Sequence = {
   getOutPoint(): Promise<TickTime>;
 
   /**
-   * Create SetInPointAction for sequence
-   *
-   * @param tickTime
+   * Get the player's current position
    */
-  createSetInPointAction(tickTime: TickTime): Action;
-
-  /**
-   * Create an action to set the zero point for the sequence.
-   *
-   * @param tickTime
-   */
-  createSetZeroPointAction(tickTime: TickTime): Action;
-
-  /**
-   * Create SetOutPointAction for sequence
-   *
-   * @param tickTime
-   */
-  createSetOutPointAction(tickTime: TickTime): Action;
+  getPlayerPosition(): Promise<TickTime>;
 
   /**
    * Get the associated projectItem of the sequence.
@@ -3203,14 +3157,60 @@ export declare type Sequence = {
   getSelection(): Promise<TrackItemSelection>;
 
   /**
-   * Gets the size of the frame
+   * Get audio time display format of this sequence
    */
-  getFrameSize(): Promise<RectF>;
+  getSequenceAudioTimeDisplayFormat(): Promise<TimeDisplay>;
+
+  /**
+   * Get video time display format of this sequence
+   */
+  getSequenceVideoTimeDisplayFormat(): Promise<TimeDisplay>;
+
+  /**
+   * Get sequence settings object
+   */
+  getSettings(): Promise<SequenceSettings>;
 
   /**
    * Gets the time base of sequence
    */
   getTimebase(): Promise<string>;
+
+  /**
+   * Get video track from track index
+   *
+   * @param trackIndex
+   */
+  getVideoTrack(trackIndex: number): Promise<VideoTrack>;
+
+  /**
+   * Get video track count from this sequence
+   */
+  getVideoTrackCount(): Promise<number>;
+
+  /**
+   * Time representing the zero point of the sequence.
+   */
+  getZeroPoint(): Promise<TickTime>;
+
+  /**
+   * Returns whether or not the sequence is done analyzing for video effects
+   */
+  isDoneAnalyzingForVideoEffects(): Promise<boolean>;
+
+  /**
+   * Set the player's current position
+   *
+   * @param positionTime
+   */
+  setPlayerPosition(positionTime?: TickTime): Promise<boolean>;
+
+  /**
+   * Updates sequence selection using the given track item selection.
+   *
+   * @param trackItemSelection
+   */
+  setSelection(trackItemSelection: TrackItemSelection): boolean;
 
   /**
    * The unique identifier of the sequence.
@@ -3341,10 +3341,52 @@ export declare type SequenceEditor = {
 
 export declare type SequenceSettingsStatic = {
   /**
-   * Square Pixels (1.0)
+   * Audio Channel Type 5.1
    * @readonly
    */
-  readonly PAR_SQUARE: string;
+  readonly AUDIO_CHANNEL_TYPE_51: number;
+
+  /**
+   * Audio Channel Type Mono
+   * @readonly
+   */
+  readonly AUDIO_CHANNEL_TYPE_MONO: number;
+
+  /**
+   * Audio Channel Type Multi
+   * @readonly
+   */
+  readonly AUDIO_CHANNEL_TYPE_MULTI: number;
+
+  /**
+   * Audio Channel Type Stereo
+   * @readonly
+   */
+  readonly AUDIO_CHANNEL_TYPE_STEREO: number;
+
+  /**
+   * Audio Display format miliseconds
+   * @readonly
+   */
+  readonly AUDIO_DISPLAY_FORMAT_MILISECONDS: number;
+
+  /**
+   * Audio Display format: Audio Sample Timecode
+   * @readonly
+   */
+  readonly AUDIO_DISPLAY_FORMAT_SAMPLE_RATE: number;
+
+  /**
+   * Anamorphic 2:1 (2.0)
+   * @readonly
+   */
+  readonly PAR_Anamorphic: string;
+
+  /**
+   * DVCPRO HD (1.5)
+   * @readonly
+   */
+  readonly PAR_DVCProHD: string;
 
   /**
    * DV NTSC (0.9091)
@@ -3371,40 +3413,22 @@ export declare type SequenceSettingsStatic = {
   readonly PAR_DVPALWide: string;
 
   /**
-   * Anamorphic 2:1 (2.0)
-   * @readonly
-   */
-  readonly PAR_Anamorphic: string;
-
-  /**
    * HD Anamorphic 1080 (1.333)
    * @readonly
    */
   readonly PAR_HDAnamorphic1080: string;
 
   /**
-   * DVCPRO HD (1.5)
+   * Square Pixels (1.0)
    * @readonly
    */
-  readonly PAR_DVCProHD: string;
+  readonly PAR_SQUARE: string;
 
   /**
-   * Video field type progressive
+   * Feet+Frame 16mm
    * @readonly
    */
-  readonly VIDEO_FIELDTYPE_PROGRESSIVE: number;
-
-  /**
-   * Video field type upper first
-   * @readonly
-   */
-  readonly VIDEO_FIELDTYPE_UPPER_FIRST: number;
-
-  /**
-   * Video field type lower first
-   * @readonly
-   */
-  readonly VIDEO_FIELDTYPE_LOWER_FIRST: number;
+  readonly VIDEO_DISPLAY_FORMAT_16mm: number;
 
   /**
    * 23.976 fps TimeCode
@@ -3431,12 +3455,6 @@ export declare type SequenceSettingsStatic = {
   readonly VIDEO_DISPLAY_FORMAT_2997_NON_DROP: number;
 
   /**
-   * Feet+Frame 16mm
-   * @readonly
-   */
-  readonly VIDEO_DISPLAY_FORMAT_16mm: number;
-
-  /**
    * Feet+Frame 35mm
    * @readonly
    */
@@ -3449,67 +3467,25 @@ export declare type SequenceSettingsStatic = {
   readonly VIDEO_DISPLAY_FORMAT_FRAMES: number;
 
   /**
-   * Audio Channel Type Mono
+   * Video field type lower first
    * @readonly
    */
-  readonly AUDIO_CHANNEL_TYPE_MONO: number;
+  readonly VIDEO_FIELDTYPE_LOWER_FIRST: number;
 
   /**
-   * Audio Channel Type Stereo
+   * Video field type progressive
    * @readonly
    */
-  readonly AUDIO_CHANNEL_TYPE_STEREO: number;
+  readonly VIDEO_FIELDTYPE_PROGRESSIVE: number;
 
   /**
-   * Audio Channel Type 5.1
+   * Video field type upper first
    * @readonly
    */
-  readonly AUDIO_CHANNEL_TYPE_51: number;
-
-  /**
-   * Audio Channel Type Multi
-   * @readonly
-   */
-  readonly AUDIO_CHANNEL_TYPE_MULTI: number;
-
-  /**
-   * Audio Display format: Audio Sample Timecode
-   * @readonly
-   */
-  readonly AUDIO_DISPLAY_FORMAT_SAMPLE_RATE: number;
-
-  /**
-   * Audio Display format miliseconds
-   * @readonly
-   */
-  readonly AUDIO_DISPLAY_FORMAT_MILISECONDS: number;
+  readonly VIDEO_FIELDTYPE_UPPER_FIRST: number;
 };
 
 export declare type SequenceSettings = {
-  /**
-   * Find if maximum bit depth is set
-   */
-  getMaximumBitDepth(): Promise<boolean>;
-
-  /**
-   * Set maximum bit depth to true/false
-   *
-   * @param useMaxBitDepth
-   */
-  setMaximumBitDepth(useMaxBitDepth: boolean): Promise<boolean>;
-
-  /**
-   * Find if maximum render quality is set
-   */
-  getMaxRenderQuality(): Promise<boolean>;
-
-  /**
-   * Set maximum render quality to true/false
-   *
-   * @param useMaxRenderQuality
-   */
-  setMaxRenderQuality(useMaxRenderQuality: boolean): Promise<boolean>;
-
   /**
    * Get number of channels in the sequence
    */
@@ -3526,16 +3502,76 @@ export declare type SequenceSettings = {
   getAudioDisplayFormat(): Promise<TimeDisplay>;
 
   /**
+   * Get audio sample rate
+   */
+  getAudioSampleRate(): Promise<FrameRate>;
+
+  /**
+   * Get if composite in linear color is checked
+   */
+  getCompositeInLinearColor(): Promise<boolean>;
+
+  /**
+   * Get editing mode of sequence
+   */
+  getEditingMode(): Promise<string>;
+
+  /**
+   * Find if maximum render quality is set
+   */
+  getMaxRenderQuality(): Promise<boolean>;
+
+  /**
+   * Find if maximum bit depth is set
+   */
+  getMaximumBitDepth(): Promise<boolean>;
+
+  /**
+   * Get preview codec of sequence
+   */
+  getPreviewCodec(): Promise<string>;
+
+  /**
+   * Get preview file format of sequence
+   */
+  getPreviewFileFormat(): Promise<string>;
+
+  /**
+   * Get preview video frame rect in the sequence
+   */
+  getPreviewFrameRect(): Promise<RectF>;
+
+  /**
+   * Get Video display format
+   */
+  getVideoDisplayFormat(): Promise<TimeDisplay>;
+
+  /**
+   * Get video field type in the sequence
+   */
+  getVideoFieldType(): Promise<number>;
+
+  /**
+   * Get video frame rate in the sequence
+   */
+  getVideoFrameRate(): FrameRate;
+
+  /**
+   * Get video frame rect in the sequence
+   */
+  getVideoFrameRect(): Promise<RectF>;
+
+  /**
+   * Get Video display format
+   */
+  getVideoPixelAspectRatio(): Promise<string>;
+
+  /**
    * Set audio display format of sequence.
    *
    * @param audioDisplay
    */
   setAudioDisplayFormat(audioDisplay: TimeDisplay): Promise<boolean>;
-
-  /**
-   * Get audio sample rate
-   */
-  getAudioSampleRate(): Promise<FrameRate>;
 
   /**
    * Set audio sample rate
@@ -3545,81 +3581,11 @@ export declare type SequenceSettings = {
   setAudioSampleRate(inRate: FrameRate): Promise<boolean>;
 
   /**
-   * Get Video display format
-   */
-  getVideoDisplayFormat(): Promise<TimeDisplay>;
-
-  /**
-   * Set video display format of sequence
-   *
-   * @param audioDisplay
-   */
-  setVideoDisplayFormat(audioDisplay: TimeDisplay): Promise<boolean>;
-
-  /**
-   * Get video field type in the sequence
-   */
-  getVideoFieldType(): Promise<number>;
-
-  /**
-   * Set video field type in sequence
-   *
-   * @param videoFiledType
-   */
-  setVideoFieldType(videoFiledType: number): Promise<boolean>;
-
-  /**
-   * Get video frame rate in the sequence
-   */
-  getVideoFrameRate(): FrameRate;
-
-  /**
-   * Set video frame rate in the sequence
-   *
-   * @param inVideoFrameRate
-   */
-  setVideoFrameRate(inVideoFrameRate: FrameRate): boolean;
-
-  /**
-   * Get video frame rect in the sequence
-   */
-  getVideoFrameRect(): Promise<RectF>;
-
-  /**
-   * Set video frame rect in sequence
-   *
-   * @param inVideoFrameRect
-   */
-  setVideoFrameRect(inVideoFrameRect: RectF): Promise<boolean>;
-
-  /**
-   * Get Video display format
-   */
-  getVideoPixelAspectRatio(): Promise<string>;
-
-  /**
-   * Set video display format of sequence
-   *
-   * @param inPixelAspectRatio
-   */
-  setVideoPixelAspectRatio(inPixelAspectRatio: string): Promise<boolean>;
-
-  /**
-   * Get if composite in linear color is checked
-   */
-  getCompositeInLinearColor(): Promise<boolean>;
-
-  /**
    * Set if composite in linear color is checked
    *
    * @param useCompositeInLinearColor
    */
   setCompositeInLinearColor(useCompositeInLinearColor: boolean): Promise<boolean>;
-
-  /**
-   * Get editing mode of sequence
-   */
-  getEditingMode(): Promise<string>;
 
   /**
    * Set editing mode of sequence
@@ -3629,21 +3595,18 @@ export declare type SequenceSettings = {
   setEditingMode(inEditingModeName: string): Promise<boolean>;
 
   /**
-   * Get preview file format of sequence
-   */
-  getPreviewFileFormat(): Promise<string>;
-
-  /**
-   * Set preview file format of sequence
+   * Set maximum render quality to true/false
    *
-   * @param inPreviewCodec
+   * @param useMaxRenderQuality
    */
-  setPreviewFileFormat(inPreviewCodec: string): Promise<boolean>;
+  setMaxRenderQuality(useMaxRenderQuality: boolean): Promise<boolean>;
 
   /**
-   * Get preview codec of sequence
+   * Set maximum bit depth to true/false
+   *
+   * @param useMaxBitDepth
    */
-  getPreviewCodec(): Promise<string>;
+  setMaximumBitDepth(useMaxBitDepth: boolean): Promise<boolean>;
 
   /**
    * Set preview codec of sequence
@@ -3653,9 +3616,11 @@ export declare type SequenceSettings = {
   setPreviewCodec(inPreviewCodec: string): Promise<boolean>;
 
   /**
-   * Get preview video frame rect in the sequence
+   * Set preview file format of sequence
+   *
+   * @param inPreviewCodec
    */
-  getPreviewFrameRect(): Promise<RectF>;
+  setPreviewFileFormat(inPreviewCodec: string): Promise<boolean>;
 
   /**
    * Set preview video frame rect in sequence
@@ -3663,6 +3628,41 @@ export declare type SequenceSettings = {
    * @param inPreviewVideoRect
    */
   setPreviewFrameRect(inPreviewVideoRect: RectF): Promise<boolean>;
+
+  /**
+   * Set video display format of sequence
+   *
+   * @param audioDisplay
+   */
+  setVideoDisplayFormat(audioDisplay: TimeDisplay): Promise<boolean>;
+
+  /**
+   * Set video field type in sequence
+   *
+   * @param videoFiledType
+   */
+  setVideoFieldType(videoFiledType: number): Promise<boolean>;
+
+  /**
+   * Set video frame rate in the sequence
+   *
+   * @param inVideoFrameRate
+   */
+  setVideoFrameRate(inVideoFrameRate: FrameRate): boolean;
+
+  /**
+   * Set video frame rect in sequence
+   *
+   * @param inVideoFrameRect
+   */
+  setVideoFrameRect(inVideoFrameRect: RectF): Promise<boolean>;
+
+  /**
+   * Set video display format of sequence
+   *
+   * @param inPixelAspectRatio
+   */
+  setVideoPixelAspectRatio(inPixelAspectRatio: string): Promise<boolean>;
 };
 
 export declare type SequenceUtilsStatic = {
@@ -3700,6 +3700,30 @@ export declare type SequenceUtils = {};
 
 export declare type SnapEventStatic = {
   /**
+   * Event occurs when the playhead snaps into track-item edges.
+   * @readonly
+   */
+  readonly EVENT_SNAP_PLAYHEAD_TO_TRACKITEM_EDGE: string;
+
+  /**
+   * Event occurs when the razor tool hovers over the all types of markers and snaps into position for a cut.
+   * @readonly
+   */
+  readonly EVENT_SNAP_RAZOR_TO_MARKER: string;
+
+  /**
+   * Event occurs when the razor tool hovers over the playhead and snaps into position for a cut.
+   * @readonly
+   */
+  readonly EVENT_SNAP_RAZOR_TO_PLAYHEAD: string;
+
+  /**
+   * Event occurs object is snapped to guildelines when holding the Cmd/Ctrl key.
+   * @readonly
+   */
+  readonly EVENT_SNAP_TO_GUIDES: string;
+
+  /**
    * Event occurs a user scrub on timeline over keyframes when shift key is applied.
    * @readonly
    */
@@ -3710,35 +3734,31 @@ export declare type SnapEventStatic = {
    * @readonly
    */
   readonly EVENT_SNAP_TO_TRACKITEM: string;
-
-  /**
-   * Event occurs object is snapped to guildelines when holding the Cmd/Ctrl key.
-   * @readonly
-   */
-  readonly EVENT_SNAP_TO_GUIDES: string;
-
-  /**
-   * Event occurs when the razor tool hovers over the playhead and snaps into position for a cut.
-   * @readonly
-   */
-  readonly EVENT_SNAP_RAZOR_TO_PLAYHEAD: string;
-
-  /**
-   * Event occurs when the razor tool hovers over the all types of markers and snaps into position for a cut.
-   * @readonly
-   */
-  readonly EVENT_SNAP_RAZOR_TO_MARKER: string;
-
-  /**
-   * Event occurs when the playhead snaps into track-item edges.
-   * @readonly
-   */
-  readonly EVENT_SNAP_PLAYHEAD_TO_TRACKITEM_EDGE: string;
 };
 
 export declare type SnapEvent = {};
 
 export declare type SourceMonitorStatic = {
+  /**
+   * Close all clips on Source Monitor
+   */
+  closeAllClips(): Promise<boolean>;
+
+  /**
+   * Close clip on Source Monitor
+   */
+  closeClip(): Promise<boolean>;
+
+  /**
+   * Get position of source monitor in time
+   */
+  getPosition(): Promise<TickTime>;
+
+  /**
+   * Get projectItem at source monitor
+   */
+  getProjectItem(): Promise<ProjectItem>;
+
   /**
    * Open the item at the specified path and send to the Source Monitor for preview
    *
@@ -3754,28 +3774,6 @@ export declare type SourceMonitorStatic = {
   openProjectItem(projectItem: ProjectItem): Promise<boolean>;
 
   /**
-   * Close clip on Source Monitor
-   */
-  closeClip(): Promise<boolean>;
-
-  /**
-   * Close all clips on Source Monitor
-   */
-  closeAllClips(): Promise<boolean>;
-
-  /**
-   * Get position of source monitor in time
-   */
-  getPosition(): Promise<TickTime>;
-
-  /**
-   * Set position of source monitor to the given TickTime
-   *
-   * @param position
-   */
-  setPosition(position: TickTime): Promise<boolean>;
-
-  /**
    * Play clip at source monitor with input speed
    *
    * @param speed
@@ -3783,9 +3781,11 @@ export declare type SourceMonitorStatic = {
   play(speed?: number): Promise<boolean>;
 
   /**
-   * Get projectItem at source monitor
+   * Set position of source monitor to the given TickTime
+   *
+   * @param position
    */
-  getProjectItem(): Promise<ProjectItem>;
+  setPosition(position: TickTime): Promise<boolean>;
 };
 
 export declare type SourceMonitor = {};
@@ -3826,28 +3826,10 @@ export declare type TickTimeStatic = {
   createWithTicks(ticks: string): TickTime;
 
   /**
-   * Zero Tick Time Constant
+   * Invalid Tick Time Constant
    * @readonly
    */
-  readonly TIME_ZERO: TickTime;
-
-  /**
-   * One Second Tick Time Constant
-   * @readonly
-   */
-  readonly TIME_ONE_SECOND: TickTime;
-
-  /**
-   * One Second Tick Time Constant
-   * @readonly
-   */
-  readonly TIME_ONE_MINUTE: TickTime;
-
-  /**
-   * One Hour Tick Time Constant
-   * @readonly
-   */
-  readonly TIME_ONE_HOUR: TickTime;
+  readonly TIME_INVALID: TickTime;
 
   /**
    * Max Tick Time Constant
@@ -3862,10 +3844,28 @@ export declare type TickTimeStatic = {
   readonly TIME_MIN: TickTime;
 
   /**
-   * Invalid Tick Time Constant
+   * One Hour Tick Time Constant
    * @readonly
    */
-  readonly TIME_INVALID: TickTime;
+  readonly TIME_ONE_HOUR: TickTime;
+
+  /**
+   * One Second Tick Time Constant
+   * @readonly
+   */
+  readonly TIME_ONE_MINUTE: TickTime;
+
+  /**
+   * One Second Tick Time Constant
+   * @readonly
+   */
+  readonly TIME_ONE_SECOND: TickTime;
+
+  /**
+   * Zero Tick Time Constant
+   * @readonly
+   */
+  readonly TIME_ZERO: TickTime;
 };
 
 export declare type TickTime = {
@@ -3877,18 +3877,11 @@ export declare type TickTime = {
   (): TickTime;
 
   /**
-   * Returns true if the given TickTime is equal to the TickTime object
+   * Add another TickTime to this one and return it. This TickTime is not modified.
    *
    * @param tickTime
    */
-  equals(tickTime: TickTime): boolean;
-
-  /**
-   * AlignToNearestFrame will return a TickTime that is aligned to the nearest frame boundary greater than or less than the given time, for a given frame rate by rounding any fractional portion.
-   *
-   * @param frameRate
-   */
-  alignToNearestFrame(frameRate: FrameRate): TickTime;
+  add(tickTime: TickTime): TickTime;
 
   /**
    * alignToFrame will return a TickTime that is aligned to the nearest frame boundary less than the given time, for a given frame rate by rounding any fractional portion.
@@ -3898,18 +3891,25 @@ export declare type TickTime = {
   alignToFrame(frameRate: FrameRate): TickTime;
 
   /**
-   * Add another TickTime to this one and return it. This TickTime is not modified.
+   * AlignToNearestFrame will return a TickTime that is aligned to the nearest frame boundary greater than or less than the given time, for a given frame rate by rounding any fractional portion.
    *
-   * @param tickTime
+   * @param frameRate
    */
-  add(tickTime: TickTime): TickTime;
+  alignToNearestFrame(frameRate: FrameRate): TickTime;
 
   /**
-   * Subtract another TickTime from this one and return it. This TickTime is not modified.
+   * Divide this TickTime by a divisor and return it. In case of a division by zero, TIME_INVALID is returned. This TickTime is not modified.
+   *
+   * @param divisor
+   */
+  divide(divisor: number): TickTime;
+
+  /**
+   * Returns true if the given TickTime is equal to the TickTime object
    *
    * @param tickTime
    */
-  subtract(tickTime: TickTime): TickTime;
+  equals(tickTime: TickTime): boolean;
 
   /**
    * Multiply this TickTime with a factor and return it. This TickTime is not modified.
@@ -3919,11 +3919,11 @@ export declare type TickTime = {
   multiply(factor: number): TickTime;
 
   /**
-   * Divide this TickTime by a divisor and return it. In case of a division by zero, TIME_INVALID is returned. This TickTime is not modified.
+   * Subtract another TickTime from this one and return it. This TickTime is not modified.
    *
-   * @param divisor
+   * @param tickTime
    */
-  divide(divisor: number): TickTime;
+  subtract(tickTime: TickTime): TickTime;
 
   /**
    * Get the TickTime in seconds
@@ -4028,22 +4028,22 @@ export declare type Utils = {};
 
 export declare type VideoClipTrackItemStatic = {
   /**
-   * Empty Track Item Type
-   * @readonly
-   */
-  readonly TRACKITEMTYPE_EMPTY: number;
-
-  /**
    * Clip Track Item Type
    * @readonly
    */
   readonly TRACKITEMTYPE_CLIP: number;
 
   /**
-   * Transition Track Item Type
+   * Empty Track Item Type
    * @readonly
    */
-  readonly TRACKITEMTYPE_TRANSITION: number;
+  readonly TRACKITEMTYPE_EMPTY: number;
+
+  /**
+   * Feedback Track Item Type
+   * @readonly
+   */
+  readonly TRACKITEMTYPE_FEEDBACK: number;
 
   /**
    * Previe Track Item Type
@@ -4052,10 +4052,10 @@ export declare type VideoClipTrackItemStatic = {
   readonly TRACKITEMTYPE_PREVIEW: number;
 
   /**
-   * Feedback Track Item Type
+   * Transition Track Item Type
    * @readonly
    */
-  readonly TRACKITEMTYPE_FEEDBACK: number;
+  readonly TRACKITEMTYPE_TRANSITION: number;
 };
 
 export declare type VideoClipTrackItem = {
@@ -4078,104 +4078,11 @@ export declare type VideoClipTrackItem = {
   createRemoveVideoTransitionAction(transitionPosition?: Constants.TransitionPosition): Action;
 
   /**
-   * Returns the value of internal matchname for this trackItem
-   */
-  getMatchName(): Promise<string>;
-
-  /**
-   * Returns the display name for trackItem
-   */
-  getName(): Promise<string>;
-
-  /**
-   * Returns if trackItem is selected or not
-   */
-  getIsSelected(): Promise<boolean>;
-
-  /**
-   * Returns the value of speed of the trackItem
-   */
-  getSpeed(): Promise<number>;
-
-  /**
-   * Returns true if the trackitem is an adjustment layer
-   */
-  isAdjustmentLayer(): Promise<boolean>;
-
-  /**
-   * Returns true if the trackitem is reversed
-   */
-  isSpeedReversed(): Promise<number>;
-
-  /**
    * Returns an action that moves the inPoint of the track item to a new time, by shifting it by a number of seconds.
    *
    * @param tickTime
    */
   createMoveAction(tickTime: TickTime): Action;
-
-  /**
-   * Returns a TickTime object representing the track item in point relative to the start time of the project item referenced by this track item.
-   */
-  getInPoint(): Promise<TickTime>;
-
-  /**
-   * Returns a TickTime object representing the track item out point relative to the start time of the project item referenced by this track item.
-   */
-  getOutPoint(): Promise<TickTime>;
-
-  /**
-   * Create SetInPointAction for setting the track item in point relative to the start time of the project item referenced by this track item
-   *
-   * @param tickTime Sets the In-Point in TickTime
-   */
-  createSetInPointAction(tickTime: TickTime): Action;
-
-  /**
-   * Create SetOutPointAction for setting the track item out point relative to the start time of the project item referenced by this track item
-   *
-   * @param tickTime Sets the Out-Point in TickTime
-   */
-  createSetOutPointAction(tickTime: TickTime): Action;
-
-  /**
-   * Returns a TickTime object representing the starting sequence time of this track item relative to the sequence start time.
-   */
-  getStartTime(): Promise<TickTime>;
-
-  /**
-   * Returns a TickTime object representing the ending sequence time of this track item relative to the sequence start time.
-   */
-  getEndTime(): Promise<TickTime>;
-
-  /**
-   * Create set start time action for sequence
-   *
-   * @param tickTime
-   */
-  createSetStartAction(tickTime: TickTime): Action;
-
-  /**
-   * Create set end time action for sequence
-   *
-   * @param tickTime
-   */
-  createSetEndAction(tickTime: TickTime): Action;
-
-  /**
-   * Returns timecode representing the duration of this track item relative to the sequence start.
-   */
-  getDuration(): Promise<TickTime>;
-
-  /**
-   * Index representing the type of this track item.
-   */
-  getType(): Promise<number>;
-
-  /**
-   * Returns true if trackitem is muted/disabled
-   */
-  isDisabled(): Promise<boolean>;
 
   /**
    * Returns an action that enables/disables the trackItem
@@ -4185,6 +4092,20 @@ export declare type VideoClipTrackItem = {
   createSetDisabledAction(disabled: boolean): Action;
 
   /**
+   * Create set end time action for sequence
+   *
+   * @param tickTime
+   */
+  createSetEndAction(tickTime: TickTime): Action;
+
+  /**
+   * Create SetInPointAction for setting the track item in point relative to the start time of the project item referenced by this track item
+   *
+   * @param tickTime Sets the In-Point in TickTime
+   */
+  createSetInPointAction(tickTime: TickTime): Action;
+
+  /**
    * Returns an action that renames the trackItem
    *
    * @param inName
@@ -4192,9 +4113,73 @@ export declare type VideoClipTrackItem = {
   createSetNameAction(inName: string): Action;
 
   /**
+   * Create SetOutPointAction for setting the track item out point relative to the start time of the project item referenced by this track item
+   *
+   * @param tickTime Sets the Out-Point in TickTime
+   */
+  createSetOutPointAction(tickTime: TickTime): Action;
+
+  /**
+   * Create set start time action for sequence
+   *
+   * @param tickTime
+   */
+  createSetStartAction(tickTime: TickTime): Action;
+
+  /**
+   * Returns timecode representing the duration of this track item relative to the sequence start.
+   */
+  getDuration(): Promise<TickTime>;
+
+  /**
+   * Returns a TickTime object representing the ending sequence time of this track item relative to the sequence start time.
+   */
+  getEndTime(): Promise<TickTime>;
+
+  /**
+   * Returns a TickTime object representing the track item in point relative to the start time of the project item referenced by this track item.
+   */
+  getInPoint(): Promise<TickTime>;
+
+  /**
+   * Returns if trackItem is selected or not
+   */
+  getIsSelected(): Promise<boolean>;
+
+  /**
+   * Returns the value of internal matchname for this trackItem
+   */
+  getMatchName(): Promise<string>;
+
+  /**
    * Returns UUID representing the underlying media type of this track item
    */
   getMediaType(): Promise<Guid>;
+
+  /**
+   * Returns the display name for trackItem
+   */
+  getName(): Promise<string>;
+
+  /**
+   * Returns a TickTime object representing the track item out point relative to the start time of the project item referenced by this track item.
+   */
+  getOutPoint(): Promise<TickTime>;
+
+  /**
+   * Returns the project item for this track item.
+   */
+  getProjectItem(): Promise<ProjectItem>;
+
+  /**
+   * Returns the value of speed of the trackItem
+   */
+  getSpeed(): Promise<number>;
+
+  /**
+   * Returns a TickTime object representing the starting sequence time of this track item relative to the sequence start time.
+   */
+  getStartTime(): Promise<TickTime>;
 
   /**
    * Index representing the track index of the track this track item belongs to
@@ -4202,9 +4187,24 @@ export declare type VideoClipTrackItem = {
   getTrackIndex(): Promise<number>;
 
   /**
-   * Returns the project item for this track item.
+   * Index representing the type of this track item.
    */
-  getProjectItem(): Promise<ProjectItem>;
+  getType(): Promise<number>;
+
+  /**
+   * Returns true if the trackitem is an adjustment layer
+   */
+  isAdjustmentLayer(): Promise<boolean>;
+
+  /**
+   * Returns true if trackitem is muted/disabled
+   */
+  isDisabled(): Promise<boolean>;
+
+  /**
+   * Returns true if the trackitem is reversed
+   */
+  isSpeedReversed(): Promise<number>;
 
   /**
    * Returns VideoComponentChain
@@ -4216,6 +4216,13 @@ export declare type VideoComponentChainStatic = {};
 
 export declare type VideoComponentChain = {
   /**
+   * Creates and returns an append component action
+   *
+   * @param component Video filter component
+   */
+  createAppendComponentAction(component: Component | VideoFilterComponent): Action;
+
+  /**
    * Creates and returns an insert component action
    *
    * @param component Video filter component
@@ -4225,13 +4232,6 @@ export declare type VideoComponentChain = {
     component: Component | VideoFilterComponent,
     componentInsertionIndex: number
   ): Action;
-
-  /**
-   * Creates and returns an append component action
-   *
-   * @param component Video filter component
-   */
-  createAppendComponentAction(component: Component | VideoFilterComponent): Action;
 
   /**
    * Creates and returns an remove component action
@@ -4267,14 +4267,14 @@ export declare type VideoFilterFactoryStatic = {
   createComponent(matchName: string): Promise<VideoFilterComponent>;
 
   /**
-   * Returns an array of video filter matchNames
-   */
-  getMatchNames(): Promise<string[]>;
-
-  /**
    * Returns an array of video filter display names
    */
   getDisplayNames(): Promise<string[]>;
+
+  /**
+   * Returns an array of video filter matchNames
+   */
+  getMatchNames(): Promise<string[]>;
 };
 
 export declare type VideoFilterFactory = {};
@@ -4308,11 +4308,9 @@ export declare type VideoTrack = {
   createSetNameAction(name: string): Action;
 
   /**
-   * sets the mute state of the track to muted/unmuted
-   *
-   * @param mute
+   * Index representing the track index of this track within the track group.
    */
-  setMute(mute: boolean): Promise<boolean>;
+  getIndex(): Promise<number>;
 
   /**
    * UUID representing the underlying media type of this track
@@ -4320,14 +4318,16 @@ export declare type VideoTrack = {
   getMediaType(): Promise<Guid>;
 
   /**
-   * Index representing the track index of this track within the track group.
-   */
-  getIndex(): Promise<number>;
-
-  /**
    * Get mute state of the track
    */
   isMuted(): Promise<boolean>;
+
+  /**
+   * sets the mute state of the track to muted/unmuted
+   *
+   * @param mute
+   */
+  setMute(mute: boolean): Promise<boolean>;
 
   /**
    * Returns array of VideoClipTrackItem from the track item type
@@ -4341,30 +4341,30 @@ export declare type VideoTrack = {
   ): VideoClipTrackItem[];
 
   /**
-   * Get the name of the track
-   * @readonly
-   */
-  readonly name: string;
-
-  /**
    * The ID of the track within the TrackGroup
    * @readonly
    */
   readonly id: number;
+
+  /**
+   * Get the name of the track
+   * @readonly
+   */
+  readonly name: string;
 };
 
 export declare type VideoTransitionStatic = {
-  /**
-   * TransitionPosition: START
-   * @readonly
-   */
-  readonly TRANSITIONPOSITION_START: number;
-
   /**
    * TransitionPosition: END
    * @readonly
    */
   readonly TRANSITIONPOSITION_END: number;
+
+  /**
+   * TransitionPosition: START
+   * @readonly
+   */
+  readonly TRANSITIONPOSITION_START: number;
 };
 
 export declare type VideoTransition = {};
@@ -4385,6 +4385,15 @@ export declare type WorkAreaUtilsStatic = {
   getWorkAreaOutPoint(sequence: Sequence): TickTime;
 
   /**
+   * Set the work area in and out points of the sequence.
+   *
+   * @param sequence
+   * @param inTickTime
+   * @param outTickTime
+   */
+  setWorkAreaInOutPoints(sequence: Sequence, inTickTime: TickTime, outTickTime: TickTime): boolean;
+
+  /**
    * Set the work area in point of the sequence.
    *
    * @param sequence
@@ -4399,15 +4408,6 @@ export declare type WorkAreaUtilsStatic = {
    * @param tickTime
    */
   setWorkAreaOutPoint(sequence: Sequence, tickTime: TickTime): boolean;
-
-  /**
-   * Set the work area in and out points of the sequence.
-   *
-   * @param sequence
-   * @param inTickTime
-   * @param outTickTime
-   */
-  setWorkAreaInOutPoints(sequence: Sequence, inTickTime: TickTime, outTickTime: TickTime): boolean;
 };
 
 export declare type WorkAreaUtils = {};
