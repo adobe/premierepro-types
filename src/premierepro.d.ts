@@ -12,9 +12,9 @@
  */
 
 export declare type premierepro = {
-  AAFExportOptions: AAFExportOptions;
+  AAFExportOptions: AAFExportOptionsStatic;
   Action: Action;
-  AddTransitionOptions: AddTransitionOptions;
+  AddTransitionOptions: AddTransitionOptionsStatic;
   AppPreference: AppPreferenceStatic;
   Application: Application;
   AudioClipTrackItem: AudioClipTrackItemStatic;
@@ -24,8 +24,8 @@ export declare type premierepro = {
   AudioTrack: AudioTrackStatic;
   CaptionTrack: CaptionTrackStatic;
   ClipProjectItem: ClipProjectItemStatic;
-  CloseProjectOptions: CloseProjectOptions;
-  Color: Color;
+  CloseProjectOptions: CloseProjectOptionsStatic;
+  Color: ColorStatic;
   Component: Component;
   ComponentParam: ComponentParam;
   CompoundAction: CompoundAction;
@@ -43,10 +43,10 @@ export declare type premierepro = {
   MediaManager: MediaManagerStatic;
   Metadata: MetadataStatic;
   ObjectMaskUtils: ObjectMaskUtilsStatic;
-  OpenProjectOptions: OpenProjectOptions;
+  OpenProjectOptions: OpenProjectOptionsStatic;
   OperationCompleteEvent: OperationCompleteEventStatic;
   PRProduction: PRProductionStatic;
-  PointF: PointF;
+  PointF: PointFStatic;
   PointKeyframe: PointKeyframe;
   Project: ProjectStatic;
   ProjectClosedEvent: ProjectClosedEventStatic;
@@ -58,7 +58,7 @@ export declare type premierepro = {
   ProjectSettings: ProjectSettingsStatic;
   ProjectUtils: ProjectUtilsStatic;
   Properties: PropertiesStatic;
-  RectF: RectF;
+  RectF: RectFStatic;
   ScratchDiskSettings: ScratchDiskSettingsStatic;
   Sequence: SequenceStatic;
   SequenceEditor: SequenceEditorStatic;
@@ -85,14 +85,16 @@ export declare type premierepro = {
   Constants: typeof Constants;
 };
 
-export declare type AAFExportOptions = {
+export declare type AAFExportOptionsStatic = {
   /**
-   * Constructs a new instance of the AAFExportOptions class.
+   * Construct an object that contains properties for AAF export.
    * @constructor
    */
   new (): AAFExportOptions;
   (): AAFExportOptions;
+};
 
+export declare type AAFExportOptions = {
   /**
    * Set the audio file format (0 for AIFF, 1 for WAV)
    *
@@ -252,14 +254,16 @@ export declare type AAFExportOptions = {
 
 export declare type Action = {};
 
-export declare type AddTransitionOptions = {
+export declare type AddTransitionOptionsStatic = {
   /**
-   * Constructs a new instance of the AddTransitionOptions class.
+   * Construct an object that contains properties for applying transition.
    * @constructor
    */
   new (): AddTransitionOptions;
   (): AddTransitionOptions;
+};
 
+export declare type AddTransitionOptions = {
   /**
    * Set whether to apply transition to the start or end of trackitem
    *
@@ -1002,14 +1006,16 @@ export declare type ClipProjectItem = {
   readonly type: number;
 };
 
-export declare type CloseProjectOptions = {
+export declare type CloseProjectOptionsStatic = {
   /**
-   * Constructs a new instance of the CloseProjectOptions class.
+   * Construct an object that contains properties for closing a project.
    * @constructor
    */
   new (): CloseProjectOptions;
   (): CloseProjectOptions;
+};
 
+export declare type CloseProjectOptions = {
   /**
    * Set whether the app should be prepared to quit when open/closing a project
    *
@@ -1063,9 +1069,9 @@ export declare type CloseProjectOptions = {
   readonly showCancelButton: boolean;
 };
 
-export declare type Color = {
+export declare type ColorStatic = {
   /**
-   * Constructs a new instance of the Color class.
+   * Construct a Color Object with parameters for Red, Green, Blue, and Alpha values which are in range [0.0-1.0]
    * @constructor
    *
    * @param [red]
@@ -1075,7 +1081,9 @@ export declare type Color = {
    */
   new (red?: number, green?: number, blue?: number, alpha?: number): Color;
   (red?: number, green?: number, blue?: number, alpha?: number): Color;
+};
 
+export declare type Color = {
   /**
    * Returns true if the given ColorObject is equal to this ColorObject
    *
@@ -1729,6 +1737,13 @@ export declare type FootageInterpretation = {
 
 export declare type FrameRateStatic = {
   /**
+   * Constructs a FrameRate object
+   * @constructor
+   */
+  new (): FrameRate;
+  (): FrameRate;
+
+  /**
    * Create frame rate object with a value
    *
    * @param value
@@ -1737,13 +1752,6 @@ export declare type FrameRateStatic = {
 };
 
 export declare type FrameRate = {
-  /**
-   * Constructs a new instance of the FrameRate class.
-   * @constructor
-   */
-  new (): FrameRate;
-  (): FrameRate;
-
   /**
    * Returns true if the given FrameRate is equal to this FrameRate object
    *
@@ -1765,6 +1773,13 @@ export declare type FrameRate = {
 
 export declare type GuidStatic = {
   /**
+   * Constructs an empty Guid object
+   * @constructor
+   */
+  new (): Guid;
+  (): Guid;
+
+  /**
    * Create a guid from a string
    *
    * @param stringValue
@@ -1773,13 +1788,6 @@ export declare type GuidStatic = {
 };
 
 export declare type Guid = {
-  /**
-   * Constructs a new instance of the Guid class.
-   * @constructor
-   */
-  new (): Guid;
-  (): Guid;
-
   /**
    * Return string representation of the GUID
    */
@@ -2169,14 +2177,16 @@ export declare type ObjectMaskUtilsStatic = {
 
 export declare type ObjectMaskUtils = {};
 
-export declare type OpenProjectOptions = {
+export declare type OpenProjectOptionsStatic = {
   /**
-   * Constructs a new instance of the OpenProjectOptions class.
+   * Construct an object that contains properties for opening a project.
    * @constructor
    */
   new (): OpenProjectOptions;
   (): OpenProjectOptions;
+};
 
+export declare type OpenProjectOptions = {
   /**
    * Set whether to add to MRU list after project changes
    *
@@ -2308,9 +2318,9 @@ export declare type PRProduction = {
   getScratchDiskSettings(): Promise<ScratchDiskSettings>;
 };
 
-export declare type PointF = {
+export declare type PointFStatic = {
   /**
-   * Constructs a new instance of the PointF class.
+   * Construct a PointFloat Object.
    * @constructor
    *
    * @param [x]
@@ -2318,7 +2328,9 @@ export declare type PointF = {
    */
   new (x?: number, y?: number): PointF;
   (x?: number, y?: number): PointF;
+};
 
+export declare type PointF = {
   /**
    * Get the distance from one point to another point
    *
@@ -2960,14 +2972,16 @@ export declare type Properties = {
   hasValue(name: string): boolean;
 };
 
-export declare type RectF = {
+export declare type RectFStatic = {
   /**
    * Constructs a new instance of the RectF class.
    * @constructor
    */
   new (): RectF;
   (): RectF;
+};
 
+export declare type RectF = {
   /**
    * Get/Set the height of a rect
    */
@@ -3804,6 +3818,13 @@ export declare type TextSegments = {};
 
 export declare type TickTimeStatic = {
   /**
+   * Constructs a TickTime object
+   * @constructor
+   */
+  new (): TickTime;
+  (): TickTime;
+
+  /**
    * Constructs a TickTime object with a frame and a frame rate.
    *
    * @param frameCount
@@ -3869,13 +3890,6 @@ export declare type TickTimeStatic = {
 };
 
 export declare type TickTime = {
-  /**
-   * Constructs a new instance of the TickTime class.
-   * @constructor
-   */
-  new (): TickTime;
-  (): TickTime;
-
   /**
    * Add another TickTime to this one and return it. This TickTime is not modified.
    *
