@@ -13,11 +13,9 @@
 
 import type {
   AudioTrack,
-  Color,
   FolderItem,
   FrameRate,
   Guid,
-  PointF,
   premierepro,
   Project,
   ProjectItem,
@@ -31,21 +29,6 @@ import type {
 
 // Simulated premierepro module for type checking
 declare const premierepro: premierepro;
-
-/*
- * Callable object types (Color, Guid, etc.) are type-only in `.d.ts` files — there is
- * no exported JS value named `Color` at compile time. In the host, those values
- * exist at runtime. Declare local stand-ins so we can exercise call signatures
- * and properties without `Color only refers to a type` errors.
- */
-/* eslint-disable @typescript-eslint/naming-convention */
-declare const Color: Color;
-declare const FrameRate: FrameRate;
-declare const Guid: Guid;
-declare const PointF: PointF;
-declare const RectF: RectF;
-declare const TickTime: TickTime;
-/* eslint-enable @typescript-eslint/naming-convention */
 
 // Test: Project methods
 async function testProject(project: Project): Promise<void> {
@@ -134,15 +117,15 @@ async function testTrackItem(clip: VideoClipTrackItem): Promise<void> {
 
 // Test: callable object types + static factories (see premierepro.d.ts)
 function testBasicTypes(): void {
-  const color = Color(255, 128, 0, 255);
+  const color = new premierepro.Color(255, 128, 0, 255);
   const frameRate = premierepro.FrameRate.createWithValue(24000 / 1001);
-  const guid = Guid();
-  const point = PointF(0.5, 0.5);
-  const rect = RectF();
+  const guid = new premierepro.Guid();
+  const point = new premierepro.PointF(0.5, 0.5);
+  const rect = new premierepro.RectF();
   rect.width = 100;
   rect.height = 100;
   const tickTime = premierepro.TickTime.createWithTicks("254016000000");
-  const tickTimeAlt = TickTime();
+  const tickTimeAlt = new premierepro.TickTime();
 
   console.log(`Color: rgba(${color.red}, ${color.green}, ${color.blue}, ${color.alpha})`);
   console.log(`FrameRate: ${frameRate.value}fps`);
