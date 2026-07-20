@@ -4433,7 +4433,7 @@ export declare type EventManagerStatic = {
    * @param target
    * @param eventName
    * @param eventHandler
-   * @param inCapturePhase?
+   * @param inCapturePhase
    */
   addEventListener(
     target: Project | Sequence | VideoTrack | AudioTrack | EncoderManager,
@@ -4470,7 +4470,7 @@ export declare type EventManagerStatic = {
    *
    * @param eventName
    * @param eventHandler
-   * @param inCapturePhase?
+   * @param inCapturePhase
    */
   addGlobalEventListener(
     eventName:
