@@ -22,6 +22,7 @@ export declare type premierepro = {
   AudioFilterComponent: AudioFilterComponentStatic;
   AudioFilterFactory: AudioFilterFactoryStatic;
   AudioTrack: AudioTrackStatic;
+  C2PAService: C2PAServiceStatic;
   CaptionTrack: CaptionTrackStatic;
   ClipProjectItem: ClipProjectItemStatic;
   CloseProjectOptions: CloseProjectOptionsStatic;
@@ -685,6 +686,45 @@ export declare type AudioTrack = {
    */
   readonly name: string;
 };
+
+export declare type C2PAServiceStatic = {
+  /**
+   * Returns an object with 'manifest' (JSON string) and 'manifestLocation' (number) indicating where the C2PA manifest was found. Location flags: NONE (0), EMBEDDED (1), SIDE_CAR (2), CLOUD (4). If withValidation is true, the file will be validated during processing.
+   *
+   * @param filePath
+   * @param withValidation
+   */
+  getManifest(
+    filePath: string,
+    withValidation: boolean
+  ): { manifest: string; manifestLocation: Constants.C2PAManifestLocation };
+
+  /**
+   * Content credentials CLOUD
+   * @readonly
+   */
+  readonly MANIFEST_LOCATION_CLOUD: number;
+
+  /**
+   * Content credentials EMBEDDED
+   * @readonly
+   */
+  readonly MANIFEST_LOCATION_EMBEDDED: number;
+
+  /**
+   * Content credentials NONE
+   * @readonly
+   */
+  readonly MANIFEST_LOCATION_NONE: number;
+
+  /**
+   * Content credentials SIDE_CAR
+   * @readonly
+   */
+  readonly MANIFEST_LOCATION_SIDE_CAR: number;
+};
+
+export declare type C2PAService = {};
 
 export declare type CaptionTrackStatic = {};
 
@@ -4575,6 +4615,16 @@ export namespace Constants {
     TRACK_CHANGED,
     INFO_CHANGED,
     LOCK_CHANGED,
+  }
+
+  /**
+   * @since 26.5
+   */
+  export enum C2PAManifestLocation {
+    CLOUD,
+    EMBEDDED,
+    NONE,
+    SIDE_CAR,
   }
 
   export enum ContentType {
