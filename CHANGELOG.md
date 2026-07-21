@@ -2,6 +2,21 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.5.0-beta.71 (2026-07-21)
+
+### Features
+
+* feat: Add C2PAService (#80) ([c05a70b](https://github.com/adobe/premierepro-types/commit/c05a70baf8015219ddf4a33015a473cab2a36cb9))
+
+### Bug Fixes
+
+* fix: Remove '?' from param names (#79) ([8b375ec](https://github.com/adobe/premierepro-types/commit/8b375ec3d33a51bfb864526f06a5d3b6fb8656c4))
+* fix: Put constructors in the right type (#78) ([bad875a](https://github.com/adobe/premierepro-types/commit/bad875a2afb33d661e99e4cbab9e2fd0867b519f))
+
+### Miscellaneous Chores
+
+* chore: Partial cleanup, sorting of methods/properties (#77) ([68f1baa](https://github.com/adobe/premierepro-types/commit/68f1baab4b0d4364dad6021e7633709fce2ce2d3))
+
 ## 26.5.0-beta.61 (2026-07-13)
 
 ### Features
