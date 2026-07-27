@@ -4581,6 +4581,17 @@ export declare type TranscriptStatic = {
   hasTranscript(clipProjectItem: ClipProjectItem): boolean;
 
   /**
+   * Transcribes the clip audio associated with the given ClipProjectItem
+   *
+   * @param clipProjectItem
+   * @param options
+   */
+  transcribeClipProjectItem(
+    clipProjectItem: ClipProjectItem,
+    options?: { languageCode?: string }
+  ): Promise<boolean>;
+
+  /**
    * Export transcripts inside of clipProjectItem as JSON string if transcript exist
    *
    * @param clipProjectItem
