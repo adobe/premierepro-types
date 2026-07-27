@@ -2,6 +2,16 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.5.0-beta.73 (2026-07-27)
+
+### Features
+
+* feat: Add Transcript.transcribeClipProjectItem (#83) ([b459c86](https://github.com/adobe/premierepro-types/commit/b459c862eb003fe4ceea8e561c5fa6999e1da2ea))
+
+### Documentation
+
+* docs: Improve description for Project.saveAs (#82) ([0960d45](https://github.com/adobe/premierepro-types/commit/0960d45b4ee5ac058af300236ba391c242f3612f))
+
 ## 26.5.0-beta.71 (2026-07-21)
 
 ### Features
