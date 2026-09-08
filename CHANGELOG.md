@@ -2,6 +2,45 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.5.0 (2026-09-08)
+
+### Features
+
+* feat: Add Transcript.transcribeClipProjectItem (#83) ([b459c86](https://github.com/adobe/premierepro-types/commit/b459c862eb003fe4ceea8e561c5fa6999e1da2ea))
+* feat: Add C2PAService (#80) ([c05a70b](https://github.com/adobe/premierepro-types/commit/c05a70baf8015219ddf4a33015a473cab2a36cb9))
+* feat: Add Constants.MarkerColor.MAGENTA (#75) ([17c6160](https://github.com/adobe/premierepro-types/commit/17c616048623d8fee9c4946a08917fc08f5c532b))
+* feat: Add Transcript.isLanguagePackAvailable (#73) ([ffa4408](https://github.com/adobe/premierepro-types/commit/ffa4408dc32adead8f6d40180ca6400ee46b3efb))
+* feat: Add sync functions for Media (#72) ([b2cc39e](https://github.com/adobe/premierepro-types/commit/b2cc39e971c8f20542ab9199c32af892957b217f))
+* feat: Add WorkAreaUtils type (#69) ([3c07cb9](https://github.com/adobe/premierepro-types/commit/3c07cb9a427e44abf1495034cd37bae87fa04cb4))
+* feat: Add MediaManager type (#66) ([ea3a3f2](https://github.com/adobe/premierepro-types/commit/ea3a3f2ac22318d080dcdcc979f040cae7495d13))
+
+### Bug Fixes
+
+* fix: Remove '?' from param names (#79) ([8b375ec](https://github.com/adobe/premierepro-types/commit/8b375ec3d33a51bfb864526f06a5d3b6fb8656c4))
+* fix: Put constructors in the right type (#78) ([bad875a](https://github.com/adobe/premierepro-types/commit/bad875a2afb33d661e99e4cbab9e2fd0867b519f))
+* fix!: Use correct return type for async properties (#71) ([74b332b](https://github.com/adobe/premierepro-types/commit/74b332b410088f9ce086973f5fcdb6a0c06607a8))
+* fix: Various description, parameter name cleanup (#68) ([82d66c6](https://github.com/adobe/premierepro-types/commit/82d66c6bc3138358a4b6583639ffdcffa1232375))
+* fix: Fully type options for createSubClipAction (#64) ([feabbef](https://github.com/adobe/premierepro-types/commit/feabbefb56f3dab2fa27e85794aadd8538e7bcea))
+* fix!: Update getComponentChain return type (#63) ([1e2e1f3](https://github.com/adobe/premierepro-types/commit/1e2e1f3afb9bb191dc0cf650e74d7e3b4ff0e5ee))
+* fix: Use better return type for createSetNameAction (#61) ([2218d15](https://github.com/adobe/premierepro-types/commit/2218d153214f63a1605ee0ce1fadbce3f5f334e6))
+
+### Miscellaneous Chores
+
+* chore: release 26.5.0-beta.73 (#84) ([0ef644c](https://github.com/adobe/premierepro-types/commit/0ef644c92f422b4f01cddffd9d2be01dba6660a7))
+* chore: release 26.5.0-beta.71 (#81) ([cfcff5e](https://github.com/adobe/premierepro-types/commit/cfcff5e14f8a6fcb5aaaa5b032f49d78dbdfa0da))
+* chore: Partial cleanup, sorting of methods/properties (#77) ([68f1baa](https://github.com/adobe/premierepro-types/commit/68f1baab4b0d4364dad6021e7633709fce2ce2d3))
+* chore: release 26.5.0-beta.61 (#76) ([a86d29e](https://github.com/adobe/premierepro-types/commit/a86d29e0c8ecab9147125adb23981dedde647045))
+* chore: release 26.5.0-beta.59 (#74) ([e4848c5](https://github.com/adobe/premierepro-types/commit/e4848c539d69269de325d33a7cb0b88f7cda1003))
+* chore: release 26.5.0-beta.29 (#70) ([a710df2](https://github.com/adobe/premierepro-types/commit/a710df2d686518b5430539bd06a0e2cfd78b0e6f))
+* chore: release 26.5.0-beta.8 (#67) ([13543e9](https://github.com/adobe/premierepro-types/commit/13543e9f57b58c4a75221e2508a50257cb30d9d2))
+* chore: release 26.5.0-beta.7 (#65) ([581611c](https://github.com/adobe/premierepro-types/commit/581611cf0484ae402c5a487e4e509d0e969be837))
+* chore: release 26.5.0-beta.3 (#62) ([171b89a](https://github.com/adobe/premierepro-types/commit/171b89a83afda06d344fa38f7c74f24237d3676e))
+* chore: begin 26.5.0-beta.0 cycle (#60) ([94f5c00](https://github.com/adobe/premierepro-types/commit/94f5c00d8c239f63fe7fd5d6e6bcc320c43dac9f))
+
+### Documentation
+
+* docs: Improve description for Project.saveAs (#82) ([0960d45](https://github.com/adobe/premierepro-types/commit/0960d45b4ee5ac058af300236ba391c242f3612f))
+
 ## 26.5.0-beta.73 (2026-07-27)
 
 ### Features
