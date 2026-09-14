@@ -2,6 +2,10 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 26.5.1 (2026-09-14)
+
+* docs: Fix languageCode -> language for Transcript (#87) (#88) ([b73623b](https://github.com/adobe/premierepro-types/commit/b73623b7a095ef27b9597474969ac7785a0c4c87))
+
 ## 26.5.0 (2026-09-08)
 
 ### Features
