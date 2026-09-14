@@ -4017,6 +4017,24 @@ export declare type TickTimeStatic = {
   createWithTicks(ticks: string): TickTime;
 
   /**
+   * Convert a TickTime to a string using the current display format
+   *
+   * @param tickTime
+   * @param frameRate
+   * @param timeDisplay
+   */
+  timeToTimecode(tickTime: TickTime, frameRate: FrameRate, timeDisplay: TimeDisplay): string;
+
+  /**
+   * Convert a timecode string to a TickTime using the current display format
+   *
+   * @param timecode
+   * @param frameRate
+   * @param timeDisplay
+   */
+  timecodeToTime(timecode: string, frameRate: FrameRate, timeDisplay: TimeDisplay): TickTime;
+
+  /**
    * Invalid Tick Time Constant
    * @readonly
    */
