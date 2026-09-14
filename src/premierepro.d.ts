@@ -1289,8 +1289,9 @@ export declare type ComponentParam = {
    * Gets the value of component Param at the given time
    *
    * @param time The time at which to get the value of the component param
+   * @returns Resolves to an object wrapping the value: `value` is a number, string, or boolean for scalar params, or a [x, y] number array for Point params
    */
-  getValueAtTime(time: TickTime): Promise<number | string | boolean | PointF | Color>;
+  getValueAtTime(time: TickTime): Promise<{ value: number | string | boolean | number[] }>;
 
   /**
    * Returns true if the parameter value varies over time (for the duration of the item)
