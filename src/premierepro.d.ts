@@ -71,7 +71,7 @@ export declare type premierepro = {
   SourceMonitor: SourceMonitorStatic;
   TextSegments: TextSegmentsStatic;
   TickTime: TickTimeStatic;
-  TimeDisplay: TimeDisplay;
+  TimeDisplay: TimeDisplayStatic;
   TrackItemSelection: TrackItemSelectionStatic;
   TransitionFactory: TransitionFactoryStatic;
   UniqueSerializeable: UniqueSerializeableStatic;
@@ -4126,6 +4126,15 @@ export declare type TickTime = {
    * @readonly
    */
   readonly ticksNumber: number;
+};
+
+export declare type TimeDisplayStatic = {
+  /**
+   * Constructs a TimeDisplay object
+   * @constructor
+   */
+  new (): TimeDisplay;
+  (): TimeDisplay;
 };
 
 export declare type TimeDisplay = {
