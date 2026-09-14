@@ -43,6 +43,7 @@ export declare type premierepro = {
   Media: Media;
   MediaManager: MediaManagerStatic;
   Metadata: MetadataStatic;
+  MogrtComment: MogrtCommentStatic;
   MogrtText: MogrtTextStatic;
   ObjectMaskUtils: ObjectMaskUtilsStatic;
   OpenProjectOptions: OpenProjectOptionsStatic;
@@ -2206,6 +2207,15 @@ export declare type MetadataStatic = {
 };
 
 export declare type Metadata = {};
+
+export declare type MogrtCommentStatic = {};
+
+export declare type MogrtComment = {
+  /**
+   * Get the text content.
+   */
+  getText(): string;
+};
 
 export declare type MogrtTextStatic = {
   /**
