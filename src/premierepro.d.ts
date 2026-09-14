@@ -4584,11 +4584,11 @@ export declare type TranscriptStatic = {
    * Transcribes the clip audio associated with the given ClipProjectItem
    *
    * @param clipProjectItem
-   * @param options
+   * @param options optional transcription options. `language` is a language code (ISO 639-1 language + ISO 3166-1 region, e.g. "en-US") and must be one of the languageCode values returned by `querySupportedLanguages()`; an unsupported code throws. If language is omitted, the default language from the user's transcription preferences is used. Note: if the "auto-detect language" transcription preference is enabled, the spoken language is detected automatically and overrides the language provided here.
    */
   transcribeClipProjectItem(
     clipProjectItem: ClipProjectItem,
-    options?: { languageCode?: string }
+    options?: { language?: string }
   ): Promise<boolean>;
 
   /**
