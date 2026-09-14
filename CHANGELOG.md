@@ -2,6 +2,26 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 27.0.0-beta.22 (2026-09-14)
+
+### Features
+
+* feat: Add TickTime utility functions (#93) ([41da936](https://github.com/adobe/premierepro-types/commit/41da936b8cfe2c864b7df753f96bc05a863e0e9b))
+* feat: Add ProjectItemColorLabel.CARIBBEAN (#92) ([f2ccc48](https://github.com/adobe/premierepro-types/commit/f2ccc48c34e2e2c9d5a6422436533c509b538c1e))
+* feat: Add MogrtText, MogrtComment (#90) ([5cf7a00](https://github.com/adobe/premierepro-types/commit/5cf7a00afe7fe451c245b12d480cc0f97b4a95c3))
+
+### Bug Fixes
+
+* fix!: Update return types for ComponentParam functions (#91) ([f647568](https://github.com/adobe/premierepro-types/commit/f647568367664b673cc6f2ba625b376a8ca4626a))
+
+### Miscellaneous Chores
+
+* chore: begin 27.0.0-beta.0 cycle (#86) ([0b24624](https://github.com/adobe/premierepro-types/commit/0b24624c62748a69482364ecc689ba3d3854255a))
+
+### Documentation
+
+* docs: Fix languageCode -> language for Transcript (#87) ([2779f27](https://github.com/adobe/premierepro-types/commit/2779f2729f81e086a7e877f7ef29fb491b44d119))
+
 ## 26.5.0 (2026-09-08)
 
 ### Features
