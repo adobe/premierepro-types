@@ -4873,9 +4873,16 @@ export namespace Constants {
     PROJECT_ITEM_SELECTION_CHANGED,
   }
 
+  /**
+   * @since 25.6
+   */
   export enum ProjectItemColorLabel {
     VIOLET,
     IRIS,
+    /**
+     * @since 27.0
+     */
+    CARIBBEAN,
     LAVENDER,
     CERULEAN,
     FOREST,
