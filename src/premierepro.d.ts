@@ -2642,7 +2642,7 @@ export declare type Project = {
    *
    * @param guid
    */
-  getSequence(guid: Guid): Sequence;
+  getSequence(guid: Guid): Promise<Sequence | null>;
 
   /**
    * Get an array of all sequences in this project.
