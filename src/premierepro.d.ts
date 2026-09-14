@@ -43,6 +43,7 @@ export declare type premierepro = {
   Media: Media;
   MediaManager: MediaManagerStatic;
   Metadata: MetadataStatic;
+  MogrtText: MogrtTextStatic;
   ObjectMaskUtils: ObjectMaskUtilsStatic;
   OpenProjectOptions: OpenProjectOptionsStatic;
   OperationCompleteEvent: OperationCompleteEventStatic;
@@ -2205,6 +2206,121 @@ export declare type MetadataStatic = {
 };
 
 export declare type Metadata = {};
+
+export declare type MogrtTextStatic = {
+  /**
+   * Construct a MogrtText with a single empty text run.
+   * @constructor
+   */
+  new (): MogrtText;
+  (): MogrtText;
+};
+
+export declare type MogrtText = {
+  /**
+   * Get all caps. Throws if isUniformStyling() is false (mixed styling); check isUniformStyling() before calling.
+   */
+  getAllCaps(): boolean;
+
+  /**
+   * Get faux bold. Throws if isUniformStyling() is false (mixed styling); check isUniformStyling() before calling.
+   */
+  getFauxBold(): boolean;
+
+  /**
+   * Get faux italic. Throws if isUniformStyling() is false (mixed styling); check isUniformStyling() before calling.
+   */
+  getFauxItalic(): boolean;
+
+  /**
+   * Get font name. Throws if isUniformStyling() is false (mixed styling); check isUniformStyling() before calling.
+   */
+  getFontName(): string;
+
+  /**
+   * Get font size. Throws if isUniformStyling() is false (mixed styling); check isUniformStyling() before calling.
+   */
+  getFontSize(): number;
+
+  /**
+   * Get small caps. Throws if isUniformStyling() is false (mixed styling); check isUniformStyling() before calling.
+   */
+  getSmallCaps(): boolean;
+
+  /**
+   * Get the text content.
+   */
+  getText(): string;
+
+  /**
+   * Returns whether faux styles can be edited for this text parameter. Returns true for user-constructed instances (no author restrictions apply).
+   */
+  isFauxStylesEditable(): boolean;
+
+  /**
+   * Returns whether the font name can be edited for this text parameter. Returns true for user-constructed instances (no author restrictions apply).
+   */
+  isFontNameEditable(): boolean;
+
+  /**
+   * Returns whether the font size can be edited for this text parameter. Returns true for user-constructed instances (no author restrictions apply).
+   */
+  isFontSizeEditable(): boolean;
+
+  /**
+   * Returns true when all text shares a single uniform style (exactly one text run).
+   */
+  isUniformStyling(): boolean;
+
+  /**
+   * Set all caps across all runs. Throws if isFauxStylesEditable() is false.
+   *
+   * @param inAllCaps
+   */
+  setAllCaps(inAllCaps: boolean): boolean;
+
+  /**
+   * Set faux bold across all runs. Throws if isFauxStylesEditable() is false.
+   *
+   * @param inFauxBold
+   */
+  setFauxBold(inFauxBold: boolean): boolean;
+
+  /**
+   * Set faux italic across all runs. Throws if isFauxStylesEditable() is false.
+   *
+   * @param inFauxItalic
+   */
+  setFauxItalic(inFauxItalic: boolean): boolean;
+
+  /**
+   * Set font name across all runs. Throws if isFontNameEditable() is false.
+   *
+   * @param inFontName
+   */
+  setFontName(inFontName: string): boolean;
+
+  /**
+   * Set font size across all runs. Throws if isFontSizeEditable() is false.
+   *
+   * @param inFontSize
+   */
+  setFontSize(inFontSize: number): boolean;
+
+  /**
+   * Set small caps across all runs. Throws if isFauxStylesEditable() is false.
+   *
+   * @param inSmallCaps
+   */
+  setSmallCaps(inSmallCaps: boolean): boolean;
+
+  /**
+   * Set the text content. Collapses any multi-run styling to a single run.
+   *
+   * @param inText
+   */
+  setText(inText: string): boolean;
+};
 
 export declare type ObjectMaskUtilsStatic = {
   /**
