@@ -2,6 +2,16 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 27.0.0-beta.28 (2026-09-14)
+
+### Features
+
+* feat: Add Constants.ProjectItemType (#96) ([c2ef8f1](https://github.com/adobe/premierepro-types/commit/c2ef8f1982cd41456400c3a57dfd0104f9c8e39c))
+
+### Bug Fixes
+
+* fix: Update return type for getSequence (#95) ([5df7d27](https://github.com/adobe/premierepro-types/commit/5df7d27dcc59cb4877e9ecc38229dc57738c0cea))
+
 ## 27.0.0-beta.22 (2026-09-14)
 
 ### Features
