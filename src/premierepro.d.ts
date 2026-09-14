@@ -1281,8 +1281,9 @@ export declare type ComponentParam = {
 
   /**
    * Returned promise will be fullfilled with the start value (keyframe) of the component param
+   * @returns Resolves to the component param's current value: a Keyframe (or PointKeyframe) for most params, or the typed value object for Color, MOGRT text (MogrtText), and MOGRT comment (MogrtComment) params
    */
-  getStartValue(): Promise<Keyframe>;
+  getStartValue(): Promise<Keyframe | PointKeyframe | Color | MogrtText | MogrtComment>;
 
   /**
    * Gets the value of component Param at the given time
