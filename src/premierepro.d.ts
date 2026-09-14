@@ -1281,15 +1281,17 @@ export declare type ComponentParam = {
 
   /**
    * Returned promise will be fullfilled with the start value (keyframe) of the component param
+   * @returns Resolves to the component param's current value: a Keyframe (or PointKeyframe) for most params, or the typed value object for Color, MOGRT text (MogrtText), and MOGRT comment (MogrtComment) params
    */
-  getStartValue(): Promise<Keyframe>;
+  getStartValue(): Promise<Keyframe | PointKeyframe | Color | MogrtText | MogrtComment>;
 
   /**
    * Gets the value of component Param at the given time
    *
    * @param time The time at which to get the value of the component param
+   * @returns Resolves to an object wrapping the value: `value` is a number, string, or boolean for scalar params, or a [x, y] number array for Point params
    */
-  getValueAtTime(time: TickTime): Promise<number | string | boolean | PointF | Color>;
+  getValueAtTime(time: TickTime): Promise<{ value: number | string | boolean | number[] }>;
 
   /**
    * Returns true if the parameter value varies over time (for the duration of the item)
