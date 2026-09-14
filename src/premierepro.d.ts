@@ -1045,7 +1045,7 @@ export declare type ClipProjectItem = {
    * Get the type of the Project Item.
    * @readonly
    */
-  readonly type: number;
+  readonly type: Constants.ProjectItemType.CLIP | Constants.ProjectItemType.COMPOUND;
 };
 
 export declare type CloseProjectOptionsStatic = {
@@ -1584,7 +1584,7 @@ export declare type FolderItem = {
    * Get the type of the Project Item.
    * @readonly
    */
-  readonly type: number;
+  readonly type: Constants.ProjectItemType.ROOT | Constants.ProjectItemType.BIN;
 };
 
 export declare type FootageInterpretation = {
@@ -2987,7 +2987,7 @@ export declare type ProjectItem = {
    * Get the type of the Project Item.
    * @readonly
    */
-  readonly type: number;
+  readonly type: Constants.ProjectItemType;
 };
 
 export declare type ProjectItemSelection = {
@@ -4923,6 +4923,18 @@ export namespace Constants {
     GREEN,
     BROWN,
     YELLOW,
+  }
+
+  /**
+   * @since 27.0
+   */
+  export enum ProjectItemType {
+    BIN,
+    CLIP,
+    COMPOUND,
+    FILE,
+    ROOT,
+    STYLE,
   }
 
   export enum PropertyType {
