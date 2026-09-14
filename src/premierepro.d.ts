@@ -1194,9 +1194,11 @@ export declare type ComponentParam = {
   /**
    * Creates and returns a keyframe initialised with the ComponentParam's type and passed in value. This throws if the passed in value is not compatible with the component param type
    *
-   * @param inValue Input could be number, string, boolean, PointF, or Color depend on effect param type
+   * @param value Input could be number, string, boolean, PointF, Color, MogrtText, or MogrtComment depending on effect param type
    */
-  createKeyframe(inValue: number | string | boolean | PointF | Color): Keyframe;
+  createKeyframe(
+    value: number | string | boolean | PointF | Color | MogrtText | MogrtComment
+  ): Keyframe;
 
   /**
    * Returns an action which removes keyframe at specific time
