@@ -71,7 +71,7 @@ export declare type premierepro = {
   SourceMonitor: SourceMonitorStatic;
   TextSegments: TextSegmentsStatic;
   TickTime: TickTimeStatic;
-  TimeDisplay: TimeDisplay;
+  TimeDisplay: TimeDisplayStatic;
   TrackItemSelection: TrackItemSelectionStatic;
   TransitionFactory: TransitionFactoryStatic;
   UniqueSerializeable: UniqueSerializeableStatic;
@@ -4017,6 +4017,24 @@ export declare type TickTimeStatic = {
   createWithTicks(ticks: string): TickTime;
 
   /**
+   * Convert a TickTime to a string using the current display format
+   *
+   * @param tickTime
+   * @param frameRate
+   * @param timeDisplay
+   */
+  timeToTimecode(tickTime: TickTime, frameRate: FrameRate, timeDisplay: TimeDisplay): string;
+
+  /**
+   * Convert a timecode string to a TickTime using the current display format
+   *
+   * @param timecode
+   * @param frameRate
+   * @param timeDisplay
+   */
+  timecodeToTime(timecode: string, frameRate: FrameRate, timeDisplay: TimeDisplay): TickTime;
+
+  /**
    * Invalid Tick Time Constant
    * @readonly
    */
@@ -4126,6 +4144,15 @@ export declare type TickTime = {
    * @readonly
    */
   readonly ticksNumber: number;
+};
+
+export declare type TimeDisplayStatic = {
+  /**
+   * Constructs a TimeDisplay object
+   * @constructor
+   */
+  new (): TimeDisplay;
+  (): TimeDisplay;
 };
 
 export declare type TimeDisplay = {
