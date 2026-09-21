@@ -4629,7 +4629,7 @@ export declare type EventManagerStatic = {
    * @param target
    * @param eventName
    * @param eventHandler
-   * @param inCapturePhase
+   * @param useCapture
    */
   addEventListener(
     target: Project | Sequence | VideoTrack | AudioTrack | EncoderManager,
@@ -4640,7 +4640,7 @@ export declare type EventManagerStatic = {
       | Constants.SequenceEvent
       | Constants.OperationCompleteEvent,
     eventHandler: (event?: object) => void,
-    inCapturePhase?: boolean
+    useCapture?: boolean
   ): void;
 
   /**
@@ -4649,6 +4649,7 @@ export declare type EventManagerStatic = {
    * @param target
    * @param eventName
    * @param eventHandler
+   * @param useCapture
    */
   removeEventListener(
     target: Project | Sequence | VideoTrack | AudioTrack | EncoderManager,
@@ -4658,7 +4659,8 @@ export declare type EventManagerStatic = {
       | Constants.ProjectEvent
       | Constants.SequenceEvent
       | Constants.OperationCompleteEvent,
-    eventHandler: (event?: object) => void
+    eventHandler: (event?: object) => void,
+    useCapture?: boolean
   ): void;
 
   /**
@@ -4666,7 +4668,7 @@ export declare type EventManagerStatic = {
    *
    * @param eventName
    * @param eventHandler
-   * @param inCapturePhase
+   * @param useCapture
    */
   addGlobalEventListener(
     eventName:
@@ -4676,7 +4678,7 @@ export declare type EventManagerStatic = {
       | Constants.SequenceEvent
       | Constants.OperationCompleteEvent,
     eventHandler: (event?: object) => void,
-    inCapturePhase?: boolean
+    useCapture?: boolean
   ): void;
 
   /**
@@ -4684,6 +4686,7 @@ export declare type EventManagerStatic = {
    *
    * @param eventName
    * @param eventHandler
+   * @param useCapture
    */
   removeGlobalEventListener(
     eventName:
@@ -4692,7 +4695,8 @@ export declare type EventManagerStatic = {
       | Constants.ProjectEvent
       | Constants.SequenceEvent
       | Constants.OperationCompleteEvent,
-    eventHandler: (event?: object) => void
+    eventHandler: (event?: object) => void,
+    useCapture?: boolean
   ): void;
 };
 
