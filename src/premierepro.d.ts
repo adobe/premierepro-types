@@ -16,7 +16,6 @@ export declare type premierepro = {
   Action: Action;
   AddTransitionOptions: AddTransitionOptionsStatic;
   AppPreference: AppPreferenceStatic;
-  Application: Application;
   AudioClipTrackItem: AudioClipTrackItemStatic;
   AudioComponentChain: AudioComponentChainStatic;
   AudioFilterComponent: AudioFilterComponentStatic;
