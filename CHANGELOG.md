@@ -2,6 +2,12 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 27.0.0-beta.51 (2026-09-21)
+
+### Features
+
+* feat: useCapture param for EventManager functions (#101) ([19f6c42](https://github.com/adobe/premierepro-types/commit/19f6c42f4f6f16547942ff43ec20f274f6e67778))
+
 ## 27.0.0-beta.37 (2026-09-21)
 
 ### Features
