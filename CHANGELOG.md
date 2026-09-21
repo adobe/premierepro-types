@@ -2,6 +2,16 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 27.0.0-beta.37 (2026-09-21)
+
+### Features
+
+* feat!: Remove Application class from premierepro type (#99) ([06383c1](https://github.com/adobe/premierepro-types/commit/06383c1f2df1820ff8a08df1da31b7b740a9aff1))
+
+### Documentation
+
+* docs: Improve description for createEmptySelection (#98) ([644ca04](https://github.com/adobe/premierepro-types/commit/644ca04d71c8ef9921eac57dd5ed92c6dcd604ea))
+
 ## 27.0.0-beta.28 (2026-09-14)
 
 ### Features
