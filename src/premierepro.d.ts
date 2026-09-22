@@ -373,12 +373,7 @@ export declare type AppPreferenceStatic = {
 
 export declare type AppPreference = {};
 
-export declare type Application = {
-  /**
-   * @readonly
-   */
-  readonly version: Promise<string>;
-};
+export declare type Application = {};
 
 export declare type AudioClipTrackItemStatic = {
   /**
