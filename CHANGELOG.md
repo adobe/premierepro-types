@@ -2,6 +2,12 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 27.0.0-beta.56 (2026-09-22)
+
+### Features
+
+* feat!: Remove version property from Application (#103) ([d0645da](https://github.com/adobe/premierepro-types/commit/d0645da645b0f5dc02ac3b0ab9473286413bc1ec))
+
 ## 27.0.0-beta.51 (2026-09-21)
 
 ### Features
