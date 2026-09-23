@@ -2,6 +2,12 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 27.0.0-beta.57 (2026-09-23)
+
+### Bug Fixes
+
+* fix!: Further type corrections to ComponentParam, Keyframe (#105) ([38a054a](https://github.com/adobe/premierepro-types/commit/38a054af286fa52670a541b324c36da7d65861c5))
+
 ## 27.0.0-beta.56 (2026-09-22)
 
 ### Features
