@@ -1285,7 +1285,9 @@ export declare type ComponentParam = {
    * @param time The time at which to get the value of the component param
    * @returns Resolves to an object wrapping the value: `value` is a number, string, or boolean for scalar params, or a [x, y] number array for Point params
    */
-  getValueAtTime(time: TickTime): Promise<{ value: number | string | boolean | number[] }>;
+  getValueAtTime(
+    time: TickTime
+  ): Promise<{ value: number | string | boolean | [x: number, y: number] }>;
 
   /**
    * Returns true if the parameter value varies over time (for the duration of the item)
@@ -1905,8 +1907,14 @@ export declare type Keyframe = {
   position: TickTime;
 
   /**
+   * An object wrapping the value: `value` is a number, string, or boolean for scalar params
    */
-  value: { value: string | number | boolean | Color | PointF };
+  get value(): { value: string | number | boolean };
+
+  /**
+   * An object wrapping the value: `value` is a number, string, or boolean for scalar params
+   */
+  set value(value: string | number | boolean);
 };
 
 export declare type MarkerStatic = {
@@ -2520,8 +2528,14 @@ export declare type PointKeyframe = {
   position: TickTime;
 
   /**
+   * An object wrapping the value: `value` is an [x, y] number array representing the PointF value
    */
-  value: { value: PointF };
+  get value(): { value: [x: number, y: number] };
+
+  /**
+   * An object wrapping the value: `value` is an [x, y] number array representing the PointF value
+   */
+  set value(value: PointF);
 };
 
 export declare type ProjectStatic = {
