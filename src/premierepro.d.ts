@@ -3433,6 +3433,36 @@ export declare type SequenceEditorStatic = {
 
 export declare type SequenceEditor = {
   /**
+   * Create an action that will razor all tracks identified by media type at the specified position. alignToMediaType specifies which media type to align the razor position to.
+   *
+   * @param mediaType
+   * @param razorPosition
+   * @param alignToMediaType
+   */
+  createRazorAllTracksAction(
+    mediaType: Constants.MediaType.AUDIO | Constants.MediaType.VIDEO,
+    razorPosition: TickTime,
+    alignToMediaType: Constants.MediaType.AUDIO | Constants.MediaType.VIDEO
+  ): Action;
+
+  /**
+   * Create an action that will razor the track identified by media type and track index at the specified position. If razorLinkedTrackItems is true, linked track items will also be razored. alignToMediaType specifies which media type to align the razor position to.
+   *
+   * @param mediaType
+   * @param trackIndex
+   * @param razorPosition
+   * @param razorLinkedTrackItems
+   * @param alignToMediaType
+   */
+  createRazorTrackAction(
+    mediaType: Constants.MediaType.AUDIO | Constants.MediaType.DATA | Constants.MediaType.VIDEO,
+    trackIndex: number,
+    razorPosition: TickTime,
+    razorLinkedTrackItems: boolean,
+    alignToMediaType: Constants.MediaType.AUDIO | Constants.MediaType.VIDEO
+  ): Action;
+
+  /**
    * Create remove action for sequence
    *
    * @param trackItemSelection
