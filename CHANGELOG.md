@@ -2,6 +2,16 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 27.1.0-beta.7 (2026-11-05)
+
+### Features
+
+* feat: Add SequenceEditor razor action functions (#109) ([715d4d6](https://github.com/adobe/premierepro-types/commit/715d4d69959ac260842a0322a3a7303dd81b004e))
+
+### Miscellaneous Chores
+
+* chore: begin 27.1.0-beta.0 cycle (#108) ([ab7a00d](https://github.com/adobe/premierepro-types/commit/ab7a00dcad8388ded066b2eac36ce14a5efddad1))
+
 ## 27.0.0 (2026-11-05)
 
 ### Features
