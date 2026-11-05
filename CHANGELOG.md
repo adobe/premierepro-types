@@ -2,6 +2,39 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 27.0.0 (2026-11-05)
+
+### Features
+
+* feat!: Remove version property from Application (#103) ([d0645da](https://github.com/adobe/premierepro-types/commit/d0645da645b0f5dc02ac3b0ab9473286413bc1ec))
+* feat: useCapture param for EventManager functions (#101) ([19f6c42](https://github.com/adobe/premierepro-types/commit/19f6c42f4f6f16547942ff43ec20f274f6e67778))
+* feat!: Remove Application class from premierepro type (#99) ([06383c1](https://github.com/adobe/premierepro-types/commit/06383c1f2df1820ff8a08df1da31b7b740a9aff1))
+* feat: Add Constants.ProjectItemType (#96) ([c2ef8f1](https://github.com/adobe/premierepro-types/commit/c2ef8f1982cd41456400c3a57dfd0104f9c8e39c))
+* feat: Add TickTime utility functions (#93) ([41da936](https://github.com/adobe/premierepro-types/commit/41da936b8cfe2c864b7df753f96bc05a863e0e9b))
+* feat: Add ProjectItemColorLabel.CARIBBEAN (#92) ([f2ccc48](https://github.com/adobe/premierepro-types/commit/f2ccc48c34e2e2c9d5a6422436533c509b538c1e))
+* feat: Add MogrtText, MogrtComment (#90) ([5cf7a00](https://github.com/adobe/premierepro-types/commit/5cf7a00afe7fe451c245b12d480cc0f97b4a95c3))
+
+### Bug Fixes
+
+* fix!: Further type corrections to ComponentParam, Keyframe (#105) ([38a054a](https://github.com/adobe/premierepro-types/commit/38a054af286fa52670a541b324c36da7d65861c5))
+* fix: Update return type for getSequence (#95) ([5df7d27](https://github.com/adobe/premierepro-types/commit/5df7d27dcc59cb4877e9ecc38229dc57738c0cea))
+* fix!: Update return types for ComponentParam functions (#91) ([f647568](https://github.com/adobe/premierepro-types/commit/f647568367664b673cc6f2ba625b376a8ca4626a))
+
+### Miscellaneous Chores
+
+* chore: release 27.0.0-beta.57 (#106) ([c8f1089](https://github.com/adobe/premierepro-types/commit/c8f108941197c1d987f08b9916c0d18a2e252699))
+* chore: release 27.0.0-beta.56 (#104) ([e0e3ff0](https://github.com/adobe/premierepro-types/commit/e0e3ff08842257d1453249c6e6f1164b2ab0ad12))
+* chore: release 27.0.0-beta.51 (#102) ([3bf0d4f](https://github.com/adobe/premierepro-types/commit/3bf0d4f689a0278659cf521180bf183594932c23))
+* chore: release 27.0.0-beta.37 (#100) ([edad9ee](https://github.com/adobe/premierepro-types/commit/edad9eea6a726dcb6f6672f49e9a43ecaa64e00c))
+* chore: release 27.0.0-beta.28 (#97) ([f9d7ad4](https://github.com/adobe/premierepro-types/commit/f9d7ad4dedabb42f61d182d3b908ab23f2781fd8))
+* chore: release 27.0.0-beta.22 (#94) ([b2a34a2](https://github.com/adobe/premierepro-types/commit/b2a34a272b1fa179ac2d4eee06c3e520bac4f87c))
+* chore: begin 27.0.0-beta.0 cycle (#86) ([0b24624](https://github.com/adobe/premierepro-types/commit/0b24624c62748a69482364ecc689ba3d3854255a))
+
+### Documentation
+
+* docs: Improve description for createEmptySelection (#98) ([644ca04](https://github.com/adobe/premierepro-types/commit/644ca04d71c8ef9921eac57dd5ed92c6dcd604ea))
+* docs: Fix languageCode -> language for Transcript (#87) ([2779f27](https://github.com/adobe/premierepro-types/commit/2779f2729f81e086a7e877f7ef29fb491b44d119))
+
 ## 27.0.0-beta.57 (2026-09-23)
 
 ### Bug Fixes
