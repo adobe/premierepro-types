@@ -2,6 +2,14 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 27.1.0-beta.16 (2026-11-06)
+
+### Features
+
+* feat: Add CaptionTrack event constants (#113) ([f736585](https://github.com/adobe/premierepro-types/commit/f73658522e33cb5ba6aac0645eb872108735a7e0))
+* feat: Add ClipProjectItem.isStill (#112) ([d17fdda](https://github.com/adobe/premierepro-types/commit/d17fdda40ee842f1d5f007c5934207b63ea78553))
+* feat: Add Component get/set instance name APIs (#111) ([5a5f045](https://github.com/adobe/premierepro-types/commit/5a5f045d6246c37ab4b23db57689e039a2dd57f6))
+
 ## 27.1.0-beta.7 (2026-11-05)
 
 ### Features
