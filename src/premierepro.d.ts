@@ -1030,6 +1030,11 @@ export declare type ClipProjectItem = {
   getOriginatingProjectPath(): Promise<string>;
 
   /**
+   * Returns true if the ClipProjectItem represents a still image
+   */
+  isStill(): boolean;
+
+  /**
    * The name of this project item.
    * @readonly
    */
