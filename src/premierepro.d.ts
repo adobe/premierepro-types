@@ -1150,9 +1150,21 @@ export declare type Color = {
 
 export declare type Component = {
   /**
+   * Returns an action which sets the instance name of this component
+   *
+   * @param instanceName
+   */
+  createSetInstanceNameAction(instanceName: string): Action;
+
+  /**
    * Returned Promise will be fullfilled with the value of display name for this component
    */
   getDisplayName(): Promise<string>;
+
+  /**
+   * Returned Promise will be fullfilled with the value of instance name for this component
+   */
+  getInstanceName(): Promise<string>;
 
   /**
    * Returned Promise will be fullfilled with the value of internal matchname for this component
