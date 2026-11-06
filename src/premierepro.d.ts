@@ -722,7 +722,25 @@ export declare type C2PAServiceStatic = {
 
 export declare type C2PAService = {};
 
-export declare type CaptionTrackStatic = {};
+export declare type CaptionTrackStatic = {
+  /**
+   * Event Object for Track changed
+   * @readonly
+   */
+  readonly EVENT_TRACK_CHANGED: string;
+
+  /**
+   * Event Object for Track Info Changed
+   * @readonly
+   */
+  readonly EVENT_TRACK_INFO_CHANGED: string;
+
+  /**
+   * Event Object for Track Lock Changed
+   * @readonly
+   */
+  readonly EVENT_TRACK_LOCK_CHANGED: string;
+};
 
 export declare type CaptionTrack = {
   /**
@@ -4852,6 +4870,15 @@ export namespace Constants {
     EMBEDDED,
     NONE,
     SIDE_CAR,
+  }
+
+  /**
+   * @since 27.1
+   */
+  export enum CaptionTrackEvent {
+    TRACK_CHANGED,
+    INFO_CHANGED,
+    LOCK_CHANGED,
   }
 
   export enum ContentType {
