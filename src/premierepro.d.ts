@@ -2525,6 +2525,36 @@ export declare type PRProduction = {
   getScratchDiskSettings(): Promise<ScratchDiskSettings>;
 };
 
+export declare type PluginSupportStatic = {
+  /**
+   * Posts an event to the Events panel. eventType is EVENT_TYPE_INFORMATION, EVENT_TYPE_WARNING or EVENT_TYPE_ERROR. Returns true if the event was posted.
+   *
+   * @param message Text shown in the Events panel. Must not be empty.
+   * @param eventType One of PluginSupport.EVENT_TYPE_INFORMATION, EVENT_TYPE_WARNING or EVENT_TYPE_ERROR.
+   */
+  setSDKEventMessage(message: string, eventType: number): Promise<boolean>;
+
+  /**
+   * Event type used to post or identify an error event in the Events panel
+   * @readonly
+   */
+  readonly EVENT_TYPE_ERROR: number;
+
+  /**
+   * Event type used to post or identify an informational event in the Events panel
+   * @readonly
+   */
+  readonly EVENT_TYPE_INFORMATION: number;
+
+  /**
+   * Event type used to post or identify a warning event in the Events panel
+   * @readonly
+   */
+  readonly EVENT_TYPE_WARNING: number;
+};
+
+export declare type PluginSupport = {};
+
 export declare type PointFStatic = {
   /**
    * Construct a PointFloat Object.
