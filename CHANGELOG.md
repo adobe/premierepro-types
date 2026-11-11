@@ -2,6 +2,12 @@
 
 Versioning of Beta and Stable releases is documented here. For more details on this project's versioning mechanics, see [VERSIONING.md](./VERSIONING.md).
 
+## 27.1.0-beta.23 (2026-11-11)
+
+### Features
+
+* feat: Add PluginSupport class (#115) ([5ef43a0](https://github.com/adobe/premierepro-types/commit/5ef43a0a5bb5bc83e5e98e104fc38fba4acb8fb0))
+
 ## 27.1.0-beta.16 (2026-11-06)
 
 ### Features
