@@ -48,6 +48,7 @@ export declare type premierepro = {
   OpenProjectOptions: OpenProjectOptionsStatic;
   OperationCompleteEvent: OperationCompleteEventStatic;
   PRProduction: PRProductionStatic;
+  PluginSupport: PluginSupportStatic;
   PointF: PointFStatic;
   PointKeyframe: PointKeyframe;
   Project: ProjectStatic;
